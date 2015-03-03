@@ -1,2 +1,3 @@
 # generator-freekerneljs
-Generates a skeleton app which builds upon AngularJS as a framework, and Angular Material as the UI
+Generates a skeleton app which was built upon AngularJS as a framework, and Angular Material as the UI
+
