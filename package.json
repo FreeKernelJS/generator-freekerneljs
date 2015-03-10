@@ -1,0 +1,42 @@
+{
+  "name": "generator-freekerneljs",
+  "version": "0.0.2",
+  "description": "A FreeKernelJS generator for Yeoman",
+  "license": "MIT",
+  "main": "app/index.js",
+  "repository": "https://github.com/FreeKernelJS/generator-freekerneljs",
+    "author": {
+        "name": "FreeKernelJS",
+        "email": "freekerneljs.org",
+        "url": "http://www.freekerneljs.org"
+    },
+  "homepage": "http://www.freekerneljs.org",
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "files": [
+    "app"
+  ],
+  "keywords": [
+    "yeoman-generator",
+    "scaffold",
+    "freekerneljs"
+  ],
+  "dependencies": {
+    "yeoman-generator": "^0.18.0",
+    "chalk": "^0.5.1",
+    "yosay": "^0.3.0",
+    "compare-version": "^0.1.2",
+    "multiline": "^1.0.1",
+    "pkg-name": "^1.0.0"
+  },
+  "devDependencies": {
+    "mocha": "*"
+  },
+  "peerDependencies": {
+    "yo": ">=1.0.0"
+  }
+}

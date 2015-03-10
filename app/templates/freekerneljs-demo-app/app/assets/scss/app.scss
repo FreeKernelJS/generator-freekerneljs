@@ -1,0 +1,83 @@
+@import "_colors"; //must be required first
+@import "_variables"; //must be required second
+@import "_mixin";     
+@import "_animation";     
+@import "_main";
+@import "_navbar";
+@import "_header";
+@import "_tabs";
+@import "_tile";
+@import "_panel";
+@import "_notification";
+
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//  Custom styles for this demo app
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+//general
+.simple-bg{
+    background-color: #fff !important;
+}
+
+//inbox
+.inbox{
+    padding: 10px 0;
+    color: $color-grey-400;
+}
+.inbox .md-button{
+    text-transform: none;
+}
+.inbox-icon{
+    margin-right: 10px;
+}
+
+//notification
+.#{$app-css-prefix}-notification-dialog ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.#{$app-css-prefix}-notification-dialog li {
+    margin: 0;
+    padding: 12px;
+    border-top: $border-width $border-style $color-grey-300;
+}
+
+.#{$app-css-prefix}-notification-dialog li.last {
+    border-bottom: $border-width $border-style $color-grey-300;
+}
+
+.#{$app-css-prefix}-notification-dialog .notify-icon{
+    padding-right: 5px;
+    font-size: 1.3em;
+}
+
+.#{$app-css-prefix}-notification-dialog .notify-count{
+    background-color: $color-accent-500;
+    line-height: 20px;
+    height: 20px;
+    padding: .1em .65em .2em;
+    color: #fff;
+    @include border-radius($border-radius);
+}
+
+//sign up
+.form-portlet{
+    margin: 16px 16px 24px;
+}
+.form-portlet-last{
+    margin: 16px;
+}
+.form-actions{
+    margin-bottom: 20px;
+}
+.form-actions .md-button{
+    min-width: 10em;
+    margin: 1em;
+    line-height: 25px;
+}
+.form-label{
+    padding-right: 20px;
+}

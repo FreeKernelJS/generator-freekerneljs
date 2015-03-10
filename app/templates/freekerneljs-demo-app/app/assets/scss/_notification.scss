@@ -1,0 +1,8 @@
+.#{$app-css-prefix}-notification-dialog{
+    border: 1px solid $color-grey-400;
+    border-top-width: 4px;
+}
+
+.#{$app-css-prefix}-notification-footer{
+    padding: 15px 0;
+}

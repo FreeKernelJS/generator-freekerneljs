@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-controller="MainViewController">
+    <head>
+        <title ng-bind="appTitle"></title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="<%= props.description %>">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" type="image/ico" href="assets/images/favicon.ico">
+        
+        <link href="http://fonts.googleapis.com/css?family=RobotoDraft:400,500,700,400italic" rel="stylesheet">
+        
+        <!-- build:css assets/css/app.min.css -->
+        <!-- bower:css -->
+        <!-- endbower -->
+        <link rel="stylesheet" type="text/css" href="assets/css/app.css" media="screen">
+        <!-- /build -->
+        <!-- build:js app.min.js -->
+        <!-- <script src="//localhost:35729/livereload.js"></script> -->
+
+        <!-- bower:js -->
+        <!-- endbower -->
+        <!-- /build -->
+        <script src="app.bootstrap.js"></script>
+    </head>
+    
+    <body layout="column" class="md-default-theme md-hue-1">
+        <section class="{{cssPrefix}}-page-wrapper" layout="row" flex>
+            <fkjs-navbar></fkjs-navbar>
+            <div class="page-animation" layout="column" flex ng-view></div>
+        </section>
+    </body>
+</html>

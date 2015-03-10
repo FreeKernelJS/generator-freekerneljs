@@ -1,0 +1,12 @@
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+@mixin animation-effect($name, $duration, $mode, $timing){
+    -webkit-animation: $name $duration $mode $timing;
+       -moz-animation: $name $duration $mode $timing;
+            animation: $name $duration $mode $timing;
+}

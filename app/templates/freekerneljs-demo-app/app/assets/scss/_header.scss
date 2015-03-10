@@ -1,0 +1,21 @@
+.#{$app-css-prefix}-page-header {
+    padding: 32px 34px 13px 0;
+    border-bottom: 1px solid $color-grey-200;
+}
+
+.#{$app-css-prefix}-page-header .md-button {
+    background-color: #FFF;
+    font-size: $font-size-xnormal;
+    border-radius: 0 15% 15% 0;
+    padding: 3px 3px 3px 1px;
+    font-weight: bold;
+    border: $border;
+}
+
+.#{$app-css-prefix}-page-header-text {
+    margin-left: 11px;
+    font-size: $font-size-large;
+    color: #828a95;
+    text-transform: uppercase;
+    line-height: 29px;
+}

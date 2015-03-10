@@ -1,0 +1,140 @@
+<fkjs-header></fkjs-header>
+
+<md-content class="md-padding" flex>
+
+    <!-- Login details -->
+    <!--~~~~~~~~~~~~~~~-->
+    <div class="md-whiteframe-z1 {{cssPrefix}}-panel form-portlet">
+
+        <div class="{{cssPrefix}}-panel-header">
+            <span class="{{cssPrefix}}-panel-title">Login Details</span>
+            <span class="{{cssPrefix}}-panel-controls">
+                <a href="javascript:void(0);" class="mdi mdi-expand-less"></a>
+            </span>
+        </div>
+
+        <div class="{{cssPrefix}}-panel-body">
+            <form name="signupForm">
+                <md-input-container>
+                    <label>Name</label>
+                    <input ng-model="signup.title">
+                </md-input-container>
+
+                <md-input-container>
+                    <label>Email</label>
+                    <input ng-model="signup.email" type="email" placeholder="example@email.com">
+                </md-input-container>
+
+                <md-input-container>
+                    <label>Password</label>
+                    <input ng-model="signup.password" name="password" type="password" required>
+                </md-input-container>
+
+                <div class="form-actions" layout="row">
+                    <md-button class="md-primary md-raised" ng-click="showSimpleToast()">Send</md-button>
+                    <md-button class="md-primary md-raised" ng-click="showSimpleToast()">Reset</md-button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- Personal details -->
+    <!--~~~~~~~~~~~~~~~~~~-->
+    <div class="md-whiteframe-z1 {{cssPrefix}}-panel form-portlet">
+
+        <div class="{{cssPrefix}}-panel-header">
+            <span class="{{cssPrefix}}-panel-title">Personal Details</span>
+            <span class="{{cssPrefix}}-panel-controls">
+                <a href="javascript:void(0);" class="mdi mdi-expand-less"></a>
+            </span>
+        </div>
+
+        <div class="{{cssPrefix}}-panel-body">
+            <form name="personalDetailsForm">
+
+                <md-radio-group ng-model="data.group1">
+                    <div layout="row">
+                        <label>Sex:</label>
+                        <md-radio-button value="Apple">Male</md-radio-button>
+                        <md-radio-button value="Banana">Female</md-radio-button>
+                    </div>
+                </md-radio-group>
+
+                <div layout layout-sm="column">
+                    <md-input-container flex>
+                        <label>Street</label>
+                        <input ng-model="signup.street">
+                    </md-input-container>
+
+                    <md-input-container flex>
+                        <label>Number</label>
+                        <input type="number" step="any" name="rate" ng-model="project.rate" min="1" max="4999">
+                    </md-input-container>
+                </div>
+
+                <div layout="column">
+                    <md-autocomplete
+                        md-selected-item="statesList.selectedItem"
+                        md-search-text="statesList.searchText"
+                        md-items="item in statesList.querySearch(statesList.searchText)"
+                        md-item-text="display"
+                        placeholder="State">
+                      <span md-highlight-text="statesList.searchText">{{item.display}}</span>
+                    </md-autocomplete>
+                </div>
+
+                <md-switch ng-model="data.cb1" aria-label="Switch 1">
+                    Use this address for billing
+                </md-switch>
+
+                <div class="form-actions" layout="row">
+                    <md-button class="md-primary md-raised" ng-click="showSimpleToast()">Submit</md-button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- Registration -->
+     <!--~~~~~~~~~~~~~-->
+    <div class="md-whiteframe-z1 {{cssPrefix}}-panel form-portlet-last">
+
+        <div class="{{cssPrefix}}-panel-header">
+            <span class="{{cssPrefix}}-panel-title">Registration</span>
+            <span class="{{cssPrefix}}-panel-controls">
+                <a href="javascript:void(0);" class="mdi mdi-expand-less"></a>
+            </span>
+        </div>
+
+        <div class="{{cssPrefix}}-panel-body">
+            <form name="registrationForm">
+
+                <div>
+                    <label class="form-label">How did you hear about us?</label>
+                    <md-select ng-model="registration.survey" placeholder="You haven't selected anything yet">
+                        <md-option ng-value="opt" ng-repeat="opt in survey">{{ opt }}</md-option>
+                    </md-select>
+                </div>
+
+                <md-input-container flex>
+                    <label>Comments</label>
+                    <textarea ng-model="signup.biography" columns="1" md-maxlength="150"></textarea>
+                </md-input-container>
+
+                <md-checkbox aria-label="Checkbox 1">
+                    Sign me up for mailing list
+                </md-checkbox>
+                <md-checkbox aria-label="Checkbox 1">
+                    I accept the terms and conditions of this page
+                </md-checkbox>
+
+                <div class="form-actions" layout="row">
+                    <md-button class="md-primary md-raised" ng-click="showSimpleToast()">Submit</md-button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+</md-content>

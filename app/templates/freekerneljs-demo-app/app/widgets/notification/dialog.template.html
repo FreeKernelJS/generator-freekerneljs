@@ -1,0 +1,20 @@
+<md-dialog aria-label="notifications" 
+           class="fkjs-notification-dialog">
+    
+    <!-- TODO: section content and css-prefix -->
+    <ul>
+        <li ng-repeat="item in notificationItems" ng-class="{'last':$last}" layout="row" layout-align="space-between start">
+            <div>
+                <span class="mdi {{item.icon}} notify-icon"></span>
+                <span>{{item.text}}</span>
+            </div>
+            <span class="notify-count">{{item.total}}</span>
+        </li>
+    </ul>
+    
+    <div class="fkjs-notification-footer" layout="row" layout-align="center center">
+        <md-button ng-click="hide()">
+            Close
+        </md-button>
+    </div>
+</md-dialog>

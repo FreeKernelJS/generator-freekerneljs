@@ -1,0 +1,49 @@
+.#{$app-css-prefix}-info-tile{
+    color: $title-color;
+    padding: $padding-large;    
+    clear: both;
+    border: $border;
+    @include border-radius($border-radius);
+    background-color: #fff;
+}
+
+.#{$app-css-prefix}-info-tile .mini-stat-icon {
+    width: 60px;
+    height: 60px;
+    display: inline-block;
+    line-height: 60px;
+    text-align: center;
+    font-size: 30px;
+    @include border-radius(100%);
+    float: left;
+    margin-right: 10px;
+    color: #FFF;
+}
+
+.#{$app-css-prefix}-info-tile .mini-stat-info {
+    font-size: 12px;
+    padding-top: 8px;
+}
+
+.#{$app-css-prefix}-info-tile .mini-stat-info span {
+    display: block;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.#{$app-css-prefix}-info-tile .visitors{
+    background-color: $color-primary-500;
+}
+
+.#{$app-css-prefix}-info-tile .users{
+    background-color: $color-accent-500;
+}
+
+.#{$app-css-prefix}-info-tile .tickets{
+    background-color: $color-warn-500;
+}
+
+.#{$app-css-prefix}-info-tile .topics{
+    background-color: $custom-color;
+}
+

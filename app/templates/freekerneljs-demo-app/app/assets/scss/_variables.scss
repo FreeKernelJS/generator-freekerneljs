@@ -1,0 +1,34 @@
+// global definitions
+$app-css-prefix: fkjs;
+$images-path: '../app/assets/images/';
+
+// colors
+$color-grey-100: rgba(0, 0, 0, 0.05);
+$color-grey-200: rgba(0, 0, 0, 0.08);
+$color-grey-300: rgba(0, 0, 0, 0.12);
+$color-grey-400: rgba(0, 0, 0, 0.54);
+
+// fonts
+$font-size-small: 0.8em;
+$font-size-normal: 1em;
+$font-size-xnormal: 1.3em;
+$font-size-large: 1.5em;
+$font-size-xlarge: 2em;
+$font-size-xxlarge: 2.5em;
+$font-weight: 400;
+$font-weight-medium: 500;
+$title-color: $color-grey-400;
+
+// padding
+$padding-large: 20px;
+$padding-small: 16px;
+
+// border
+$border-radius: 3px;
+$border-color: $color-grey-200;
+$border-width: 1px;
+$border-style: solid;
+$border: $border-width $border-style $border-color;
+
+// global vars
+$fkjs-toolbar-height: 60px;

@@ -1,0 +1,137 @@
+<fkjs-header></fkjs-header>
+
+<md-content layout="column" class="md-padding">
+
+
+    <!-- first row: tiles -->
+    <div layout="row" layout-margin>
+        <fkjs-tile ng-repeat="tile in tiles"></fkjs-tile>
+    </div>
+
+
+
+    <!-- second row -->
+    <div layout="row" layout-margin>
+        
+        <!-- first panel -->
+        <!-- ~~~~~~~~~~~ -->
+        <div class="md-whiteframe-z1 {{cssPrefix}}-panel" flex="25">
+
+            <div class="{{cssPrefix}}-panel-header" layout="row">
+                <div class="{{cssPrefix}}-panel-title">Inbox</div>
+                <div flex></div>
+                <div>
+                    <fkjs-notification></fkjs-notification>
+                </div>
+            </div>
+
+            <div class="{{cssPrefix}}-panel-body">
+                <md-list>
+                    <md-item ng-repeat="item in messages">
+                        <md-item-content class="inbox">
+                            <md-button ng-click="showSimpleToast()">
+                                <i class="inbox-icon mdi" ng-class="statusCheck(item.status)"></i>
+                                {{item.title}} | {{item.date}}
+                            </md-button>
+                        </md-item-content>
+                        <md-divider></md-divider>
+                    </md-item>
+                </md-list>
+            </div>
+        </div>
+
+
+        <!-- second panel -->
+        <!-- ~~~~~~~~~~~~ -->
+        <div class="md-whiteframe-z1 {{cssPrefix}}-panel" flex="40">
+
+            <div class="{{cssPrefix}}-panel-header" layout="row">
+                <div class="{{cssPrefix}}-panel-title">Contact Us</div>
+                <div flex></div>
+                <div>
+                    <fkjs-notification></fkjs-notification>
+                </div>
+            </div>
+
+            <md-content class="md-padding simple-bg">
+                <form name="userForm">
+                    <md-input-container>
+                        <label>Name</label>
+                        <input ng-model="user.title">
+                    </md-input-container>
+                    <md-input-container>
+                        <label>Email</label>
+                        <input ng-model="user.email" type="email">
+                    </md-input-container>
+                    <md-input-container flex>
+                        <label>Message</label>
+                        <textarea ng-model="user.biography" columns="1" md-maxlength="150"></textarea>
+                    </md-input-container>
+                </form>
+                <div class="md-actions" layout="row">
+                    <md-button class="md-primary md-raised" ng-click="showSimpleToast()">Send</md-button>
+                    <span flex></span>
+                    <md-button class="md-primary md-raised" ng-click="showSimpleToast()">Reset</md-button>
+                </div>
+            </md-content>
+        </div>
+
+
+        <!-- third panel -->
+        <!-- ~~~~~~~~~~~ -->
+        <div class="md-whiteframe-z1 {{cssPrefix}}-panel" flex>
+
+            <div class="{{cssPrefix}}-panel-header" layout="row">
+                <div class="{{cssPrefix}}-panel-title">Statistics</div>
+                <div flex></div>
+                <div>
+                    <fkjs-notification></fkjs-notification>
+                </div>
+            </div>
+
+            <div class="{{cssPrefix}}-panel-body tabs-wrapper">
+                <md-tabs md-selected="data.selectedIndex">
+                    <md-tab ng-repeat="tab in tabs" id="tab{{$index}}"> <!--  md-ink-ripple="#313b3d" -->
+                        {{tab.title}}
+                    </md-tab>
+                </md-tabs>
+                <ng-switch on="data.selectedIndex" class="tabpanel-container">
+                    <div role="tabpanel"
+                         id="tab1-content"
+                         aria-labelledby="tab1"
+                         ng-switch-when="0"
+                         md-swipe-left="next()"
+                         md-swipe-right="previous()" >
+                            Lorem ipsum dolor sit amet, ne quod novum mei. Sea omnium invenire mediocrem at, in lobortis conclusionemque nam.
+                    </div>
+                    <div role="tabpanel"
+                         id="tab2-content"
+                         aria-labelledby="tab2"
+                         ng-switch-when="1"
+                         md-swipe-left="next()"
+                         md-swipe-right="previous()" >
+                            Facete delenit argumentum cum at. Pro rebum nostrum contentiones ad.
+                    </div>
+                    <div role="tabpanel"
+                         id="tab3-content"
+                         aria-labelledby="tab3"
+                         ng-switch-when="2"
+                         md-swipe-left="next()"
+                         md-swipe-right="previous()" >
+                            Ad sea dolor accusata consequuntur. Sit facete convenire reprehendunt et. Usu cu nonumy dissentiet, mei choro omnes fuisset ad. Te qui docendi accusam efficiantur, doming noster prodesset eam ei. In vel posse movet, ut convenire referrentur eum, ceteros singulis intellegam eu sit.
+                    </div>
+                    <div role="tabpanel"
+                         id="tab4-content"
+                         aria-labelledby="tab4"
+                         ng-switch-when="3"
+                         md-swipe-left="next()"
+                         md-swipe-right="previous()" >
+                            it saepe quaestio reprimique id, duo no congue nominati, cum id nobis facilisi.
+                    </div>
+                </ng-switch>
+            </div>
+        </div>
+
+
+    </div>
+</md-content>

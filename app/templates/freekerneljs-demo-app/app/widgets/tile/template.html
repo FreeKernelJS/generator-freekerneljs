@@ -1,0 +1,7 @@
+<div class="{{cssPrefix}}-info-tile" flex ng-controller="InfoTileController">
+    <span class="mini-stat-icon mdi" ng-class="getIconByType(tile.type)"></span>
+    <div class="mini-stat-info">
+        <span>{{tile.count}}</span>
+        {{tile.description}}
+    </div>
+</div>

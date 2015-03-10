@@ -1,0 +1,20 @@
+<md-sidenav class="md-sidenav-left md-whiteframe-z2 {{cssPrefix}}-navbar" 
+            md-component-id="{{sidnavId}}" 
+            md-is-open="true">
+    
+    <h1 class="md-toolbar-tools {{cssPrefix}}-navbar-header">
+        {{appTitle}}
+    </h1>
+
+    <div layout="column" layout-align="space-between start" class="{{cssPrefix}}-navbar-body" ng-controller="NavbarController">
+
+        <md-button ng-repeat="item in navbarItems"
+                   ng-class="{'active' : isActive([item.pageUrl])}"
+                   ng-href="#{{item.pageUrl}}">
+
+            <i class="{{cssPrefix}}-navbar-item-icon mdi {{item.icon}}"></i>
+            <span class="{{cssPrefix}}-navbar-item-text">{{item.text}}</span>
+        </md-button>
+
+    </div>
+</md-sidenav>
