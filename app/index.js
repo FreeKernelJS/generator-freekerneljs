@@ -153,17 +153,17 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
             var hasMod = function (mod) {
                 return props.modules.indexOf(mod) !== -1;
             };
-            this.angularModule = hasMod('angularModule');
-            this.routeModule = hasMod('routeModule');
-            this.ariaModule = hasMod('ariaModule');
-            this.animateModule = hasMod('animateModule');
+            this.angularModule = true;
+            this.routeModule = true;
+            this.ariaModule = true;
+            this.animateModule = true;
             this.cookiesModule = hasMod('cookiesModule');
             this.resourceModule = hasMod('resourceModule');
             this.messagesModule = hasMod('messagesModule');
             this.sanitizeModule = hasMod('sanitizeModule');
             this.touchModule = hasMod('touchModule');
-            this.materialModule = hasMod('materialModule');
-            this.scriptjsModule = hasMod('scriptjsModule');
+            this.materialModule = true;
+            this.scriptjsModule = true;
             this.iconicFont = hasMod('iconicFont');
 
             done();
