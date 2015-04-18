@@ -67,22 +67,6 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
             name: 'modules',
             message: 'Which modules would you like to include?',
             choices: [{
-                value: 'angularModule',
-                name: 'angular',
-                checked: true
-            }, {
-                value: 'routeModule',
-                name: 'angular-route',
-                checked: true
-            }, {
-                value: 'ariaModule',
-                name: 'angular-aria',
-                checked: true
-            }, {
-                value: 'animateModule',
-                name: 'angular-animate',
-                checked: true
-            }, {
                 value: 'cookiesModule',
                 name: 'angular-cookies',
                 checked: false
@@ -102,14 +86,6 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
                 value: 'touchModule',
                 name: 'angular-touch',
                 checked: false
-            }, {
-                value: 'materialModule',
-                name: 'angular-material',
-                checked: true
-            }, {
-                value: 'scriptjsModule',
-                name: 'scriptjs',
-                checked: true
             }, {
                 value: 'iconicFont',
                 name: 'material-design-iconic-font',
