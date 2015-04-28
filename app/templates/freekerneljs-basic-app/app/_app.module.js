@@ -3,12 +3,17 @@ angular.module('<%= props.name %>', [
     // the application:
     
     //angular modules
-    'ngRoute',
     'ngMaterial',
     'ngAnimate',
-    //widgets
+    'ui.router',
+    
+    //app services
+    'fkjs.services.utils',
+    
+    //app widgets
     'fkjs.widgets.header',
     'fkjs.widgets.navbar',
-    //views
-    'HomeView'
+    
+    //app views
+    'fkjs.views.home'
 ]);

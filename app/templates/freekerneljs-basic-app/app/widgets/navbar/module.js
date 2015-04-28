@@ -37,4 +37,11 @@ angular.module('fkjs.widgets.navbar', [])
         pageUrl: 'home',
         text: 'Home'
     }];
+
+    //set "active" css on selected menu item
+    $scope.isActive = function(viewLocation){ 
+        var path = $location.path();
+        path = path.substr(1, path.length);
+        return viewLocation.toString() === path;
+    };
 });

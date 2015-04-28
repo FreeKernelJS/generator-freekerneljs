@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc module
- * @name HomeView
+ * @name fkjs.views.home
  *
  * @description
- * A view for the application home page.
+ * A view for the home page of this application.
  */
-angular.module('HomeView', [])
+angular.module('fkjs.views.home', [])
 
 .controller('HomeViewController', function($scope){
     $scope.pageTitle = 'Home';

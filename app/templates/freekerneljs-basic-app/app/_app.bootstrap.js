@@ -4,6 +4,9 @@
 $script([
     // list all your files here.
     
+    //services
+    'services/utils.js',
+    
     //widgets
     'widgets/header/module.js',
     'widgets/navbar/module.js',

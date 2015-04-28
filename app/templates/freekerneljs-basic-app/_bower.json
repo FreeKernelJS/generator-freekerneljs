@@ -4,7 +4,6 @@
   "dependencies": {
     <% if (angularModule) { %>
     "angular": "^<%= ngVer %>"<% } %><% if (routeModule) { %>,
-    "angular-route": "^<%= ngVer %>"<% } %><% if (ariaModule) { %>,
     "angular-aria": "^<%= ngVer %>"<% } %><% if (animateModule) { %>,
     "angular-animate": "^<%= ngVer %>"<% } %><% if (cookiesModule) { %>,
     "angular-cookies": "^<%= ngVer %>"<% } %><% if (resourceModule) { %>,
@@ -12,6 +11,7 @@
     "angular-messages": "^<%= ngVer %>"<% } %><% if (sanitizeModule) { %>,
     "angular-sanitize": "^<%= ngVer %>"<% } %><% if (touchModule) { %>,
     "angular-touch": "^<%= ngVer %>"<% } %><% if (materialModule) { %>,
+    "angular-ui-router": "~0.2.13"<% } %><% if (ariaModule) { %>,
     "angular-material": "^0.8.2"<% } %><% if (scriptjsModule) { %>,
     "script.js": "^2.5.7"<% } %><% if (iconicFont) { %>,
     "material-design-iconic-font": "^1.1.1"<% } %>

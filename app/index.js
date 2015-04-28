@@ -50,19 +50,22 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
 
         console.log(welcomeMsg);
 
-        var prompts = [{
-            type: 'list',
-            name: 'template',
-            message: 'Select a template',
-            choices: getDirectories(templatePath),
-            default: 'freekerneljs-basic-app'
-        }, {
-            when: function (response) {
-                if (response.template == 'freekerneljs-basic-app')
-                    return true
-
-                return false
-            },
+        var prompts = [
+//            {
+//            type: 'list',
+//            name: 'template',
+//            message: 'Select a template',
+//            choices: getDirectories(templatePath),
+//            default: 'freekerneljs-basic-app'
+//        }, 
+        
+            {
+//            when: function (response) {
+//                if (response.template == 'freekerneljs-basic-app')
+//                    return true
+//
+//                return false
+//            },
             type: 'checkbox',
             name: 'modules',
             message: 'Which modules would you like to include?',
@@ -190,6 +193,7 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
         this.bulkDirectory(templateName + '/app/assets/css', 'app/assets/css');
         this.bulkDirectory(templateName + '/app/views', 'app/views');
         this.bulkDirectory(templateName + '/app/widgets', 'app/widgets');
+        this.bulkDirectory(templateName + '/app/services', 'app/services');
     },
 
     test: function () {

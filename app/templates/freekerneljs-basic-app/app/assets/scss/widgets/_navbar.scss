@@ -22,3 +22,8 @@
     margin-bottom: 1px;
     line-height: 32px;
 }
+
+.navbar-body .md-button.md-default-theme.active {
+    color: $link-color;
+    background-color: #ececec;
+}

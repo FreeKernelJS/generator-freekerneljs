@@ -1,18 +1,17 @@
 angular.module('<%= props.name %>')
 
-.config(['$routeProvider',
-    function($routeProvider){
-        var homePage = '/home';
-                
-        $routeProvider
-        
-        .when('/', {redirectTo: homePage})
-        .when(homePage, {
-            templateUrl: 'views/home/page.html',
-            module: 'HomeView',
-            controller: 'HomeViewController'
-        })
-          
-        .otherwise({ redirectTo: homePage });
-    }
-]);
+.config(function($stateProvider, $urlRouterProvider){
+             
+        // ~~~ Redirects and Otherwise
+        $urlRouterProvider
+            .otherwise( '/home' );
+
+    
+        // ~~~ State Configurations
+        $stateProvider
+            .state('home', {
+                url: '/home',
+                templateUrl: 'views/home/page.html',
+                controller: 'HomeViewController'
+            });
+});

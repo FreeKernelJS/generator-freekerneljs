@@ -1,15 +1,15 @@
 // order of inclded files is important 
-@import "_colors";    //must be required first
-@import "_variables"; //must be required second
-@import "_mixin";     //must be required third
-@import "_main";
-@import "_header";
-@import "_navbar";
+@import "common/_colors";    //must be required first
+@import "common/_variables"; //must be required second
+@import "common/_mixin";     //must be required third
+@import "common/_main";
+@import "widgets/_header";
+@import "widgets/_navbar";
 
 
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //  Custom styles for this demo app
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .content-bg{
     background-color: $color-background-100 !important;
