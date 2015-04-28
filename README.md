@@ -1,4 +1,4 @@
-# generator-freekerneljs
+﻿# generator-freekerneljs
 Generates a skeleton app which was built upon AngularJS as a framework, and Angular Material as the UI.
 
 _Current version: 0.1.0_
@@ -36,16 +36,20 @@ Installation
 ------------
 
 1. Install FreeKernelJS Generator:
-
+```
     $ npm install -g generator-freekerneljs
+```
 
 2. Create a new folder where you would like to output the generator files and switch to it:
-
+```
     $ mkdir <project_folder>
     $ cd <project_folder>
+```
 
 3. Run the generator:
+```
     $ yo freekerneljs
+```
 
 The following configuration can be set during installation:
 - Modules to be included

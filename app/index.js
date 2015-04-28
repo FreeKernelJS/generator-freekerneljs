@@ -148,7 +148,8 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
         this.prompt(prompts, function (props) {
             this.props = props;
 
-            templateName = props.template;
+//            templateName = props.template;
+            templateName = 'freekerneljs-basic-app';
 
             // For easier access in the templates.
             this.slugname = this._.slugify(props.name);
