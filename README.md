@@ -74,4 +74,4 @@ You can copy them to your server root and run the application in browser.
 This should be the result:
 
 
-<img src="docs\images\Clipboard01.png">
+<img src="docs/images/Clipboard01.png">
