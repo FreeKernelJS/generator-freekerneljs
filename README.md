@@ -79,3 +79,6 @@ This should be the result:
 
 
 <img src="docs/images/Clipboard01.png">
+
+An example of an application that has been developed using FreeKernelJS Generator:
+<a href="https://github.com/FreeKernelJS/demos/tree/master/freekerneljs-demo-app">Demo App</a>
