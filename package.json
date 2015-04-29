@@ -1,15 +1,15 @@
 {
   "name": "generator-freekerneljs",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "A FreeKernelJS generator for Yeoman",
   "license": "MIT",
   "main": "app/index.js",
   "repository": "https://github.com/FreeKernelJS/generator-freekerneljs",
-    "author": {
-        "name": "FreeKernelJS",
-        "email": "freekerneljs.org",
-        "url": "http://www.freekerneljs.org"
-    },
+  "author": {
+    "name": "FreeKernelJS",
+    "email": "freekerneljs.org",
+    "url": "http://www.freekerneljs.org"
+  },
   "homepage": "http://www.freekerneljs.org",
   "engines": {
     "node": ">=0.10.0"
