@@ -1,5 +1,5 @@
-/**
- * Load all JS dependencies, then bootstrap the application.
+/*
+ * Load all JS dependencies first
  */
 $script([
     // list all your files here.
@@ -20,7 +20,9 @@ $script([
 ], 'appDependencies');
 
 
-// finally load routes
+/*
+ * Finally load routes, then bootstrap the application.
+ */
 $script.ready('appDependencies', function () {
     $script([
         'app.routes.js'

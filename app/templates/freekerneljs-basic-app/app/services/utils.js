@@ -18,6 +18,9 @@ angular.module('fkjs.services.utils', [])
  * 
  * @description
  * Format a string with parameters.
+ * 
+ * @example usage
+ * var formattedStr = stringFormat.compile('Your name is: {0} {1}', 'Someone', 'Else');
  */
 .service('stringFormat', function(){
     this.compile = function(args){

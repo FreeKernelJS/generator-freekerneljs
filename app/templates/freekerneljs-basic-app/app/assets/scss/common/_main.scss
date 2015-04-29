@@ -28,3 +28,10 @@ a:visited{
 md-autocomplete ul{
     z-index: 999;
 }
+
+
+// ~~~ common styles for the entire app
+
+.content-bg{
+    background-color: $color-background-100 !important;
+}

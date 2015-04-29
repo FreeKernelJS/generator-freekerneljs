@@ -1,16 +1,11 @@
-// order of inclded files is important 
+// include files by order to retain dependencies intact
+
+// common styles
 @import "common/_colors";    //must be required first
 @import "common/_variables"; //must be required second
 @import "common/_mixin";     //must be required third
 @import "common/_main";
+
+// styles for widgets
 @import "widgets/_header";
 @import "widgets/_navbar";
-
-
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-//  Custom styles for this demo app
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.content-bg{
-    background-color: $color-background-100 !important;
-}
