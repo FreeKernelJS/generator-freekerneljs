@@ -1,7 +1,7 @@
 ﻿# generator-freekerneljs
 Generates a skeleton app which was built upon AngularJS as a framework, and Angular Material as the UI.
 
-_Current version: 0.1.0_
+*Current version: 0.1.0*
 
 
 The Skeleton App
@@ -35,23 +35,18 @@ It's a basic application in the following structure:
 Installation
 ------------
 
-1. Install FreeKernelJS Generator:
-```
-    $ npm install -g generator-freekerneljs
+1) Install FreeKernelJS Generator globally: 
+``` 
+    $ npm install -g generator-freekerneljs 
 ```
 
-2. Create a new folder where you would like to output the generator files and switch to it:
+2) Create a new folder where you would like for your app files to be output by the generator, and switch to it:
 ```
     $ mkdir <project_folder>
     $ cd <project_folder>
 ```
-
-3. Run the generator:
-```
-    $ yo freekerneljs
-```
-
-The following configuration can be set during installation:
+During installation, various configuration values can be set for your application. 
+The generator wizard will prompt you for values, or you can leave all as default by pressing enter:
 - Modules to be included
 - Project name
 - Title of the application
@@ -65,5 +60,18 @@ The following configuration can be set during installation:
 - Author url
 - Home page
 
-You can now find the basic app located under:
-    <project_folder>/dist/debug
+3) Run the generator:
+``` 
+    $ yo freekerneljs 
+```
+
+4) After installation is successful you can find all the output files at this path:
+``` 
+    $ cd <project_folder>/dist/debug
+```
+You can copy them to your server root and run the application in browser.
+
+This should be the result:
+
+
+<img src="docs\images\Clipboard01.png">
