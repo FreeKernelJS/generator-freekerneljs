@@ -2,7 +2,7 @@
 Generates a skeleton app which was built upon AngularJS as a framework, and Angular Material as the UI.
 The skeleton app can be used to start and build your own application.
 
-*Current version: 0.1.0*
+*Current version: 0.1.1*
 
 
 The Skeleton App
