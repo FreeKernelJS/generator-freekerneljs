@@ -1,6 +1,6 @@
 {
   "name": "generator-freekerneljs",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A FreeKernelJS generator which generates a skeleton app which was built upon AngularJS",
   "license": "MIT",
   "main": "app/index.js",
