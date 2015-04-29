@@ -15,6 +15,9 @@ It's a basic application in the following structure:
 │   ├── app.bootstrap.js
 │   ├── app.module.js
 │   ├── app.routes.js
+│   ├── assets
+│   │   ├── css
+│       └── images
 │   ├── widgets
 │   │   ├── header
 │   │   │   ├── module.js
