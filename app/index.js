@@ -1,4 +1,5 @@
 'use strict';
+
 var util = require('util'),
     fs = require('fs'),
     path = require('path'),
@@ -50,22 +51,19 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
 
         console.log(welcomeMsg);
 
-        var prompts = [
-//            {
-//            type: 'list',
-//            name: 'template',
-//            message: 'Select a template',
-//            choices: getDirectories(templatePath),
-//            default: 'freekerneljs-basic-app'
-//        }, 
-        
-            {
-//            when: function (response) {
-//                if (response.template == 'freekerneljs-basic-app')
-//                    return true
-//
-//                return false
-//            },
+        var prompts = [{
+            when: function (response) {
+                if (getDirectories(templatePath).length > 1)
+                    return true
+
+                return false
+            },
+            type: 'list',
+            name: 'template',
+            message: 'Select a template',
+            choices: getDirectories(templatePath),
+            default: 'freekerneljs-basic-app'
+        }, {
             type: 'checkbox',
             name: 'modules',
             message: 'Which modules would you like to include?',
@@ -148,7 +146,7 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
         this.prompt(prompts, function (props) {
             this.props = props;
 
-//            templateName = props.template;
+            templateName = props.template;
             templateName = 'freekerneljs-basic-app';
 
             // For easier access in the templates.
@@ -202,10 +200,6 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
         this.copy(templateName + '/test/readme.md', 'test/README.md');
     },
 
-    writing: function () {
-//        this.copy(templateName + '/readme.md', 'README.md');
-    },
-    
     install: function () {
         this.installDependencies({
             skipInstall: this.options['skip-install']
