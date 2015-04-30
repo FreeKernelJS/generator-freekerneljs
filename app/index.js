@@ -203,7 +203,7 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
     },
 
     writing: function () {
-        this.copy(templateName + '/readme.md', 'README.md');
+//        this.copy(templateName + '/readme.md', 'README.md');
     },
     
     install: function () {
