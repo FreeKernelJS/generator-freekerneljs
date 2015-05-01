@@ -1,16 +1,10 @@
-{<% var ngVer = "1.3.13" %>
+{<% var ngVer = "1.3.x" %>
   "name": "<%= slugname %>",
   "version": "<%= props.version %>",
   "dependencies": {
       
     <% if (angularModule) { %>
     "angular": "^<%= ngVer %>"<% } %>
-
-    <% if (ariaModule) { %>,
-    "angular-aria": "^<%= ngVer %>"<% } %>
-
-    <% if (animateModule) { %>,
-    "angular-animate": "^<%= ngVer %>"<% } %>
 
     <% if (cookiesModule) { %>,
     "angular-cookies": "^<%= ngVer %>"<% } %>

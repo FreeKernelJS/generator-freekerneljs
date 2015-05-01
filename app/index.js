@@ -93,10 +93,6 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
             name: 'modules',
             message: 'Which modules would you like to include?',
             choices: [{
-                value: 'animateModule',
-                name: 'angular-animate',
-                checked: false
-            },{
                 value: 'cookiesModule',
                 name: 'angular-cookies',
                 checked: false
@@ -187,8 +183,6 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
             };
             this.angularModule = true;
             this.routeModule = true;
-            this.ariaModule = true;
-            this.animateModule = hasMod('animateModule');
             this.cookiesModule = hasMod('cookiesModule');
             this.resourceModule = hasMod('resourceModule');
             this.messagesModule = hasMod('messagesModule');
@@ -223,6 +217,10 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
         this.bulkDirectory(templateName + '/app/views', 'app/views');
         this.bulkDirectory(templateName + '/app/widgets', 'app/widgets');
         this.bulkDirectory(templateName + '/app/services', 'app/services');
+    },
+    
+    writing: function () {
+        this.copy(templateName + '/readme.md', 'README.md');
     },
 
     test: function () {
