@@ -1,5 +1,6 @@
 # generator-freekerneljs
 
+[![Built with Yeoman](http://pixel-cookers.github.io/built-with-badges/yeoman/yeoman-long.png)](http://yeoman.io/)
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
 Generates a skeleton app which was built upon AngularJS as a framework, and Angular Material as the UI.
