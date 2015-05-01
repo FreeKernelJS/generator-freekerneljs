@@ -70,6 +70,10 @@ Installation
 ``` 
     $ yo freekerneljs 
 ```
+If the generator is already installed and a newer version is available you can use this command to upgrade:
+``` 
+    $ npm update -g generator-freekerneljs 
+```
 During installation, various configuration values can be set for your application. 
 The generator wizard will prompt you for values, or you can leave all as default by pressing enter:
 - Modules to be included
@@ -99,6 +103,20 @@ This should be the result:
 
 Here is an example to an application that has been developed using FreeKernelJS Generator:
 <a href="https://github.com/FreeKernelJS/demos/tree/master/freekerneljs-demo-app">Demo App</a>
+
+
+Development Tools
+-----------------
+You might want to consider using these tools to develop the application:
+- Install <a href="http://gruntjs.com/">Grunt</a> and use it to run tasks such as - debug, dist and watch.
+``` 
+    $ npm install -g grunt-cli
+```
+- Install <a href="https://www.ruby-lang.org/en/">Ruby</a> to compile the scss files (manually or through Grunt). 
+``` 
+    $ gem install sass
+    $ npm install grunt-contrib-sass --save-dev
+```
 
 
 Release History
