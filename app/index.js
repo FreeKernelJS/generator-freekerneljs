@@ -1,13 +1,16 @@
-'use strict';
+﻿'use strict';
 
 var util = require('util'),
     fs = require('fs'),
     path = require('path'),
     chalk = require('chalk'),
-    compareVersion = require('compare-version'),
     yeoman = require('yeoman-generator'),
     pkgName = require('pkg-name'),
-    templateName = '',
+    updateNotifier = require('update-notifier'),
+    compareVersion = require('compare-version'),
+    stringLength = require('string-length'),
+    pkg = require('../package.json'),   
+    templateName = 'freekerneljs-basic-app',
     generatorRoot = '',
     templatePath = '';
 
@@ -33,11 +36,33 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
         this.appname = this.appname.replace(/\s+/g, '-');
     },
 
-    initializing: function() {
-        this.pkg = require('../package.json');
-        this.compareVersion = compareVersion;
+    initializing: function () {
         generatorRoot = this.templatePath('../../');
         templatePath = this.templatePath();
+
+        var notifier = updateNotifier({
+            pkg: pkg,
+            // Check for updates every day.
+            updateCheckInterval: 1000 * 60 * 60 * 24
+        });
+
+        if (notifier.update) {
+            var fill = function (str, count) {
+                return Array(count + 1).join(str);
+            };
+
+            var line1 = ' Update available: ' + chalk.green.bold(notifier.update.latest) + chalk.dim(' (current: ' + notifier.update.current + ')') + ' ',
+                line2 = ' Run ' + chalk.magenta('npm update -g ' + pkg.name) + ' to update. ',
+                contentWidth = Math.max(stringLength(line1), stringLength(line2)),
+                line1rest = contentWidth - stringLength(line1),
+                line2rest = contentWidth - stringLength(line2),
+                top = chalk.yellow('┌' + fill('─', contentWidth) + '┐'),
+                bottom = chalk.yellow('└' + fill('─', contentWidth) + '┘'),
+                side = chalk.yellow('│'),
+                updateMessage = '\n\n' + top + '\n' + side + line1 + fill(' ', line1rest) + side + '\n' + side + line2 + fill(' ', line2rest) + side + '\n' + bottom + '\n';
+
+            console.log(updateMessage);
+        }
     },
 
     prompting: function () {
@@ -146,8 +171,9 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
         this.prompt(prompts, function (props) {
             this.props = props;
 
-            templateName = props.template;
-            templateName = 'freekerneljs-basic-app';
+            if (props.template) {
+                templateName = props.template;
+            }
 
             // For easier access in the templates.
             this.slugname = this._.slugify(props.name);
