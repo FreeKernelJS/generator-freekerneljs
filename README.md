@@ -46,9 +46,10 @@ Installation
 
 1) First, setup your environment if you have not done so yet.
 - Install Node.js (including npm) <https://nodejs.org> 
-- Then Install Yeoman globally:
+- Then Install Bower and Yeoman globally:
 ``` 
-    $ npm install -g yo 
+    $ npm install -g bower
+    $ npm install -g yo
 ```
 
 
