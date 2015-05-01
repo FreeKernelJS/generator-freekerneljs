@@ -4,7 +4,6 @@ angular.module('<%= props.name %>', [
     
     //angular modules
     'ngMaterial',
-    'ngAnimate',
     'ui.router',
     
     //app services
