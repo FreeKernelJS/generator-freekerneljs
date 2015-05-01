@@ -1,8 +1,6 @@
 # generator-freekerneljs
 
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
-[![Built with Yeoman](https://camo.githubusercontent.com/9186910b81b7c7a43d9acbbcf9ebfbc19ba2563c/687474703a2f2f6f6e6573696d652e66722f696d616765732f79656f6d616e2e737667)](http://yeoman.io/)
-
 
 Generates a skeleton app which was built upon AngularJS as a framework, and Angular Material as the UI.
 The skeleton app can be used to start and build your own application.
