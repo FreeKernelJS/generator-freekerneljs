@@ -107,7 +107,7 @@ Here is an example to an application that has been developed using FreeKernelJS 
 
 Development Tools
 -----------------
-You might want to consider using these tools to develop the application:
+You might want to consider using these tools to continue and develop the application:
 - Install <a href="http://gruntjs.com/">Grunt</a> and use it to run tasks such as - debug, dist and watch.
 ``` 
     $ npm install -g grunt-cli
