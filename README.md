@@ -103,4 +103,4 @@ Here is an example to an application that has been developed using FreeKernelJS 
 
 Release History
 ----------------
-See the [CHANGELOG](CHANGELOG).
+See the [CHANGELOG](CHANGELOG.md).
