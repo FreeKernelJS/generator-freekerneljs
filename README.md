@@ -3,11 +3,17 @@
 [![Built with Yeoman](http://pixel-cookers.github.io/built-with-badges/yeoman/yeoman-long.png)](http://yeoman.io/)
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
-Generates a skeleton app which was built upon AngularJS as a framework, and <a href="https://material.angularjs.org/">Angular Material</a> as the UI.
+Generates a skeleton app which was built upon <a href="https://angularjs.org/">AngularJS</a> as a framework, and <a href="https://material.angularjs.org/">Angular Material</a> as the UI.
 The skeleton app can be used to start and build your own application.
 
+Quick Links:
+-  [Structure](#structure)
+-  [Installation](#installation)
+-  [Tools](#tools)
+-  [Release History](#history)
 
-The Skeleton App
+
+<a name="structure"></a> The Skeleton App
 ----------------
 It's a basic application in the following structure:
 
@@ -42,12 +48,12 @@ It's a basic application in the following structure:
 - script.js (v2.5.7)
 
 
-Installation
+<a name="installation"></a> Installation
 ------------
 
 1) First, setup your environment if you have not done so yet.
 - Install Node.js (including npm) <https://nodejs.org> 
-- Then Install Bower and Yeoman globally:
+- Then Install <a href="http://bower.io/">Bower</a> and <a href="http://yeoman.io/">Yeoman</a> globally:
 ``` 
     $ npm install -g bower
     $ npm install -g yo
@@ -105,7 +111,11 @@ Here is an example to an application that has been developed using FreeKernelJS 
 <a href="https://github.com/FreeKernelJS/demos/tree/master/freekerneljs-demo-app">Demo App</a>
 
 
-Development Tools
+> For general questions and discussions, use the
+  [FreeKernelJS Forum](http://www.forum.freekerneljs.org/).
+
+
+<a name="tools"></a> Development Tools
 -----------------
 You might want to consider using these tools to continue and develop the application:
 - Install <a href="http://gruntjs.com/">Grunt</a> and use it to run tasks such as - debug, dist and watch.
@@ -119,6 +129,6 @@ You might want to consider using these tools to continue and develop the applica
 ```
 
 
-Release History
+<a name="history"></a> Release History
 ----------------
 See the [CHANGELOG](CHANGELOG.md).
