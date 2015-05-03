@@ -3,7 +3,7 @@
 [![Built with Yeoman](http://pixel-cookers.github.io/built-with-badges/yeoman/yeoman-long.png)](http://yeoman.io/)
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
-Generates a skeleton app which was built upon AngularJS as a framework, and Angular Material as the UI.
+Generates a skeleton app which was built upon AngularJS as a framework, and <a href="https://material.angularjs.org/">Angular Material</a> as the UI.
 The skeleton app can be used to start and build your own application.
 
 
