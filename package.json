@@ -15,17 +15,19 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    
+
   },
   "files": [
     "app"
   ],
   "keywords": [
+    "freekerneljs",
     "yeoman-generator",
     "angularjs",
+    "angular-material",
     "material-design",
-    "skelton-app",
-    "freekerneljs"
+    "grunt",
+    "skeleton-app"
   ],
   "dependencies": {
     "chalk": "^0.5.1",
