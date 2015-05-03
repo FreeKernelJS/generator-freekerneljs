@@ -1,7 +1,7 @@
 {
   "name": "generator-freekerneljs",
-  "version": "0.1.3",
-  "description": "FreeKernelJS generator, generate new app skeleton.",
+  "version": "0.2.0",
+  "description": "Generates app skeleton built with Angular Material UI and AngularJS. Can be developed and managed using Grunt.",
   "license": "MIT",
   "main": "app/index.js",
   "repository": "https://github.com/FreeKernelJS/generator-freekerneljs",
