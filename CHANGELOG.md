@@ -1,5 +1,5 @@
-<a name="0.1.3"></a>
-### 0.1.3 (2015-May-01)
+<a name="0.2.0"></a>
+### 0.2.0 (2015-May-03)
 
 #### Features
 
@@ -8,6 +8,7 @@
 #### Bug Fixes
 
 * Dependencies management
+* Improve documentation
 
 
 <a name="0.1.2"></a>
