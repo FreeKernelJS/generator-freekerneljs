@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 
 var util = require('util'),
     fs = require('fs'),
@@ -10,7 +10,7 @@ var util = require('util'),
     compareVersion = require('compare-version'),
     stringLength = require('string-length'),
     pkg = require('../package.json'),   
-    templateName = 'freekerneljs-basic-app',
+    templateName = 'freekerneljs-basic-app-md',
     generatorRoot = '',
     templatePath = '';
 
@@ -87,7 +87,7 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
             name: 'template',
             message: 'Select a template',
             choices: getDirectories(templatePath),
-            default: 'freekerneljs-basic-app'
+            default: 'freekerneljs-basic-app-md'
         }, {
             type: 'checkbox',
             name: 'modules',
