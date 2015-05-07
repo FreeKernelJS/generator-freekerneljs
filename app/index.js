@@ -113,6 +113,12 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
                 name: 'angular-touch',
                 checked: false
             }, {
+                when: function (response) {
+                    if (response.name = 'freekerneljs-basic-app-md')
+                        return true
+
+                    return false
+                },
                 value: 'iconicFont',
                 name: 'material-design-iconic-font',
                 checked: false
@@ -182,26 +188,22 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
                 return props.modules.indexOf(mod) !== -1;
             };
 
+            // Common modules
             this.angularModule = true;
             this.routeModule = true;
             this.scriptjsModule = true;
+            this.cookiesModule = hasMod('cookiesModule');
+            this.resourceModule = hasMod('resourceModule');
+            this.messagesModule = hasMod('messagesModule');
+            this.sanitizeModule = hasMod('sanitizeModule');
+            this.touchModule = hasMod('touchModule');
 
             switch (templateName) {
                 case 'freekerneljs-basic-app':
                     this.bootstrapModule = true;
-                    this.cookiesModule = hasMod('cookiesModule');
-                    this.resourceModule = hasMod('resourceModule');
-                    this.messagesModule = hasMod('messagesModule');
-                    this.sanitizeModule = hasMod('sanitizeModule');
-                    this.touchModule = hasMod('touchModule');
                     break;
                 case 'freekerneljs-basic-app-md':
                     this.materialModule = true;
-                    this.cookiesModule = hasMod('cookiesModule');
-                    this.resourceModule = hasMod('resourceModule');
-                    this.messagesModule = hasMod('messagesModule');
-                    this.sanitizeModule = hasMod('sanitizeModule');
-                    this.touchModule = hasMod('touchModule');
                     this.iconicFont = hasMod('iconicFont');
                     break;
                 default:
