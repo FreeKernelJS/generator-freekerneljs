@@ -182,24 +182,21 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
                 return props.modules.indexOf(mod) !== -1;
             };
 
+            this.angularModule = true;
+            this.routeModule = true;
+            this.scriptjsModule = true;
+
             switch (templateName) {
                 case 'freekerneljs-basic-app':
-                    this.angularModule = true;
-                    this.routeModule = true;
                     this.bootstrapModule = true;
-                    this.scriptjsModule = true;
                     this.cookiesModule = hasMod('cookiesModule');
                     this.resourceModule = hasMod('resourceModule');
                     this.messagesModule = hasMod('messagesModule');
                     this.sanitizeModule = hasMod('sanitizeModule');
                     this.touchModule = hasMod('touchModule');
-                    this.iconicFont = hasMod('iconicFont');
                     break;
                 case 'freekerneljs-basic-app-md':
-                    this.angularModule = true;
-                    this.routeModule = true;
                     this.materialModule = true;
-                    this.scriptjsModule = true;
                     this.cookiesModule = hasMod('cookiesModule');
                     this.resourceModule = hasMod('resourceModule');
                     this.messagesModule = hasMod('messagesModule');
