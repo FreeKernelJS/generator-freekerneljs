@@ -89,6 +89,43 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
             choices: getDirectories(templatePath),
             default: 'freekerneljs-basic-app-md'
         }, {
+            when: function (response) {
+                if (response.template == 'freekerneljs-basic-app')
+                    return true
+
+                return false
+            },
+            type: 'checkbox',
+            name: 'modules',
+            message: 'Which modules would you like to include?',
+            choices: [{
+                value: 'cookiesModule',
+                name: 'angular-cookies',
+                checked: false
+            }, {
+                value: 'resourceModule',
+                name: 'angular-resource',
+                checked: false
+            }, {
+                value: 'messagesModule',
+                name: 'angular-messages',
+                checked: false
+            }, {
+                value: 'sanitizeModule',
+                name: 'angular-sanitize',
+                checked: false
+            }, {
+                value: 'touchModule',
+                name: 'angular-touch',
+                checked: false
+            }]
+        }, {
+            when: function (response) {
+                if (response.template == 'freekerneljs-basic-app-md')
+                    return true
+
+                return false
+            },
             type: 'checkbox',
             name: 'modules',
             message: 'Which modules would you like to include?',
@@ -182,29 +219,22 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
                 return props.modules.indexOf(mod) !== -1;
             };
 
+            // Common modules
+            this.angularModule = true;
+            this.routeModule = true;
+            this.scriptjsModule = true;
+            this.cookiesModule = hasMod('cookiesModule');
+            this.resourceModule = hasMod('resourceModule');
+            this.messagesModule = hasMod('messagesModule');
+            this.sanitizeModule = hasMod('sanitizeModule');
+            this.touchModule = hasMod('touchModule');
+
             switch (templateName) {
                 case 'freekerneljs-basic-app':
-                    this.angularModule = true;
-                    this.routeModule = true;
                     this.bootstrapModule = true;
-                    this.scriptjsModule = true;
-                    this.cookiesModule = hasMod('cookiesModule');
-                    this.resourceModule = hasMod('resourceModule');
-                    this.messagesModule = hasMod('messagesModule');
-                    this.sanitizeModule = hasMod('sanitizeModule');
-                    this.touchModule = hasMod('touchModule');
-                    this.iconicFont = hasMod('iconicFont');
                     break;
                 case 'freekerneljs-basic-app-md':
-                    this.angularModule = true;
-                    this.routeModule = true;
                     this.materialModule = true;
-                    this.scriptjsModule = true;
-                    this.cookiesModule = hasMod('cookiesModule');
-                    this.resourceModule = hasMod('resourceModule');
-                    this.messagesModule = hasMod('messagesModule');
-                    this.sanitizeModule = hasMod('sanitizeModule');
-                    this.touchModule = hasMod('touchModule');
                     this.iconicFont = hasMod('iconicFont');
                     break;
                 default:
