@@ -89,6 +89,43 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
             choices: getDirectories(templatePath),
             default: 'freekerneljs-basic-app-md'
         }, {
+            when: function (response) {
+                if (response.template == 'freekerneljs-basic-app')
+                    return true
+
+                return false
+            },
+            type: 'checkbox',
+            name: 'modules',
+            message: 'Which modules would you like to include?',
+            choices: [{
+                value: 'cookiesModule',
+                name: 'angular-cookies',
+                checked: false
+            }, {
+                value: 'resourceModule',
+                name: 'angular-resource',
+                checked: false
+            }, {
+                value: 'messagesModule',
+                name: 'angular-messages',
+                checked: false
+            }, {
+                value: 'sanitizeModule',
+                name: 'angular-sanitize',
+                checked: false
+            }, {
+                value: 'touchModule',
+                name: 'angular-touch',
+                checked: false
+            }]
+        }, {
+            when: function (response) {
+                if (response.template == 'freekerneljs-basic-app-md')
+                    return true
+
+                return false
+            },
             type: 'checkbox',
             name: 'modules',
             message: 'Which modules would you like to include?',
@@ -113,12 +150,6 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
                 name: 'angular-touch',
                 checked: false
             }, {
-                when: function (response) {
-                    if (response.name = 'freekerneljs-basic-app-md')
-                        return true
-
-                    return false
-                },
                 value: 'iconicFont',
                 name: 'material-design-iconic-font',
                 checked: false
