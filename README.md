@@ -85,7 +85,7 @@ Here is an example to an application that has been developed using FreeKernelJS 
   [FreeKernelJS Forum](http://www.forum.freekerneljs.org/).
 
 
-<a name="tools"></a> Development Tools
+### <a name="tools"></a> Development Tools
 -----------------
 You might want to consider using these tools to continue and develop the application:
 - Install <a href="http://gruntjs.com/">Grunt</a> and use it to run tasks such as - debug, dist and watch.
@@ -99,6 +99,6 @@ You might want to consider using these tools to continue and develop the applica
 ```
 
 
-<a name="history"></a> Release History
+### <a name="history"></a> Release History
 ----------------
 See the [CHANGELOG](CHANGELOG.md).
