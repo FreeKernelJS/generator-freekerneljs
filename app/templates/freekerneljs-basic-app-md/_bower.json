@@ -22,7 +22,7 @@
     "angular-touch": "^<%= ngVer %>"<% } %>
 
     <% if (routeModule) { %>,
-    "angular-ui-router": "~0.2.13"<% } %>
+    "angular-ui-router": "0.2.x"<% } %>
 
     <% if (materialModule) { %>,
     "angular-material": "^0.9.x"<% } %>
