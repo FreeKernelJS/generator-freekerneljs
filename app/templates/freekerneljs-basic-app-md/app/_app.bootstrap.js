@@ -13,6 +13,7 @@ $script([
     
     //views
     'views/home/controller.js',
+    'views/page2/controller.js',
 
     // app files
     'app.module.js'

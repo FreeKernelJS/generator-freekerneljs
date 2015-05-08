@@ -25,6 +25,15 @@ angular.module('fkjs.widgets.header', [])
     return {
         restrict: 'E',
         templateUrl: 'widgets/header/template.html',
-        replace: true
+        replace: true,
+        
+        scope: {
+        },
+        
+        link: function(scope, element, attrs){
+            scope.$on('navbarStateChange', function(event, stateText){
+                scope.pageTitle = stateText;
+            });
+        }
     };
 });

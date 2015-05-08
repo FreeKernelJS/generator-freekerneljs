@@ -9,6 +9,6 @@
  */
 angular.module('fkjs.views.home', [])
 
-.controller('HomeViewController', function($scope){
-    $scope.pageTitle = 'Home';
+.controller('HomeViewController', function($scope, stringUtil){
+    $scope.someText = stringUtil.format('content {0}', 'here');
 });

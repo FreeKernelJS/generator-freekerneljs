@@ -3,94 +3,69 @@
 [![Built with Yeoman](http://pixel-cookers.github.io/built-with-badges/yeoman/yeoman-long.png)](http://yeoman.io/)
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
-Generates a skeleton app which was built upon AngularJS as a framework, and <a href="https://material.angularjs.org/">Angular Material</a> as the UI.
-The skeleton app can be used to start and build your own application.
+Generates a web app structured from a template.
+This app can then be used to start and develop your own application.
+
+Quick Links:
+-  [Installation](#installation)
+-  [Tools](#tools)
+-  [Release History](#history)
 
 
-The Skeleton App
-----------------
-It's a basic application in the following structure:
-
-```
-.
-└── app
-    ├── index.html
-    ├── app.bootstrap.js
-    ├── app.module.js
-    ├── app.routes.js
-    ├── assets
-    │   ├── css
-    │   └── images
-    ├── widgets
-    │   ├── header
-    │   │   ├── module.js
-    │   │   └── template.html
-    │   └── navbar
-    │       ├── module.js
-    │       └── template.html
-    ├── views
-    │   └── home
-    │       ├── controller.js
-    │       └── page.html
-    └── services
-        └── utils.js
-```
-###### Dependencies:
-- angular (v1.3.x)
-- angular-material (v0.8.2)
-- angular-ui-router (v0.2.13)
-- script.js (v2.5.7)
-
-
-Installation
+### <a name="installation"></a> Installation
 ------------
 
-1) First, setup your environment if you have not done so yet.
+###### Step 1: Setup your environment if you have not done so yet.
 - Install Node.js (including npm) <https://nodejs.org> 
-- Then Install Bower and Yeoman globally:
+- Then Install <a href="http://bower.io/">Bower</a> and <a href="http://yeoman.io/">Yeoman</a> globally:
 ``` 
     $ npm install -g bower
     $ npm install -g yo
 ```
 
 
-2) Install FreeKernelJS Generator globally: 
+###### Step 2: Install FreeKernelJS Generator globally: 
 ``` 
     $ npm install -g generator-freekerneljs 
 ```
 
-3) Create a new folder where you would like for your app files to be output by the generator, and switch to it:
+###### Step 3: Create a new workspace folder where you would like for your app files to be output by the generator, and switch to it:
 ```
-    $ mkdir <project_folder>
-    $ cd <project_folder>
+    $ mkdir <workspace_folder>
+    $ cd <workspace_folder>
 ```
 
 
-4) Run the generator:
+###### Step 4: Run the generator:
 ``` 
     $ yo freekerneljs 
 ```
-If the generator is already installed and a newer version is available you can use this command to upgrade:
+If the generator is already installed and a newer version is available it will notify you of this. Alternatively you can use this command to upgrade:
 ``` 
     $ npm update -g generator-freekerneljs 
 ```
 During installation, various configuration values can be set for your application. 
-The generator wizard will prompt you for values, or you can leave all as default by pressing enter:
-- Modules to be included
-- Project name
-- Title of the application
-- Description
-- Version
-- License
-- GitHub repository
-- GitHub username
-- Author name
-- Author email
-- Author url
-- Home page
+The generator wizard will prompt you for values, or you can leave all as default by pressing enter. 
+After the installation is complete you can still set these values manually.
+
+<img src="docs/images/freekerneljs-generator.png">
+
+- **Select a template**. Select which template you would like to use:  [freekerneljs-basic-app](app/templates/freekerneljs-basic-app) or [freekerneljs-basic-app-md](app/templates/freekerneljs-basic-app-md)
+- **Packages to be included**. Use arrows and spacebar to select which packages to inclued in your application. This can be managed later from bower.json file.
+- **Application name**. The name of the folder which contains the application, it will also be used as the name of the main module of the application in the JavaScript files.
+- **Title of the application**. The window title in browser, and the name of the application as displayed above the navigation bar. This can be managed later in code (see index.html, widgets/navbar/template.html)
+- **Description**. The description of this application, can be managed in package.json
+- **Version**. The <a href="http://semver.org/">version</a> of this application, can be managed in package.json (default to 1.0.0).
+- **License**. The license of this application, can be managed in package.json (default to MIT).
+- **GitHub repository**. Can be managed in package.json
+- **GitHub username**. Can be managed in package.json
+- **Author name**. Can be managed in package.json
+- **Author email**. Can be managed in package.json
+- **Author url**. Can be managed in package.json
+- **Home page**. Can be managed in package.json
 
 
-5) After installation is successful you can find all the output files at this path:
+###### Step 5: After installation is successful you can find all the output files at this path:
 ``` 
     $ cd <project_folder>/dist/debug
 ```
@@ -101,11 +76,16 @@ This should be the result:
 
 <img src="docs/images/Clipboard01.png">
 
-Here is an example to an application that has been developed using FreeKernelJS Generator:
+Here is an example to an application that has been developed using FreeKernelJS Generator, and is based on [freekerneljs-basic-app-md](app/templates/freekerneljs-basic-app-md):
+
 <a href="https://github.com/FreeKernelJS/demos/tree/master/freekerneljs-demo-app">Demo App</a>
 
 
-Development Tools
+> For general questions and discussions, use the
+  [FreeKernelJS Forum](http://www.forum.freekerneljs.org/).
+
+
+<a name="tools"></a> Development Tools
 -----------------
 You might want to consider using these tools to continue and develop the application:
 - Install <a href="http://gruntjs.com/">Grunt</a> and use it to run tasks such as - debug, dist and watch.
@@ -119,6 +99,6 @@ You might want to consider using these tools to continue and develop the applica
 ```
 
 
-Release History
+<a name="history"></a> Release History
 ----------------
 See the [CHANGELOG](CHANGELOG.md).

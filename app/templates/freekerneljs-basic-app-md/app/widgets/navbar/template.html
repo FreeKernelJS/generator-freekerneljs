@@ -1,17 +1,20 @@
-<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-is-locked-open="$mdMedia('gt-md')">
+<nav layout="column">
+    <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-is-locked-open="$mdMedia('gt-md')" flex>
     
-    <h1 class="navbar-header">
-        fkjs_(title)
-    </h1>
+        <h1 class="navbar-header">
+            fkjs_(title)
+        </h1>
 
-    <div layout="column" layout-align="space-between start" class="navbar-body" ng-controller="NavbarController">
+        <div layout="column" layout-align="space-between start" class="navbar-body">
 
-        <md-button ng-repeat="item in navbarItems"
-                   ng-class="{'active' : isActive([item.pageUrl])}"
-                   ng-href="#{{item.pageUrl}}">
+            <md-button ng-repeat="item in navbarItems"
+                       ng-class="{ 'active' : item.isActive }"
+                       href="#{{item.pageUrl}}"
+                       aria-label="menu item">
 
-            <span class="navbar-item-text">{{item.text}}</span>
-        </md-button>
+                <span class="navbar-item-text" ng-bind="item.text"></span>
+            </md-button>
 
-    </div>
-</md-sidenav>
+        </div>
+    </md-sidenav>
+</nav>

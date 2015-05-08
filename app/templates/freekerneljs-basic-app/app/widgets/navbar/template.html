@@ -1,17 +1,18 @@
-<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-is-locked-open="$mdMedia('gt-md')">
+<div class="fkjs-navbar">
     
-    <h1 class="navbar-header">
+    <!-- header -->
+    <h1 class="fkjs-navbar-header">
         fkjs_(title)
     </h1>
 
-    <div layout="column" layout-align="space-between start" class="navbar-body" ng-controller="NavbarController">
-
-        <md-button ng-repeat="item in navbarItems"
-                   ng-class="{'active' : isActive([item.pageUrl])}"
-                   ng-href="#{{item.pageUrl}}">
-
-            <span class="navbar-item-text">{{item.text}}</span>
-        </md-button>
+    <!-- body -->
+    <div class="fkjs-navbar-body">
+        <ul>
+            <li ng-repeat="item in navbarItems">
+                <a class="fkjs-navbar-item-text {{item.activeCss}}"
+                   href="#{{item.pageUrl}}" ng-bind="item.text"></a>
+            </li>
+        </ul>
+    </div>
 
     </div>
-</md-sidenav>

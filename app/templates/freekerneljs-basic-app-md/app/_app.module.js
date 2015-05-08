@@ -14,5 +14,6 @@ angular.module('<%= props.name %>', [
     'fkjs.widgets.navbar',
     
     //app views
-    'fkjs.views.home'
+    'fkjs.views.home',
+    'fkjs.views.page2'
 ]);
