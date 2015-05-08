@@ -1,9 +1,13 @@
-.page-header {
+.fkjs-page-header {
     padding: 32px 34px 13px $padding-small;
+    margin-left: $navbar-width;
     border-bottom: 1px solid $color-grey-300;
+    background-color: $color-background-header;
+    height: 100%;
+    vertical-align: top;
 }
 
-.page-header-text {
+.fkjs-page-header-text {
     font-size: $font-size-large;
     color: $title-color;
     text-transform: uppercase;

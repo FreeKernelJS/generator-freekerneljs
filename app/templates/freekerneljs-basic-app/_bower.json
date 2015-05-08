@@ -25,13 +25,10 @@
     "angular-ui-router": "~0.2.13"<% } %>
 
     <% if (bootstrapModule) { %>,
-    "bootstrap": "^3.3.4"<% } %>
+    "bootstrap": "^3.3.x"<% } %>
 
     <% if (scriptjsModule) { %>, 
     "script.js": "^2.5.7"<% } %>
-
-    <% if (iconicFont) { %>,
-    "material-design-iconic-font": "^1.1.1"<% } %>
 
   },
   "overrides": {

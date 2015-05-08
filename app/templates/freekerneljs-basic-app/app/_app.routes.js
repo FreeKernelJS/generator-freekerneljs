@@ -13,5 +13,10 @@ angular.module('<%= props.name %>')
                 url: '/home',
                 templateUrl: 'views/home/page.html',
                 controller: 'HomeViewController'
+            })
+            
+            .state('page2', {
+                url: '/page2',
+                templateUrl: 'views/page2/page.html'
             });
 });

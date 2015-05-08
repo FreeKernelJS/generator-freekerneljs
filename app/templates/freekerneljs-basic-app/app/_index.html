@@ -7,6 +7,7 @@
         <meta name="description" content="<%= props.description %>">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" type="image/ico" href="assets/images/favicon.ico">
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto">
 		
         <!-- build:css assets/css/app.min.css -->
 		<!-- bower:css -->
@@ -22,10 +23,11 @@
         <script src="app.bootstrap.js"></script>
     </head>
     
-    <body layout="column">
-        <section layout="row" flex>
-            <fkjs-navbar></fkjs-navbar>
-            <div layout="column" flex ui-view></div>
+    <body>
+        <fkjs-navbar></fkjs-navbar>
+        <section>
+            <fkjs-header></fkjs-header>
+            <div class="content-bg" ui-view></div>
         </section>
     </body>
 </html>

@@ -1,7 +1,13 @@
-// ~~~ html elements
+*{
+    font-family: 'Roboto', sans-serif;
+    font-size: 1em;
+}
+
+html,body{
+    height: 100%;
+}
 
 body {
-    font-size: $font-size-small;
     background-color: darken( $color-background-100, 3%);
 }
 
@@ -23,15 +29,10 @@ a:visited{
 }
 
 
-// ~~~ overrides and fixes
-
-md-autocomplete ul{
-    z-index: 999;
-}
-
-
 // ~~~ common styles for the entire app
 
 .content-bg{
-    background-color: $color-background-100 !important;
+    //margin-left: $navbar-width;
+    padding: $padding-small;
+    overflow-y: auto;
 }
