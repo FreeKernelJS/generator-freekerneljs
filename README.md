@@ -12,7 +12,6 @@ Quick Links:
 -  [Release History](#history)
 
 
-
 ### <a name="installation"></a> Installation
 ------------
 
@@ -48,6 +47,8 @@ If the generator is already installed and a newer version is available it will n
 During installation, various configuration values can be set for your application. 
 The generator wizard will prompt you for values, or you can leave all as default by pressing enter. 
 After the installation is complete you can still set these values manually.
+
+<img src="docs/images/freekerneljs-generator.png">
 
 - **Select a template**. Select which template you would like to use:  [freekerneljs-basic-app](app/templates/freekerneljs-basic-app) or [freekerneljs-basic-app-md](app/templates/freekerneljs-basic-app-md)
 - **Packages to be included**. Use arrows and spacebar to select which packages to inclued in your application. This can be managed later from bower.json file.
