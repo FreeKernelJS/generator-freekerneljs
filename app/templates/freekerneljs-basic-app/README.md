@@ -1,4 +1,7 @@
-It's a basic application in the following structure:
+A basic application which uses AngularJS as the MVC framework, combined with Bootstrap to provide the UI design. 
+This app can be used as a starting point and basis to develop your own application.
+
+##### Structure:
 
 ```
 .
@@ -24,8 +27,9 @@ It's a basic application in the following structure:
     └── services
         └── utils.js
 ```
-###### Dependencies:
-- angular (v1.3.13)
-- angular-material (v0.8.2)
-- angular-ui-router (v0.2.13)
-- script.js (v2.5.7)
+
+##### Dependencies:
+- <a href="https://angularjs.org/">angular</a> (v1.3.x)
+- <a href="https://github.com/angular-ui/ui-router">angular-ui-router</a> (v0.2.x)
+- <a href="https://github.com/ded/script.js/">script.js</a> (v2.5.7)
+- <a href="http://getbootstrap.com/">bootstrap</a> (v3.3.x)
