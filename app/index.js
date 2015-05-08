@@ -97,7 +97,7 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
             },
             type: 'checkbox',
             name: 'modules',
-            message: 'Which modules would you like to include?',
+            message: 'Which packages would you like to include?',
             choices: [{
                 value: 'cookiesModule',
                 name: 'angular-cookies',
@@ -128,7 +128,7 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
             },
             type: 'checkbox',
             name: 'modules',
-            message: 'Which modules would you like to include?',
+            message: 'Which packages would you like to include?',
             choices: [{
                 value: 'cookiesModule',
                 name: 'angular-cookies',
@@ -157,7 +157,7 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
         }, {
             type: 'input',
             name: 'name',
-            message: 'Project name',
+            message: 'Application name',
             default: this.appname
         }, {
             type: 'input',
