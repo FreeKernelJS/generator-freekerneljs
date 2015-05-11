@@ -5,6 +5,7 @@
     background-color: $color-background-header;
     height: 100%;
     vertical-align: top;
+    transition: all .1s linear;
 }
 
 .fkjs-page-header-text {
@@ -12,4 +13,10 @@
     color: $title-color;
     text-transform: uppercase;
     line-height: 29px;
+}
+
+@media (min-width: 0px) and (max-width: 767px) {
+    .fkjs-page-header{
+        margin-left: 0;
+    }
 }

@@ -31,10 +31,10 @@ angular.module('fkjs.widgets.navbar', [])
         },
 
         controller: function($scope){
-/*
+            /*
              * set "active" css on selected menu item,
              * fire event to notify header regarding this change.
- */
+             */
             $scope.$on('$stateChangeSuccess', function(event, current){
                 var stateName = $state.$current.self.name;
                 var items = $scope.navbarItems;

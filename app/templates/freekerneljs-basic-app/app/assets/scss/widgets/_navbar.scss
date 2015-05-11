@@ -1,25 +1,31 @@
 .fkjs-navbar{
-    width: $navbar-width;
-    height: 100%;
-    float: left;
+    transition: all .1s linear;
     background-color: #fff;
-    box-shadow: 1px 0 5px rgba(0, 0, 0, 0.38);
+    margin: 0;
 }
 
 .fkjs-navbar-header {
-    margin: 0;
-    padding: 32px 34px 13px $padding-small;
+    float: none;
+    padding-top: 26px;
+    padding-bottom: 13px;
+    border-bottom: 1px solid $color-grey-200;
+}
+
+.fkjs-navbar-appname{
+    padding-top: 0;
+    padding-bottom: 0;
     color: $title-color;
     font-size: $font-size-xlarge;
     text-transform: uppercase;
-    line-height: 29px;
-    border-bottom: 1px solid $color-grey-200;
+    line-height: normal;
     white-space: nowrap;
     overflow: hidden;
+    height: auto;
 }
 
 .fkjs-navbar-body{
-    padding: $padding-small;
+    padding-top: $padding-small;
+    background-color: #fff;
 }
 
 .fkjs-navbar-body >ul{
@@ -42,4 +48,24 @@
 .fkjs-navbar-item-text:hover,
 .fkjs-navbar-item-text.active{
     background-color: $link-background;
+}
+
+@media (min-width: 0px) and (max-width: 767px) {
+    .fkjs-navbar-header {
+        border-bottom: 0 none;
+    }
+    
+    .fkjs-navbar-body{
+        padding-top: 0;
+    }
+}
+
+@media(min-width:768px){
+    .fkjs-navbar{
+        width: $navbar-width;
+        height: 100%;
+        float: left;
+        box-shadow: 1px 0 5px rgba(0, 0, 0, 0.38);
+        @include border-radius(0);
+    }
 }
