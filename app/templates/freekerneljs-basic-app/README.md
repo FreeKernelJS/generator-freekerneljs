@@ -1,4 +1,4 @@
-A basic application which uses AngularJS as the MVC framework, combined with Bootstrap to provide the UI design. 
+A basic application which uses AngularJS as the MVC framework, combined with **Bootstrap** to provide the UI design. 
 This app can be used as a starting point and basis to develop your own application.
 
 ##### Structure:
@@ -33,3 +33,14 @@ This app can be used as a starting point and basis to develop your own applicati
 - <a href="https://github.com/angular-ui/ui-router">angular-ui-router</a> (v0.2.x)
 - <a href="https://github.com/ded/script.js/">script.js</a> (v2.5.7)
 - <a href="http://getbootstrap.com/">bootstrap</a> (v3.3.x)
+
+
+##### Features:
+- Routing and sharing data between diffrent sections in the application
+- Modular architecture that can be extended
+- Best Practices for Performance
+- <a href="http://sass-lang.com/">Sass</a> CSS Preprocessors
+- String format service
+- Documentation format to be used with ngdoc
+- HTML 5 structure
+

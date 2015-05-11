@@ -14,9 +14,7 @@
   "engines": {
     "node": ">=0.10.0"
   },
-  "scripts": {
-
-  },
+  "scripts": {},
   "files": [
     "app"
   ],
@@ -37,9 +35,7 @@
     "update-notifier": "^0.4.0",
     "yeoman-generator": "^0.18.0"
   },
-  "devDependencies": {
-    
-  },
+  "devDependencies": {},
   "peerDependencies": {
     "yo": ">=1.0.0"
   }

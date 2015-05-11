@@ -32,17 +32,40 @@ module.exports = function (grunt) {
                     }]
                 }
             },
-            tags: {
+            'default-tags': {
                 files: [{
                     expand: true,
-                    cwd: 'dist/debug/',
+                    cwd: 'app/',
                     src: [
                         '**/*',
                         '!**/assets/fonts/**',
                         '!**/assets/images/**'
                     ],
-                    dest: 'dist/debug/'
-                }, {
+                    dest: 'app/'
+                }],
+                options: {
+                    replacements: [
+                        {
+                            pattern: 'fkjs_(name)',
+                            replacement: '<%= pkg.name %>'
+                        },
+                        {
+                            pattern: 'fkjs_(title)',
+                            replacement: '<%= pkg.title %>'
+                        },
+                        {
+                            pattern: 'fkjs_(description)',
+                            replacement: '<%= pkg.description %>'
+                        },
+                        {
+                            pattern: 'fkjs_(version)',
+                            replacement: '<%= pkg.version %>'
+                        }
+                    ]
+                }
+            },
+            'dist-tags': {
+                files: [{
                     expand: true,
                     cwd: 'dist/',
                     src: [
@@ -83,16 +106,6 @@ module.exports = function (grunt) {
                 cwd: 'bower_components/material-design-iconic-font/fonts',
                 dest: 'app/assets/fonts'
             },
-            debug: {
-                src: [
-                    '**/*',
-                    '!**/assets/css/**',
-                    '!**/assets/scss/**'
-                ],
-                expand: true,
-                cwd: 'app',
-                dest: 'dist/debug'
-            },
             dist: {
                 src: [
                     '**/*',
@@ -102,20 +115,12 @@ module.exports = function (grunt) {
                 expand: true,
                 cwd: 'app',
                 dest: 'dist'
-            },
-            'map-debug': {
-                src: [
-                    '**/*.css.map'
-                ],
-                expand: true,
-                cwd: 'app/assets/scss/temp',
-                dest: 'dist/debug/assets/css'
             }
         },
         wiredep: {
-            debug: {
+            build: {
                 src: [
-					'dist/debug/index.html'
+                    'app/index.html'
                 ],
                 options: {
 
@@ -136,7 +141,7 @@ module.exports = function (grunt) {
                     ext: '.css'
                 }]
             },
-            debug: {
+            'compile-scss': {
                 options: {
                     style: 'expanded',
                     lineNumbers: true,
@@ -146,34 +151,23 @@ module.exports = function (grunt) {
                     expand: true,
                     cwd: 'app/assets/scss/',
                     src: ['**/*.scss'],
-                    dest: 'app/assets/scss/temp',
-                    ext: '.css'
-                }]
-            },
-            dist: {
-                options: {
-                    style: 'expanded',
-                    lineNumbers: true,
-                    cacheLocation: 'app/assets/scss/.sass-cache'
-                },
-                files: [{
-                    expand: true,
-                    cwd: 'app/assets/scss/',
-                    src: ['**/*.scss'],
-                    dest: 'app/assets/scss/temp',
+                    dest: 'app/assets/scss/.temp',
                     ext: '.css'
                 }]
             }
         },
         bower_concat: {
             all: {
-                dest: "dist/_bower.js",
+                //dest: "dist/_bower.js",
+                //cssDest: 'dist/_bower.css',
                 exclude: [
-                    "jquery",
-                    "modernizr"
+
                 ],
                 mainFiles: {
                     'script.js': 'dist/script.js'
+                },
+                bowerOptions: {
+                    relative: false
                 }
             }
         },
@@ -181,20 +175,20 @@ module.exports = function (grunt) {
             options: {
                 //separator: ';'
             },
-            'debug-css-first': {
+            'compile-css-first': {
                 src: [
                     'app/assets/scss/temp/*.css',
                     'app/assets/css/**/*.css',
                     '!**/app/assets/css/**/custom.css',
                 ],
-                dest: 'dist/debug/assets/css/app.css',
+                dest: 'app/assets/css/app.css',
             },
-            'debug-css-last': {
+            'compile-css-last': {
                 src: [
-                    'dist/debug/assets/css/app.css',
+                    'app/assets/css/app.css',
                     'app/assets/css/custom.css'
                 ],
-                dest: 'dist/debug/assets/css/app.css',
+                dest: 'app/assets/css/app.css',
             },
             'dist-libraries': {
                 src: [
@@ -204,7 +198,7 @@ module.exports = function (grunt) {
             },
             'dist-css-first': {
                 src: [
-                    'app/assets/scss/temp/*.css',
+                    'app/assets/scss/.temp/*.css',
                     'app/assets/css/**/*.css',
                     '!**/app/assets/css/**/custom.css',
                 ],
@@ -259,19 +253,12 @@ module.exports = function (grunt) {
             }
         },
         clean: {
-            'debug-before': [
-                'dist/debug/'
-            ],
-            'debug-after': [
-				
-            ],
             'dist-before': [
                 'dist/'
             ],
             'dist-after': [
-                'app/assets/scss/temp',
+                'app/assets/scss/.temp',
                 'dist/app.js',
-                'dist/_bower.js',
                 'dist/assets/css/app.css'
             ]
         },
@@ -280,9 +267,9 @@ module.exports = function (grunt) {
                 files: [
                     'app/**/*',
 					'!app/assets/scss/.sass-cache',
-					'!app/assets/scss/temp'
+					'!app/assets/scss/.temp'
                 ],
-                tasks: ['debug'],
+                tasks: ['compile-scss'],
                 options: {
                     // Start a live reload server on the default port 35729
                     //livereload: true,
@@ -298,19 +285,13 @@ module.exports = function (grunt) {
 
     /**
 	 * @description
-	 *   Debug task(s).
+	 *   Compile SCSS task(s).
 	 * 
 	 */
-    grunt.registerTask('debug', [
-        'clean:debug-before',
-        'copy:debug',
-        'wiredep:debug',
-        'sass:debug',
-        'string-replace:tags',
-        'concat:debug-css-first',
-        'concat:debug-css-last',
-        'copy:map-debug',
-        'clean:debug-after'
+    grunt.registerTask('compile-scss', [
+        'sass:compile-scss',
+        'concat:compile-css-first',
+        'concat:compile-css-last'
     ]);
 
     /**
@@ -321,8 +302,8 @@ module.exports = function (grunt) {
     grunt.registerTask('dist', [
         'clean:dist-before',
         'copy:dist',
-        'sass:dist',
-        'string-replace:tags',
+        'sass:compile-scss',
+        'string-replace:dist-tags',
         'concat:dist-css-first',
         'concat:dist-css-last',
         'processhtml',
@@ -343,6 +324,8 @@ module.exports = function (grunt) {
         'copy:material-design-iconic-font',
         'string-replace:material-design-iconic-font',
         'sass:material-design-iconic-font',
-        'debug'
+        'string-replace:default-tags',
+        'sass:compile-scss',
+        'wiredep:build'
     ]);
 };

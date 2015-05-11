@@ -9,7 +9,7 @@ var util = require('util'),
     updateNotifier = require('update-notifier'),
     compareVersion = require('compare-version'),
     stringLength = require('string-length'),
-    pkg = require('../package.json'),   
+    pkg = require('../package.json'),
     templateName = 'freekerneljs-basic-app-md',
     generatorRoot = '',
     templatePath = '';
@@ -246,7 +246,7 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
 
     configuration: function () {
         this.copy(templateName + '/gitignore', '.gitignore');
-        this.copy(templateName + '/travis.yml', '.travis.yml');
+        //this.copy(templateName + '/travis.yml', '.travis.yml');
         this.copy(templateName + '/bowerrc', '.bowerrc');
         this.copy('/Gruntfile.js', 'Gruntfile.js');
         this.template(templateName + '/_package.json', 'package.json');
