@@ -38,8 +38,9 @@ This app can be used as a starting point and basis to develop your own applicati
 ##### Features:
 - Routing and sharing data between diffrent sections in the application
 - Modular architecture that can be extended
-- Best Practices for Performance
-- <a href="http://sass-lang.com/">Sass</a> CSS Preprocessors
+- Best practices for performance
+- Responsive UI
+- <a href="http://sass-lang.com/">Sass</a> CSS preprocessors
 - String format service
 - Documentation format to be used with ngdoc
 - HTML 5 structure
