@@ -6,17 +6,26 @@
 Generates a web app structured from a template.
 This app can then be used to start and develop your own application.
 
-Quick Links:
+Table of Contents:
+-  [Templates](#templates)
 -  [Installation](#installation)
+-  [Create a New App](#generating)
 -  [Tools](#tools)
 -  [Release History](#history)
+
+
+### <a name="templates"></a> Templates
+------------
+Templates available for producing applications:
+- [freekerneljs-basic-app](app/templates/freekerneljs-basic-app): a basic application which uses AngularJS with Bootstrap
+- [freekerneljs-basic-app-md](app/templates/freekerneljs-basic-app-md): a basic application which uses AngularJS with Angular Material
 
 
 ### <a name="installation"></a> Installation
 ------------
 
 ###### Step 1: Setup your environment if you have not done so yet.
-- Install Node.js (including npm) <https://nodejs.org> 
+- Install [Node.js](https://nodejs.org) (including npm)
 - Then Install <a href="http://bower.io/">Bower</a> and <a href="http://yeoman.io/">Yeoman</a> globally:
 ``` 
     $ npm install -g bower
@@ -29,14 +38,18 @@ Quick Links:
     $ npm install -g generator-freekerneljs 
 ```
 
-###### Step 3: Create a new workspace folder where you would like for your app files to be output by the generator, and switch to it:
+
+### <a name="generating"></a> Create a New App
+------------
+
+###### Step 1: Create a new folder where you would like for your app files to be output by the generator, and switch to it:
 ```
-    $ mkdir <workspace_folder>
-    $ cd <workspace_folder>
+    $ mkdir <project_folder>
+    $ cd <project_folder>
 ```
 
 
-###### Step 4: Run the generator:
+###### Step 2: Run the generator:
 ``` 
     $ yo freekerneljs 
 ```
@@ -50,7 +63,7 @@ After the installation is complete you can still set these values manually.
 
 <img src="docs/images/freekerneljs-generator.png">
 
-- **Select a template**. Select which template you would like to use:  [freekerneljs-basic-app](app/templates/freekerneljs-basic-app) or [freekerneljs-basic-app-md](app/templates/freekerneljs-basic-app-md)
+- **Select a template**. Select which template you would like to use. For more details see [Templates](#templates) section above.
 - **Packages to be included**. Use arrows and spacebar to select which packages to inclued in your application. This can be managed later from bower.json file.
 - **Application name**. The name of the folder which contains the application, it will also be used as the name of the main module of the application in the JavaScript files.
 - **Title of the application**. The window title in browser, and the name of the application as displayed above the navigation bar. This can be managed later in code (see index.html, widgets/navbar/template.html)
@@ -65,7 +78,7 @@ After the installation is complete you can still set these values manually.
 - **Home page**. Can be managed in package.json
 
 
-###### Step 5: After installation is successful you can find all the output files at this path:
+###### Step 3: After installation is successful you can find all the output files at this path:
 ``` 
     $ cd <project_folder>/dist/debug
 ```
