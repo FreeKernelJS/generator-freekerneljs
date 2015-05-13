@@ -83,13 +83,13 @@ Available configurations:
 - **Home page**. Can be managed in package.json
 
 
-###### Step 3: After installation is successful you can find the output files through the output path:
+###### Step 3: Output files
+
+After installation is successful you can find the output files through the output path:
 ``` 
-    $ cd <project_folder>
+    $ cd <project_folder>/app
 ```
-You can copy the project to your local server root and run the application in browser as follow:
-- <http://localhost/project_folder/app> will display the application in development mode.
-- <http://localhost/project_folder/dist> will display the application in production mode.
+You can copy the folder to your local server root and run the application in browser.
 
 This should be the result:
 
@@ -108,23 +108,39 @@ Here is an example to an application that has been developed using FreeKernelJS 
 ### <a name="tools"></a> Use Grunt Tasks in Development
 -----------------
 You might want to consider install <a href="http://gruntjs.com/">Grunt</a>, to use runner tasks which are provided by the FreeKernelJS generator during development.
+The installation of Grunt is global, but you must run the different tasks from within the project folder.
 - Install Grunt:
 ``` 
     $ npm install -g grunt-cli
 ```
 
 - Watch task: monitoring your application for changes each time you make changes and save files. 
+To be able to use this task you need first to open *"index.html"* file from <project_folder>/app, and uncomment the following line:
 ``` 
+ <!-- <script src="//localhost:35729/livereload.js"></script> -->
+``` 
+Then
+``` 
+    $ cd <project_folder>
     $ grunt watch
 ```
 
-- Dist task: compiling scss files, compress JavaScript code, and publish the application into the *dist* folder.
+- Dist task: compiling scss files, compress JavaScript code, and publish the application into the *dist* folder. 
 ``` 
+    $ cd <project_folder>
     $ grunt dist
 ```
+After running this task you can find the deployed files under the *"dist"* folder.
+You can now run the application in development or production mode:
+
+<http://localhost/project_folder/app> will display the application in development mode.
+
+<http://localhost/project_folder/dist> will display the application in production mode.
+
 
 - Compile task: compiling scss files into css, creates the *app.css* file.
 ``` 
+    $ cd <project_folder>
     $ grunt compile-scss
 ```
 
