@@ -199,6 +199,7 @@ module.exports = function (grunt) {
                 src: [
                     'app/assets/scss/.temp/*.css',
                     'app/assets/css/**/*.css',
+                    '!**/app/assets/css/app.css',
                     '!**/app/assets/css/**/custom.css'
                 ],
                 dest: 'app/assets/css/app.css',
@@ -227,6 +228,7 @@ module.exports = function (grunt) {
                     'dist/_bower.css',
                     'app/assets/scss/.temp/*.css',
                     'app/assets/css/**/*.css',
+                    '!**/app/assets/css/app.css',
                     '!**/app/assets/css/**/custom.css'
                 ],
                 dest: 'dist/assets/css/app.css',
