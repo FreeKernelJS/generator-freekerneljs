@@ -10,7 +10,7 @@ Table of Contents:
 -  [Templates](#templates)
 -  [Installation](#installation)
 -  [Create a New App](#generating)
--  [Tools](#tools)
+-  [Use Grunt Tasks in Development](#tools)
 -  [Release History](#history)
 
 
@@ -42,7 +42,11 @@ Templates available for producing applications:
 ### <a name="generating"></a> Create a New App
 ------------
 
-###### Step 1: Create a new folder where you would like for your app files to be output by the generator, and switch to it:
+###### Step 1: Create a new folder 
+
+Create a new project folder where you would like for your app files to be output by the generator, and switch to it.
+This folder will contain both the development and the distrebution versions of the application.
+You can create the project folder directly under your local server root, or copy the files there after generation.
 ```
     $ mkdir <project_folder>
     $ cd <project_folder>
@@ -58,11 +62,12 @@ If the generator is already installed and a newer version is available it will n
     $ npm update -g generator-freekerneljs 
 ```
 During installation, various configuration values can be set for your application. 
-The generator wizard will prompt you for values, or you can leave all as default by pressing enter. 
+The generator wizard will prompt you for values, or you can accept default by pressing enter. 
 After the installation is complete you can still set these values manually.
 
 <img src="docs/images/freekerneljs-generator.png">
 
+Available configurations:
 - **Select a template**. Select which template you would like to use. For more details see [Templates](#templates) section above.
 - **Packages to be included**. Use arrows and spacebar to select which packages to inclued in your application. This can be managed later from bower.json file.
 - **Application name**. The name of the folder which contains the application, it will also be used as the name of the main module of the application in the JavaScript files.
@@ -78,18 +83,20 @@ After the installation is complete you can still set these values manually.
 - **Home page**. Can be managed in package.json
 
 
-###### Step 3: After installation is successful you can find all the output files at this path:
+###### Step 3: After installation is successful you can find the output files through the output path:
 ``` 
-    $ cd <project_folder>/dist/debug
+    $ cd <project_folder>/
 ```
-You can copy them to your server root and run the application in browser.
+You can copy the project to your local server root and run the application in browser as follow:
+- <http://localhost/project_folder/app> will display the application in development mode.
+- <http://localhost/project_folder/dist> will display the application in production mode.
 
 This should be the result:
 
 
 <img src="docs/images/Clipboard01.png">
 
-Here is an example to an application that has been developed using FreeKernelJS Generator, and is based on [freekerneljs-basic-app-md](app/templates/freekerneljs-basic-app-md):
+Here is an example to an application that has been developed using FreeKernelJS Generator, and is based on [freekerneljs-basic-app-md](app/templates/freekerneljs-basic-app-md) template:
 
 <a href="https://github.com/FreeKernelJS/demos/tree/master/freekerneljs-demo-app">Demo App</a>
 
@@ -98,14 +105,30 @@ Here is an example to an application that has been developed using FreeKernelJS 
   [FreeKernelJS Forum](http://www.forum.freekerneljs.org/).
 
 
-### <a name="tools"></a> Development Tools
+### <a name="tools"></a> Use Grunt Tasks in Development
 -----------------
-You might want to consider using these tools to continue and develop the application:
-- Install <a href="http://gruntjs.com/">Grunt</a> and use it to run tasks such as - debug, dist and watch.
+You might want to consider install <a href="http://gruntjs.com/">Grunt</a>, to use runner tasks which are provided by the FreeKernelJS generator during development.
+- Install Grunt:
 ``` 
     $ npm install -g grunt-cli
 ```
-- Install <a href="https://www.ruby-lang.org/en/">Ruby</a> to compile the scss files (manually or through Grunt). 
+
+- Watch task: monitoring your application for changes each time you make changes and save files. 
+``` 
+    $ grunt watch
+```
+
+- Dist task: compiling scss files, compress JavaScript code, and publish the application into the *dist* folder.
+``` 
+    $ grunt dist
+```
+
+- Compile task: compiling scss files into css, creates the *app.css* file.
+``` 
+    $ grunt compile-scss
+```
+
+> Please note that for both *"dist"* and *"compile-scss"* tasks you will need to have <a href="https://www.ruby-lang.org/en/">Ruby</a> installed for your environment to work.
 ``` 
     $ gem install sass
     $ npm install grunt-contrib-sass --save-dev
