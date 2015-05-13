@@ -215,6 +215,18 @@ module.exports = function (grunt) {
                 src: [
                     'dist/_bower.js'
                 ],
+                dest: 'dist/app.libraries.js'
+            },
+            'dist-js-files': {
+                src: [
+                    'dist/app.libraries.js',
+                    'app/services/**/*.js',
+                    'app/views/**/*.js',
+                    'app/widgets/**/*.js',
+                    'app/app.bootstrap.js',
+                    'app/app.module.js',
+                    'app/app.routes.js'
+                ],
                 dest: 'dist/app.js'
             },
             'dist-stylesheets': {
@@ -276,6 +288,7 @@ module.exports = function (grunt) {
             'dist-after': [
                 'app/assets/scss/.temp',
                 'dist/app.js',
+                'dist/app.libraries.js',
                 'dist/assets/css/app.css',
                 'dist/_bower.js',
                 'dist/_bower.css'
@@ -291,8 +304,8 @@ module.exports = function (grunt) {
                 tasks: ['compile-scss'],
                 options: {
                     // Start a live reload server on the default port 35729
-                    //livereload: true,
-                    //spawn: false
+                    livereload: true,
+                    spawn: false
                 }
             }
         }
@@ -330,6 +343,7 @@ module.exports = function (grunt) {
         'concat:dist-css-last',
         'cssmin',
         'concat:dist-libraries',
+        'concat:dist-js-files',
         'uglify',
         'clean:dist-after'
     ]);
