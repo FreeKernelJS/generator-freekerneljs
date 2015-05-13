@@ -85,7 +85,7 @@ Available configurations:
 
 ###### Step 3: After installation is successful you can find the output files through the output path:
 ``` 
-    $ cd <project_folder>/
+    $ cd <project_folder>
 ```
 You can copy the project to your local server root and run the application in browser as follow:
 - <http://localhost/project_folder/app> will display the application in development mode.
