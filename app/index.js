@@ -246,10 +246,9 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
 
     configuration: function () {
         this.copy(templateName + '/gitignore', '.gitignore');
-        //this.copy(templateName + '/travis.yml', '.travis.yml');
         this.copy(templateName + '/bowerrc', '.bowerrc');
         this.copy('/Gruntfile.js', 'Gruntfile.js');
-        this.template(templateName + '/_package.json', 'package.json');
+        this.template('_package.json', 'package.json');
         this.template(templateName + '/_bower.json', 'bower.json');
     },
 

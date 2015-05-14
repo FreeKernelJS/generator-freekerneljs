@@ -112,7 +112,13 @@ module.exports = function (grunt) {
                 src: [
                     '**/*',
                     '!**/assets/css/**',
-                    '!**/assets/scss/**'
+                    '!**/assets/scss/**',
+                    '!**/services/**/*.js',
+                    '!**/views/**/*.js',
+                    '!**/widgets/**/*.js',
+                    '!**/app.bootstrap.js',
+                    '!**/app.module.js',
+                    '!**/app.routes.js'
                 ],
                 expand: true,
                 cwd: 'app',
@@ -166,7 +172,7 @@ module.exports = function (grunt) {
 
                 ],
                 mainFiles: {
-                    'script.js': 'dist/script.js'
+                    //'script.js': 'dist/script.js'
                 },
                 dependencies: {
 
@@ -185,9 +191,22 @@ module.exports = function (grunt) {
 
                     return main_files.map(function (filepath) {
                         for (i = 0; i < bower_comp.length; i++) {
-                            return (bower_comp[i].indexOf(component) > -1 || dependencies.length > -1) ? filepath : false;
+                            return ((bower_comp[i].indexOf(component) > -1 || dependencies.length > -1) && component != 'script.js') ? filepath : false;
                         }
                     });
+                }
+            }
+        },
+        ngAnnotate: {
+            dist: {
+                files: {
+                    'dist/app.js.files.js': [
+                        'app/services/**/*.js',
+                        'app/views/**/*.js',
+                        'app/widgets/**/*.js',
+                        'app/app.module.js',
+                        'app/app.routes.js'
+                    ]
                 }
             }
         },
@@ -220,12 +239,7 @@ module.exports = function (grunt) {
             'dist-js-files': {
                 src: [
                     'dist/app.libraries.js',
-                    'app/services/**/*.js',
-                    'app/views/**/*.js',
-                    'app/widgets/**/*.js',
-                    'app/app.bootstrap.js',
-                    'app/app.module.js',
-                    'app/app.routes.js'
+                    'dist/app.js.files.js'
                 ],
                 dest: 'dist/app.js'
             },
@@ -289,6 +303,7 @@ module.exports = function (grunt) {
                 'app/assets/scss/.temp',
                 'dist/app.js',
                 'dist/app.libraries.js',
+                'dist/app.js.files.js',
                 'dist/assets/css/app.css',
                 'dist/_bower.js',
                 'dist/_bower.css'
@@ -342,6 +357,7 @@ module.exports = function (grunt) {
         'concat:dist-css-first',
         'concat:dist-css-last',
         'cssmin',
+        'ngAnnotate:dist',
         'concat:dist-libraries',
         'concat:dist-js-files',
         'uglify',
