@@ -1,5 +1,11 @@
 <!DOCTYPE html>
+<!-- build:template
+<%= html_tag %>
+/build -->
+<!-- build:remove -->
 <html>
+<!-- /build -->
+
     <head>
         <title><%= props.title %></title>
         <meta charset="utf-8">
@@ -8,21 +14,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" type="image/ico" href="assets/images/favicon.ico">
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto">
-		
+
         <!-- build:css assets/css/app.min.css -->
-		<!-- bower:css -->
-		<!-- endbower -->
+        <!-- bower:css -->
+        <!-- endbower -->
         <link rel="stylesheet" type="text/css" href="assets/css/app.css" media="screen">
         <!-- /build -->
-		
         <!-- build:js app.min.js -->
         <!-- <script src="//localhost:35729/livereload.js"></script> -->
-		<!-- bower:js -->
-		<!-- endbower -->
-        <!-- /build -->
+        <!-- bower:js -->
+        <!-- endbower -->
         <script src="app.bootstrap.js"></script>
+        <!-- /build -->
     </head>
-    
+
     <body>
         <fkjs-navbar></fkjs-navbar>
         <section>

@@ -289,6 +289,11 @@ module.exports = function (grunt) {
             }
         },
         processhtml: {
+            options: {
+                data: {
+                    html_tag: '<html ng-app="<%= pkg.name %>">'
+                }
+            },
             dist: {
                 files: {
                     'dist/index.html': ['dist/index.html']
@@ -306,7 +311,8 @@ module.exports = function (grunt) {
                 'dist/app.js.files.js',
                 'dist/assets/css/app.css',
                 'dist/_bower.js',
-                'dist/_bower.css'
+                'dist/_bower.css',
+                'dist/services'
             ]
         },
         watch: {
