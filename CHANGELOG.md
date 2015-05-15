@@ -1,3 +1,16 @@
+<a name="0.3.0"></a>
+### 0.3.0 (2015-May-15)
+
+#### Features
+
+* Different templates are now available through the generator. "freekerneljs-basic-app" template has been added, "freekerneljs-basic-app-md" template renamed.
+* New task with Grunt: compile-scss for compiling scss files during development.
+* Dist task has been improved - all JavaScript files are now minified into app.min.js output file
+
+#### Bug Fixes
+
+* Fixed bug with Sass compilation
+
 <a name="0.2.0"></a>
 ### 0.2.0 (2015-May-03)
 
