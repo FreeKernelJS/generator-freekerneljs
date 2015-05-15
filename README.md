@@ -45,7 +45,8 @@ Templates available for producing applications:
 
 ###### Step 1: Create a new folder 
 
-Create a new *"project_folder"* where you would like for your app files to be output by the generator, and switch to it. For documentation purposes it is called *"project_folder"* but you can use any name that you want.
+Create a new *"project_folder"* where you would like for your app files to be output by the generator, and switch to it. 
+>For documentation purposes it is called *"project_folder"* but you can use any name that you want.
 
 This folder will contain both the development and the distribution versions of the application.
 You can create the project folder directly under your local server root, or copy the files there after generation.
