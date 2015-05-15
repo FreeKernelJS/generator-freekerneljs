@@ -107,15 +107,15 @@ Here is an example to an application that has been developed using FreeKernelJS 
 
 ### <a name="tools"></a> Use Grunt Tasks in Development
 -----------------
-You might want to consider install <a href="http://gruntjs.com/">Grunt</a>, to use runner tasks which are provided by the FreeKernelJS generator during development.
+You might want to consider installing <a href="http://gruntjs.com/">Grunt</a>, to use runner tasks which are provided by the FreeKernelJS generator during development.
 The installation of Grunt is global, but you must run the different tasks from within the project folder.
-- Install Grunt:
+- **Install Grunt**:
 ``` 
     $ npm install -g grunt-cli
 ```
 
-- Watch task: monitoring your application for changes each time you make changes and save files. 
-To be able to use this task you need first to open *"index.html"* file from <project_folder>/app, and uncomment the following line:
+- **Watch task**: monitoring your application for changes each time you make changes and save files. 
+To be able to use this task you need first to open *"index.html"* file from *"project_folder/app"*, and uncomment the following line:
 ``` 
  <!-- <script src="//localhost:35729/livereload.js"></script> -->
 ``` 
@@ -125,7 +125,7 @@ Then
     $ grunt watch
 ```
 
-- Dist task: compiling scss files, compress JavaScript code, and publish the application into the *dist* folder. 
+- **Dist task**: compiling scss files, compress JavaScript code, and publish the application into the *"dist"* folder. 
 ``` 
     $ cd <project_folder>
     $ grunt dist
@@ -138,7 +138,7 @@ You can now run the application in development or production mode:
 <http://localhost/project_folder/dist> will display the application in production mode.
 
 
-- Compile task: compiling scss files into css, creates the *app.css* file.
+- **Compile task**: compiling scss files into css, creates the *"app.css"* file.
 ``` 
     $ cd <project_folder>
     $ grunt compile-scss
@@ -147,7 +147,6 @@ You can now run the application in development or production mode:
 > Please note that for both *"dist"* and *"compile-scss"* tasks you will need to have <a href="https://www.ruby-lang.org/en/">Ruby</a> installed for your environment to work.
 ``` 
     $ gem install sass
-    $ npm install grunt-contrib-sass --save-dev
 ```
 
 
