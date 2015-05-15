@@ -28,11 +28,13 @@
         <!-- /build -->
     </head>
 
-    <body>
-        <fkjs-navbar></fkjs-navbar>
-        <section>
-            <fkjs-header></fkjs-header>
-            <div class="content-bg" ui-view></div>
+    <body layout="column">
+        <section layout="row" flex>
+            <fkjs-navbar></fkjs-navbar>
+            <main layout="column" flex>
+                <fkjs-header></fkjs-header>
+                <article layout="column" flex ui-view></article>
+            </main>
         </section>
     </body>
 </html>
