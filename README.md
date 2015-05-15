@@ -10,6 +10,7 @@ Table of Contents:
 -  [Templates](#templates)
 -  [Installation](#installation)
 -  [Create a New App](#generating)
+-  [Running the Application](#running)
 -  [Use Grunt Tasks in Development](#tools)
 -  [Release History](#history)
 
@@ -44,7 +45,8 @@ Templates available for producing applications:
 
 ###### Step 1: Create a new folder 
 
-Create a new project folder where you would like for your app files to be output by the generator, and switch to it.
+Create a new *"project_folder"* where you would like for your app files to be output by the generator, and switch to it. For documentation purposes it is called *"project_folder"* but you can use any name that you want.
+
 This folder will contain both the development and the distribution versions of the application.
 You can create the project folder directly under your local server root, or copy the files there after generation.
 ```
@@ -70,7 +72,7 @@ After the installation is complete you can still set these values manually.
 Available configurations:
 - **Select a template**. Select which template you would like to use. For more details see [Templates](#templates) section above.
 - **Packages to be included**. Use arrows and spacebar to select which packages to inclued in your application. This can be managed later from bower.json file.
-- **Application name**. The name of the folder which contains the application, it will also be used as the name of the main module of the application in the JavaScript files.
+- **Application name**. The name of the main module of the application in the JavaScript files. By default it will use the name of the *"project_folder"* which contains this application.
 - **Title of the application**. The window title in browser, and the name of the application as displayed above the navigation bar. This can be managed later in code (see index.html, widgets/navbar/template.html)
 - **Description**. The description of this application, can be managed in package.json
 - **Version**. The <a href="http://semver.org/">version</a> of this application, can be managed in package.json (default to 1.0.0).
@@ -89,7 +91,28 @@ After installation is successful you can find the output files through the outpu
 ``` 
     $ cd <project_folder>/app
 ```
-You can copy the folder to your local server root and run the application in browser.
+
+### <a name="running"></a> Running the application
+-----------------
+The *"project_folder"* should now have the following folders and files:
+```
+.
+└── project_folder
+    ├── app/
+    ├── bower_components/
+    ├── test/
+    ├── .bowerrc
+    ├── bower.json
+    └── Gruntfile.js
+```
+- app folder: containes the application.
+- bower_components folder: contains external packages that were installed by Bower.
+- test folder: for unit testing.
+- .bowerrc file: can be edited to save external packages managed by Bower into a different location.
+- bower.json file: a list of all external packages managed by Bower. You can add/change packages and/or versions.
+- Gruntfile.js file: contains Grunt tasks. Can be edited to add more tasks. For details please refer to [Use Grunt Tasks in Development](#tools) section.
+
+If the *"project_folder"* is not located directly under your server root, you can copy the *"app"* folder there and run the application in browser.
 
 This should be the result:
 
@@ -130,7 +153,7 @@ Then
     $ cd <project_folder>
     $ grunt dist
 ```
-After running this task you can find the deployed files under the *"dist"* folder.
+After running this task you can find the deployed files under *"project_folder/dist"*.
 You can now run the application in development or production mode:
 
 <http://localhost/project_folder/app> will display the application in development mode.
