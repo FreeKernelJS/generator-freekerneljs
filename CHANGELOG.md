@@ -1,3 +1,11 @@
+<a name="0.4.0"></a>
+### 0.4.0 ()
+
+#### Features
+
+* New Grunt task: "grunt docs"
+
+
 <a name="0.3.0"></a>
 ### 0.3.0 (2015-May-15)
 
