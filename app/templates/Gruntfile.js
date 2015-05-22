@@ -336,6 +336,7 @@ module.exports = function (grunt) {
         ngdocs: {
             options: {
                 dest: 'app/docs',
+                startPage: '/api/app',
                 html5Mode: false,
                 title: '<%= pkg.title %> Docs',
                 bestMatch: true
