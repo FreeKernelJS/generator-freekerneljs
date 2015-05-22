@@ -1,31 +1,40 @@
 'use strict';
 
 /**
- * @ngdoc module
+ * @ngdoc controller
  * @name fkjs.services.utils
  *
  * @description
- * Utilities services
+ * Utilities services.
+ * 
+ * # stringUtil
+ * Utilities for strings
  */
-
 angular.module('fkjs.services.utils', [])
 
 
 /*
  * @ngdoc service
  * @name stringUtil
- * @module fkjs.services.utils
  */
 .service('stringUtil', function(){
     
-    /*
+    /**
+     * @ngdoc function
+     * @name stringUtil.format
+     * @methodOf fkjs.services.utils
+     *
      * @description
-     * Format a string with parameters.
+     * Format a string with any number of parameters.
      * 
-     * @example usage
-     * var formattedStr = stringFormat.compile('Your name is {0} {1}', 'Someone', 'Else');
+     * @example
+     * <pre>
+     * controller('MyController', function($scope, stringUtil){
+     *   $scope.someText = stringUtil.format('Your name is {0} {1}', 'Someone', 'Else');
+     * });
+     * </pre>
      * 
-     * The result will be: "Your name is Someone Else"
+     * @returns {string} Returns the formatted string.
      */
     this.format = function(){
         var len = arguments.length;

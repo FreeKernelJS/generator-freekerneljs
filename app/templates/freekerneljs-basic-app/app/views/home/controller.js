@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * @ngdoc module
+ * @ngdoc controller
  * @name fkjs.views.home
  *
  * @description
