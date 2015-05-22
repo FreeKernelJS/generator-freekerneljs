@@ -313,7 +313,10 @@ module.exports = function (grunt) {
                 'dist/_bower.js',
                 'dist/_bower.css',
                 'dist/services'
-            ]
+            ],
+            'docs': [
+                'dist/docs'
+            ],
         },
         watch: {
             debug: {
@@ -329,12 +332,34 @@ module.exports = function (grunt) {
                     spawn: false
                 }
             }
+        },
+        ngdocs: {
+            options: {
+                dest: 'dist/docs',
+                scripts: ['../app.min.js'],
+                html5Mode: false,
+                title: '<%= pkg.title %> Docs',
+                bestMatch: true
+            },
+            all: [
+				'app/**/*.js'
+            ]
         }
     });
 
     grunt.event.on('watch', function (action, filepath, target) {
         grunt.log.writeln(target + ': ' + filepath + ' has ' + action);
     });
+
+    /**
+	 * @description
+	 *   Generate documentation (ngDocs) task(s).
+	 * 
+	 */
+    grunt.registerTask('docs', [
+		'clean:docs',
+        'ngdocs'
+    ]);
 
     /**
 	 * @description
