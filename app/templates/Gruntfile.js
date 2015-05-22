@@ -111,6 +111,7 @@ module.exports = function (grunt) {
             dist: {
                 src: [
                     '**/*',
+                    '!**/docs/**',
                     '!**/assets/css/**',
                     '!**/assets/scss/**',
                     '!**/services/**/*.js',
@@ -312,8 +313,7 @@ module.exports = function (grunt) {
                 'dist/assets/css/app.css',
                 'dist/_bower.js',
                 'dist/_bower.css',
-                'dist/services',
-                'dist/docs'
+                'dist/services'
             ],
             'docs': [
                 'dist/docs'
