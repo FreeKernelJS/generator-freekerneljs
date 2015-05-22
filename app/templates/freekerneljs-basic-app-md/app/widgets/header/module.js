@@ -1,24 +1,21 @@
 'use strict';
 
-/**
+/*
  * @ngdoc module
  * @name fkjs.widgets.header
- *
- * @description
- * Page Header Widget.
  */
 angular.module('fkjs.widgets.header', [])
 
-
 /**
  * @ngdoc directive
- * @name fkjsHeader
- * @module fkjs.widgets.header
+ * @name fkjs.widgets.fkjsHeader
  *
  * @description
- * This page header is displaying the name of the page at the top of the screen.
+ * Page Header Widget.
  * 
- * @example usage
+ * This header is displaying the name of the page on the top.
+ * 
+ * @usage
  * <fkjs-header></fkjs-header>
  */
 .directive('fkjsHeader', function(){

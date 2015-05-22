@@ -312,7 +312,8 @@ module.exports = function (grunt) {
                 'dist/assets/css/app.css',
                 'dist/_bower.js',
                 'dist/_bower.css',
-                'dist/services'
+                'dist/services',
+                'dist/docs'
             ],
             'docs': [
                 'dist/docs'

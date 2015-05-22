@@ -1,10 +1,10 @@
 'use strict';
 
 /**
- * @ngdoc module
+ * @ngdoc controller
  * @name fkjs.views.page2
  * 
  * @description
- * Just an example for a second page.
+ * Another page in the application.
  */
 angular.module('fkjs.views.page2', []);

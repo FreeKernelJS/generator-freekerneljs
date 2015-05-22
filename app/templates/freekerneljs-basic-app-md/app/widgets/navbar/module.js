@@ -1,24 +1,16 @@
 'use strict';
 
-/**
- * @ngdoc module
- * @name fkjs.widgets.navbar
- *
- * @description
- * Navigation bar for the application, displays on the left.
- */
+
 angular.module('fkjs.widgets.navbar', [])
 
-
-/*
+/**
  * @ngdoc directive
- * @name fkjsNavbar
- * @module fkjs.widgets.navbar
+ * @name fkjs.widgets.fkjsNavbar
  *
  * @description
- * Set a list of pages in bar, manage click on each of the items in list.
+ * Set a list of pages in a bar, manage click on each of the items in list.
  * 
- * @example usage
+ * @usage
  * <fkjs-navbar></fkjs-navbar>
  */
 .directive('fkjsNavbar', function($state, $rootScope){
