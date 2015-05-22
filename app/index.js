@@ -163,7 +163,7 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
             type: 'input',
             name: 'title',
             message: 'Title',
-            default: 'FreeKernelJS app'
+            default: 'FreeKernelJS App'
         }, {
             type: 'input',
             name: 'description',
