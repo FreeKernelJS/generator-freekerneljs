@@ -173,6 +173,12 @@ You can now run the application in development or production mode:
     $ gem install sass
 ```
 
+- **Docs task**: generates documentation for AngularJS code which was written in a certain format. For more information please refer to their offcial wiki: [Writing AngularJS Documentation](https://github.com/angular/angular.js/wiki/Writing-AngularJS-Documentation)
+``` 
+    $ cd <project_folder>
+    $ grunt docs
+```
+
 
 ### <a name="history"></a> Release History
 ----------------
