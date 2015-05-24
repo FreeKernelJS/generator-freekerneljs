@@ -52,6 +52,7 @@ angular.module('<%= props.name %>')
             
             .state('page2', {
                 url: '/page2',
-                templateUrl: 'views/page2/page.html'
+                templateUrl: 'views/page2/page.html',
+                controller: 'Page2ViewController'
             });
 });

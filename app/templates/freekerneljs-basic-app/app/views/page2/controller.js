@@ -10,5 +10,5 @@
 angular.module('fkjs.views.page2', [])
 
 .controller('Page2ViewController', function($scope){
-    // mange this view here
+    // manage this view here
 });
