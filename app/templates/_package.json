@@ -33,6 +33,10 @@
     "load-grunt-tasks": "^0.2.0",
     "jshint-stylish": "^0.1.3",
     "grunt-ng-annotate": "^0.10.0",
-    "grunt-ngdocs": "^0.2.7"
+    "grunt-ngdocs": "^0.2.7",
+    "grunt-karma": "^0.10.1",
+    "karma": "^0.12.32",
+    "karma-jasmine": "^0.3.5",
+    "karma-phantomjs-launcher": "^0.1.4"
   }
 }
