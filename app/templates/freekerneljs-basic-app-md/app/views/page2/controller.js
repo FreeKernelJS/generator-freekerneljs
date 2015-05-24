@@ -9,6 +9,6 @@
  */
 angular.module('fkjs.views.page2', [])
 
-.controller('Page2ViewController', function($scope, stringUtil){
+.controller('Page2ViewController', function($scope){
     // manage this view here
 });
