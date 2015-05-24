@@ -221,6 +221,7 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
 
             // Common modules
             this.angularModule = true;
+            this.mocksModule = true;
             this.routeModule = true;
             this.scriptjsModule = true;
             this.cookiesModule = hasMod('cookiesModule');

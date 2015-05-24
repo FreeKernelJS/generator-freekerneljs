@@ -21,6 +21,9 @@
     <% if (touchModule) { %>,
     "angular-touch": "^<%= ngVer %>"<% } %>
 
+    <% if (mocksModule) { %>,
+    "angular-mocks": "^<%= ngVer %>"<% } %>
+
     <% if (routeModule) { %>,
     "angular-ui-router": "0.2.x"<% } %>
 
