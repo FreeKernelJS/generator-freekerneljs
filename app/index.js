@@ -271,8 +271,7 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
     },
 
     test: function () {
-        this.mkdir('test');
-        this.copy(templateName + '/test/readme.md', 'test/README.md');
+        this.bulkDirectory(templateName + '/app/_test', 'app/_test');
     },
 
     install: function () {

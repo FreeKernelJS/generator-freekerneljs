@@ -345,12 +345,26 @@ module.exports = function (grunt) {
             all: [
 				'app/**/*.js'
             ]
+        },
+        karma: {
+            unit: {
+                configFile: '_test/karma.conf.js'
+            }
         }
     });
 
     grunt.event.on('watch', function (action, filepath, target) {
         grunt.log.writeln(target + ': ' + filepath + ' has ' + action);
     });
+
+    /**
+	 * @description
+	 *   Running test task(s).
+	 * 
+	 */
+    grunt.registerTask('test', [
+		'karma'
+    ]);
 
     /**
 	 * @description
