@@ -111,6 +111,7 @@ module.exports = function (grunt) {
             dist: {
                 src: [
                     '**/*',
+                    '!**/_test/**',
                     '!**/docs/**',
                     '!**/assets/css/**',
                     '!**/assets/scss/**',
@@ -348,7 +349,7 @@ module.exports = function (grunt) {
         },
         karma: {
             unit: {
-                configFile: '_test/karma.conf.js'
+                configFile: 'app/_test/karma.conf.js'
             }
         }
     });
