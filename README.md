@@ -29,7 +29,7 @@ FreeKernelJS aims to provide developers with a set of tools to generate a Web ap
 # <a name="templates"></a> Templates
 FreeKernelJS offers a collection of templates from which you can choose.  
 Each template contains different features and UI libraries, and can be used to generate an app.  
-A list of available templates is specified in this page: **[templates](https://github.com/FreeKernelJS/generator-freekerneljs/wiki/templates)**
+A list of available templates is specified in this page: **[Templates](https://github.com/FreeKernelJS/generator-freekerneljs/wiki/templates)**
 
 # <a name="getting-started"></a> Getting Started
 1. **[Installation](https://github.com/FreeKernelJS/generator-freekerneljs/wiki/installation)**: first, you will need to install the environment with only 4 easy steps!
