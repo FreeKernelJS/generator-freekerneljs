@@ -46,5 +46,4 @@ For general questions and discussions, or if you like to contribute to this proj
 This project is under the [MIT License](https://github.com/FreeKernelJS/generator-freekerneljs/blob/master/LICENSE).
 
 # <a name="releases"></a> Releases History
-[Latest releases](https://github.com/FreeKernelJS/generator-freekerneljs/releases) of FreeKernelJS
-[CHANGELOG](CHANGELOG.md).
+[Latest releases](https://github.com/FreeKernelJS/generator-freekerneljs/releases) of FreeKernelJS and [CHANGELOG](CHANGELOG.md).
