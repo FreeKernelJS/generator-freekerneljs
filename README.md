@@ -40,7 +40,7 @@ FreeKernelJS comes with a set of tasks, powered by Grunt, which can be used duri
 A list of available tasks and instructions on how to use them can be found on this page: **[Use Grunt Tasks in Development](grunt-tasks)**
 
 # <a name="contribute"></a> Contributing to This Project
-For general questions and discussions, or if you like to contribute to this project please refer to [FreeKernelJS Forum](http://www.forum.freekerneljs.org/).
+For general questions and discussions, or if you would like to contribute to this project please refer to [FreeKernelJS Forum](http://www.forum.freekerneljs.org/).
 
 # <a name="license"></a> License
 This project is under the [MIT License](https://github.com/FreeKernelJS/generator-freekerneljs/blob/master/LICENSE).
