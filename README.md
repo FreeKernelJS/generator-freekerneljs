@@ -29,15 +29,15 @@ FreeKernelJS aims to provide developers with a set of tools to generate a Web ap
 # <a name="templates"></a> Templates
 FreeKernelJS offers a collection of templates from which you can choose.  
 Each template contains different features and UI libraries, and can be used to generate an app.  
-A list of available templates is specified in this page: **[Templates](templates)**
+A list of available templates is specified in this page: **[https://github.com/FreeKernelJS/generator-freekerneljs/wiki/templates](templates)**
 
 # <a name="getting-started"></a> Getting Started
-1. **[Installation](installation)**: first, you will need to install the environment with only 4 easy steps!
-2. **[Generate A New App](generate-app)**: then you can learn how to generate a new app, and how to configure it. 
+1. **[Installation](https://github.com/FreeKernelJS/generator-freekerneljs/wiki/installation)**: first, you will need to install the environment with only 4 easy steps!
+2. **[Generate A New App](https://github.com/FreeKernelJS/generator-freekerneljs/wiki/generate-app)**: then you can learn how to generate a new app, and how to configure it. 
 
 # <a name="development"></a> Development Tools
 FreeKernelJS comes with a set of tasks, powered by Grunt, which can be used during development to perform routine operations such as: unit testing, distribution, Sass compilation, etc.  
-A list of available tasks and instructions on how to use them can be found on this page: **[Use Grunt Tasks in Development](grunt-tasks)**
+A list of available tasks and instructions on how to use them can be found on this page: **[Use Grunt Tasks in Development](https://github.com/FreeKernelJS/generator-freekerneljs/wiki/grunt-tasks)**
 
 # <a name="contribute"></a> Contributing to This Project
 For general questions and discussions, or if you would like to contribute to this project please refer to [FreeKernelJS Forum](http://www.forum.freekerneljs.org/).
