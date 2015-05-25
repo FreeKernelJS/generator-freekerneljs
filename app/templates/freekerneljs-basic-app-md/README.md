@@ -37,7 +37,7 @@ A basic application which uses AngularJS as the MVC framework, combined with **A
 
 
 ##### Features:
-- Routing and sharing data between diffrent sections in the application
+- Routing and sharing data between different sections in the application
 - Modular architecture that can be extended
 - Best Practices for Performance
 - <a href="http://sass-lang.com/">Sass</a> CSS Preprocessors
