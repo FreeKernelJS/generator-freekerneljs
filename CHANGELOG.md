@@ -1,9 +1,16 @@
 <a name="0.4.0"></a>
-### 0.4.0 ()
+### 0.4.0 (2015-May-26)
 
 #### Features
 
-* New Grunt task: "grunt docs"
+* New Grunt task: "grunt docs" to generate documentation.
+* New Grunt task: "grunt test" to run unit testing with Karma-Jasmine.
+* Improved documentation.
+
+#### Bug Fixes
+
+* Fixed dependency injection issue.
+* Added missing controller.
 
 
 <a name="0.3.0"></a>
