@@ -1,7 +1,7 @@
 {
   "name": "generator-freekerneljs",
-  "version": "0.3.0",
-  "description": "Generates a web app structured from a template. This app can then be used to start and develop your own application.",
+  "version": "0.4.0",
+  "description": "Generates apps from templates, provides a set of tools for development.",
   "license": "MIT",
   "main": "app/index.js",
   "repository": "https://github.com/FreeKernelJS/generator-freekerneljs",
@@ -25,7 +25,11 @@
     "angular-material",
     "material-design",
     "grunt",
-    "skeleton-app"
+    "bower",
+    "karma-jasmine",
+    "templates",
+    "bootstrap",
+    "ngdocs"
   ],
   "dependencies": {
     "chalk": "^0.5.1",
