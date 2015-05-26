@@ -36,7 +36,7 @@ This app can be used as a starting point and basis to develop your own applicati
 
 
 ##### Features:
-- Routing and sharing data between diffrent sections in the application
+- Routing and sharing data between different sections in the application
 - Modular architecture that can be extended
 - Best practices for performance
 - Responsive UI
