@@ -1,185 +1,49 @@
 # generator-freekerneljs
 
-[![Built with Yeoman](http://pixel-cookers.github.io/built-with-badges/yeoman/yeoman-long.png)](http://yeoman.io/)
-[![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+#Contents
+1. [About FreeKernelJS](#about)
+2. [When Should I Use FreeKernelJS?](#use)
+3. [Templates](#templates)
+4. [Getting Started](#getting-started)
+5. [Development Tools](#development)
+6. [Contributing to This Project](#contribute)
+7. [License](#license)
+8. [Releases](#releases)
 
-Generates a web app structured from a template.
-This app can then be used to start and develop your own application.
+# <a name="about"></a> About FreeKernelJS
+FreeKernelJS aims to provide developers with a set of tools to generate a Web app structured from a template, and to use common tasks in development such as: testing the application, generate documentation, produce a distribution version, and more.
 
-Table of Contents:
--  [Templates](#templates)
--  [Installation](#installation)
--  [Create a New App](#generating)
--  [Running the Application](#running)
--  [Use Grunt Tasks in Development](#tools)
--  [Release History](#history)
+##### FreeKernelJS is based on these technologies:
+[![Yeoman](http://pixel-cookers.github.io/built-with-badges/yeoman/yeoman-short.png)](http://yeoman.io/)
+[![Grunt](http://pixel-cookers.github.io/built-with-badges/grunt/grunt-short.png)](http://gruntjs.com/)
+[![Bower](http://pixel-cookers.github.io/built-with-badges/bower/bower-short.png)](http://bower.io/)
+[![Karma](http://pixel-cookers.github.io/built-with-badges/karma/karma-short.png)](https://karma-runner.github.io)
 
+# <a name="use"></a> When Should I Use FreeKernelJS?
+- [x] You are looking to learn the basics.
+- [x] You need a tool to kick start your Web project.
+- [x] You want to test standard technologies and learn how to use them.
+- [x] You want to generate a skeleton app that can be extended and used in large projects.
+- [x] You want to produce quickly several different apps, build with different UI packages/libraries.
 
-### <a name="templates"></a> Templates
-------------
-Templates available for producing applications:
-- [freekerneljs-basic-app](app/templates/freekerneljs-basic-app): a basic application which uses AngularJS with Bootstrap
-- [freekerneljs-basic-app-md](app/templates/freekerneljs-basic-app-md): a basic application which uses AngularJS with Angular Material
+# <a name="templates"></a> Templates
+FreeKernelJS offers a collection of templates from which you can choose.  
+Each template contains different features and UI libraries, and can be used to generate an app.  
+A list of available templates is specified in this page: **[Templates](https://github.com/FreeKernelJS/generator-freekerneljs/wiki/templates)**
 
+# <a name="getting-started"></a> Getting Started
+1. **[Installation](https://github.com/FreeKernelJS/generator-freekerneljs/wiki/installation)**: first, you will need to install the environment with only 4 easy steps!
+2. **[Generate A New App](https://github.com/FreeKernelJS/generator-freekerneljs/wiki/generate-app)**: then you can learn how to generate a new app, and how to configure it. 
 
-### <a name="installation"></a> Installation
-------------
+# <a name="development"></a> Development Tools
+FreeKernelJS comes with a set of tasks, powered by Grunt, which can be used during development to perform routine operations such as: unit testing, distribution, Sass compilation, etc.  
+A list of available tasks and instructions on how to use them can be found on this page: **[Use Grunt Tasks in Development](https://github.com/FreeKernelJS/generator-freekerneljs/wiki/grunt-tasks)**
 
-###### Step 1: Setup your environment if you have not done so yet.
-- Install [Node.js](https://nodejs.org) (including npm)
-- Then Install <a href="http://bower.io/">Bower</a> and <a href="http://yeoman.io/">Yeoman</a> globally:
-``` 
-    $ npm install -g bower
-    $ npm install -g yo
-```
+# <a name="contribute"></a> Contributing to This Project
+For general questions and discussions, or if you would like to contribute to this project please refer to [FreeKernelJS Forum](http://www.forum.freekerneljs.org/).
 
+# <a name="license"></a> License
+This project is under the [MIT License](https://github.com/FreeKernelJS/generator-freekerneljs/blob/master/LICENSE).
 
-###### Step 2: Install FreeKernelJS Generator globally: 
-``` 
-    $ npm install -g generator-freekerneljs 
-```
-
-
-### <a name="generating"></a> Create a New App
-------------
-
-###### Step 1: Create a new folder 
-
-Create a new *"project_folder"* where you would like for your app files to be output by the generator, and switch to it. 
->For documentation purposes it is called *"project_folder"* but you can use any name that you want.
-
-This folder will contain both the development and the distribution versions of the application.
-You can create the project folder directly under your local server root, or copy the files there after generation.
-```
-    $ mkdir <project_folder>
-    $ cd <project_folder>
-```
-
-
-###### Step 2: Run the generator:
-``` 
-    $ yo freekerneljs 
-```
-If the generator is already installed and a newer version is available it will notify you of this. Alternatively you can use this command to upgrade:
-``` 
-    $ npm update -g generator-freekerneljs 
-```
-During installation, various configuration values can be set for your application. 
-The generator wizard will prompt you for values, or you can accept default by pressing enter. 
-After the installation is complete you can still set these values manually.
-
-<img src="docs/images/freekerneljs-generator.png">
-
-Available configurations:
-- **Select a template**. Select which template you would like to use. For more details see [Templates](#templates) section above.
-- **Packages to be included**. Use arrows and spacebar to select which packages to inclued in your application. This can be managed later from bower.json file.
-- **Application name**. The name of the main module of the application in the JavaScript files. By default it will use the name of the *"project_folder"* which contains this application.
-- **Title of the application**. The window title in browser, and the name of the application as displayed above the navigation bar. This can be managed later in code (see index.html, widgets/navbar/template.html)
-- **Description**. The description of this application, can be managed in package.json
-- **Version**. The <a href="http://semver.org/">version</a> of this application, can be managed in package.json (default to 1.0.0).
-- **License**. The license of this application, can be managed in package.json (default to MIT).
-- **GitHub repository**. Can be managed in package.json
-- **GitHub username**. Can be managed in package.json
-- **Author name**. Can be managed in package.json
-- **Author email**. Can be managed in package.json
-- **Author url**. Can be managed in package.json
-- **Home page**. Can be managed in package.json
-
-
-###### Step 3: Output files
-
-After installation is successful you can find the output files through the output path:
-``` 
-    $ cd <project_folder>/app
-```
-
-### <a name="running"></a> Running the application
------------------
-The *"project_folder"* should now have the following folders and files:
-```
-.
-└── project_folder
-    ├── app/
-    ├── bower_components/
-    ├── test/
-    ├── .bowerrc
-    ├── bower.json
-    └── Gruntfile.js
-```
-- app folder: containes the application.
-- bower_components folder: contains external packages that were installed by Bower.
-- test folder: for unit testing.
-- .bowerrc file: can be edited to save external packages managed by Bower into a different location.
-- bower.json file: a list of all external packages managed by Bower. You can add/change packages and/or versions.
-- Gruntfile.js file: contains Grunt tasks. Can be edited to add more tasks. For details please refer to [Use Grunt Tasks in Development](#tools) section.
-
-If the *"project_folder"* is not located directly under your server root, you can copy the *"app"* folder there and run the application in browser.
-
-This should be the result:
-
-
-<img src="docs/images/Clipboard01.png">
-
-Here is an example to an application that has been developed using FreeKernelJS Generator, and is based on [freekerneljs-basic-app-md](app/templates/freekerneljs-basic-app-md) template:
-
-<a href="https://github.com/FreeKernelJS/demos/tree/master/freekerneljs-demo-app">Demo App</a>
-
-
-> For general questions and discussions, use the
-  [FreeKernelJS Forum](http://www.forum.freekerneljs.org/).
-
-
-### <a name="tools"></a> Use Grunt Tasks in Development
------------------
-You might want to consider installing <a href="http://gruntjs.com/">Grunt</a>, to use runner tasks which are provided by the FreeKernelJS generator during development.
-The installation of Grunt is global, but you must run the different tasks from within the project folder.
-- **Install Grunt**:
-``` 
-    $ npm install -g grunt-cli
-```
-
-- **Watch task**: monitoring your application for changes each time you make changes and save files. 
-To be able to use this task you need first to open *"index.html"* file from *"project_folder/app"*, and uncomment the following line:
-``` 
- <!-- <script src="//localhost:35729/livereload.js"></script> -->
-``` 
-Then
-``` 
-    $ cd <project_folder>
-    $ grunt watch
-```
-
-- **Dist task**: compiling scss files, compress JavaScript code, and publish the application into the *"dist"* folder. 
-``` 
-    $ cd <project_folder>
-    $ grunt dist
-```
-After running this task you can find the deployed files under *"project_folder/dist"*.
-You can now run the application in development or production mode:
-
-<http://localhost/project_folder/app> will display the application in development mode.
-
-<http://localhost/project_folder/dist> will display the application in production mode.
-
-
-- **Compile task**: compiling scss files into css, creates the *"app.css"* file.
-``` 
-    $ cd <project_folder>
-    $ grunt compile-scss
-```
-
-> Please note that for both *"dist"* and *"compile-scss"* tasks you will need to have <a href="https://www.ruby-lang.org/en/">Ruby</a> installed for your environment to work.
-``` 
-    $ gem install sass
-```
-
-- **Docs task**: generates documentation for AngularJS code which was written in a certain format. For more information please refer to their offcial wiki: [Writing AngularJS Documentation](https://github.com/angular/angular.js/wiki/Writing-AngularJS-Documentation)
-``` 
-    $ cd <project_folder>
-    $ grunt docs
-```
-
-
-### <a name="history"></a> Release History
-----------------
-See the [CHANGELOG](CHANGELOG.md).
+# <a name="releases"></a> Releases History
+[Latest releases](https://github.com/FreeKernelJS/generator-freekerneljs/releases) of FreeKernelJS and [CHANGELOG](CHANGELOG.md).
