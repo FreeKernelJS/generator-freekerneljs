@@ -32,7 +32,7 @@ Each template contains different features and UI libraries, and can be used to g
 A list of available templates is specified in this page: **[Templates](https://github.com/FreeKernelJS/generator-freekerneljs/wiki/templates)**
 
 # <a name="getting-started"></a> Getting Started
-1. **[Installation](https://github.com/FreeKernelJS/generator-freekerneljs/wiki/installation)**: first, you will need to install the environment with only 5 easy steps!
+1. **[Installation](https://github.com/FreeKernelJS/generator-freekerneljs/wiki/installation)**: first, you will need to install the environment with only 3 easy steps!
 2. **[Generate A New App](https://github.com/FreeKernelJS/generator-freekerneljs/wiki/generate-app)**: then you can learn how to generate a new app, and how to configure it. 
 
 # <a name="development"></a> Development Tools
