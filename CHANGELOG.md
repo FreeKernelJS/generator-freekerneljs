@@ -1,3 +1,10 @@
+<a name="0.4.1"></a>
+### 0.4.1 ()
+
+#### Bug Fixes
+
+* Fixed file path in configuration (failed on iOS).
+
 <a name="0.4.0"></a>
 ### 0.4.0 (2015-May-26)
 
