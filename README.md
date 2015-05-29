@@ -19,6 +19,10 @@ FreeKernelJS aims to provide developers with a set of tools to generate a Web ap
 [![Bower](http://pixel-cookers.github.io/built-with-badges/bower/bower-short.png)](http://bower.io/)
 [![Karma](http://pixel-cookers.github.io/built-with-badges/karma/karma-short.png)](https://karma-runner.github.io)
 
+##### Support
+Supported platforms: Windows, iOS, Linux.  
+Supported Browsers: designed to support the current versions of Chrome, Firefox, and Internet Explorer 9+.
+
 # <a name="use"></a> When Should I Use FreeKernelJS?
 - [x] You are looking to learn the basics.
 - [x] You need a tool to kick start your Web project.
