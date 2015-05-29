@@ -1,4 +1,11 @@
 <a name="0.4.1"></a>
+### 0.4.2 (2015-May-29)
+
+#### Bug Fixes
+
+* Fixed file name in installation (failed on Linux).
+
+<a name="0.4.1"></a>
 ### 0.4.1 (2015-May-27)
 
 #### Bug Fixes
