@@ -1,4 +1,4 @@
-{<% var ngVer = "~1.4.0" %>
+{<% var ngVer = "1.3.x" %>
   "name": "<%= slugname %>",
   "version": "<%= props.version %>",
   "dependencies": {
@@ -25,10 +25,10 @@
     "angular-mocks": "^<%= ngVer %>"<% } %>
 
     <% if (routeModule) { %>,
-    "angular-ui-router": "~0.2.15"<% } %>
+    "angular-ui-router": "0.2.x"<% } %>
 
     <% if (bootstrapModule) { %>,
-    "bootstrap": "^3.3.4"<% } %>
+    "bootstrap": "^3.3.x"<% } %>
 
     <% if (scriptjsModule) { %>, 
     "script.js": "^2.5.7"<% } %>
