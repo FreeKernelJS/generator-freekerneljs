@@ -23,7 +23,7 @@
     "yeoman-generator",
     "angularjs",
     "angular-material",
-    "material-design",
+    "material-design", 
     "grunt",
     "bower",
     "karma-jasmine",
