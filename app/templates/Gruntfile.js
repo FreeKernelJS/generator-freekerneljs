@@ -421,7 +421,7 @@ module.exports = function (grunt) {
         'string-replace:material-design-iconic-font',
         'sass:material-design-iconic-font',
         'string-replace:default-tags',
-        'sass:compile-scss',
+        'compile-scss',
         'wiredep:build'
     ]);
 };
