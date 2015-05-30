@@ -8,7 +8,7 @@
 5. [Development Tools](#development)
 6. [Contributing to This Project](#contribute)
 7. [License](#license)
-8. [Releases](#releases)
+8. [Releases History](#releases)
 
 # <a name="about"></a> About FreeKernelJS
 FreeKernelJS aims to provide developers with a set of tools to generate a Web app structured from a template, and to use common tasks in development such as: testing the application, generate documentation, produce a distribution version, and more.
