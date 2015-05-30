@@ -25,10 +25,10 @@
     "angular-mocks": "^<%= ngVer %>"<% } %>
 
     <% if (routeModule) { %>,
-    "angular-ui-router": "0.2.x"<% } %>
+    "angular-ui-router": "~0.2.15"<% } %>
 
     <% if (bootstrapModule) { %>,
-    "bootstrap": "^3.3.x"<% } %>
+    "bootstrap": "~3.3.4"<% } %>
 
     <% if (scriptjsModule) { %>, 
     "script.js": "^2.5.7"<% } %>
