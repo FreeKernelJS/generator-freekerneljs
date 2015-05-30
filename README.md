@@ -21,7 +21,7 @@ FreeKernelJS aims to provide developers with a set of tools to generate a Web ap
 
 **Support**  
 Supported platforms: Windows, iOS, Linux.  
-Supported Browsers: designed to support the current versions of Chrome, Firefox, and Internet Explorer 9+.
+Supported Browsers: designed to support the current versions of Chrome, Firefox, and Internet Explorer 10+.
 
 # <a name="use"></a> When Should I Use FreeKernelJS?
 - [x] You are looking to learn the basics.
