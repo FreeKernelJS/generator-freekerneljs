@@ -1,6 +1,6 @@
 {
   "name": "generator-freekerneljs",
-  "version": "0.4.1",
+  "version": "0.4.3",
   "description": "Generates apps from templates, provides a set of tools for development.",
   "license": "MIT",
   "main": "app/index.js",
@@ -41,6 +41,6 @@
   },
   "devDependencies": {},
   "peerDependencies": {
-    "yo": "~1.4.6"
+    "yo": ">=1.0.0"
   }
 }
