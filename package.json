@@ -1,5 +1,5 @@
 {
-  "name": "generator-freekerneljs",
+  "name": "generator-freekerneljs", 
   "version": "0.4.3",
   "description": "Generates apps from templates, provides a set of tools for development.",
   "license": "MIT",
