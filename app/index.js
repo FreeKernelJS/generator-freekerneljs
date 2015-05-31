@@ -32,8 +32,10 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
             })
         });
 
-        this.appname = this.appname || path.basename(process.cwd());
-        this.appname = this.appname.replace(/\s+/g, '-');
+        this.appname = 'freekerneljs-project';
+
+        //this.appname = this.appname || path.basename(process.cwd());
+        //this.appname = this.appname.replace(/\s+/g, '-');
     },
 
     initializing: function () {
