@@ -32,8 +32,10 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
             })
         });
 
-        this.appname = this.appname || path.basename(process.cwd());
-        this.appname = this.appname.replace(/\s+/g, '-');
+        this.appname = 'freekerneljs-project';
+
+        //this.appname = this.appname || path.basename(process.cwd());
+        //this.appname = this.appname.replace(/\s+/g, '-');
     },
 
     initializing: function () {
@@ -42,8 +44,8 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
 
         var notifier = updateNotifier({
             pkg: pkg,
-            // Check for updates every day.
-            updateCheckInterval: 1000 * 60 * 60 * 24
+            // Check for updates every one hour.
+            updateCheckInterval: 1000 * 60 * 60
         });
 
         if (notifier.update) {
