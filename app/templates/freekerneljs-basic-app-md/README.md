@@ -51,5 +51,5 @@ A basic application which uses AngularJS as the MVC framework, combined with **A
 - Localization
 - <a href="http://sass-lang.com/">Sass</a> CSS preprocessors
 - Documentation format to be used with ngdoc
-- Unit testing with Karma and Jasmine
+- Unit testing with Jasmine
 - HTML 5 structure
