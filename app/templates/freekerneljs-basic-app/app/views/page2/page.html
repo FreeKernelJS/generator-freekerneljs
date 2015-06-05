@@ -1,3 +1,12 @@
 <page>
-    Welcome to page #2
+    <h2 translate="views.page2.title"></h2>
+    <div class="md-no-sticky">{{ 'views.page2.listTitle' | translate }}</div>
+
+        <ul>
+
+            
+            <li ng-repeat="item in list">
+                {{ item.name }} 
+        </li>
+
 </page>

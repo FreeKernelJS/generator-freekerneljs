@@ -1,0 +1,15 @@
+{
+    "views": {
+        "home": {
+            "title": "Welcome",
+            "text": "This app is based on Angular Material library. Please visit",
+            "angularMaterial": "Angular Material",
+            "website": "website and view the Demos section.",
+            "lastVisit": "Last visit: {{lastVisitDate}}"
+        },
+        "page2": {
+            "title": "Welcome to page #2",
+            "listTitle": "Some List"
+        }
+    }
+}

@@ -1,3 +1,12 @@
 <md-content class="md-padding content-bg" flex>
-    Add some {{someText}}
+    <h2 translate="views.home.title"></h2>
+
+    <p>
+        {{ 'views.home.text' | translate }} 
+        <a href="https://material.angularjs.org" target="_blank"  translate="views.home.angularMaterial"></a> 
+        {{ 'views.home.website' | translate }}
+    </p>
+    
+    <p translate="views.home.lastVisit" translate-values='{ lastVisitDate: lastVisitDate }'></p>
+   
 </md-content>

@@ -27,9 +27,9 @@ angular.module('fkjs.widgets.header', [])
         scope: {
         },
         
-        link: function(scope, element, attrs){
-            scope.$on('navbarStateChange', function(event, stateText){
-                scope.pageTitle = stateText;
+        controller: function($scope){
+            $scope.$on('navbarStateChange', function(event, stateText){
+                $scope.pageTitle = stateText;
             });
         }
     };

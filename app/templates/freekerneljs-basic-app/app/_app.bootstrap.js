@@ -39,13 +39,14 @@ $script([
     // list all your files here:
     
     //services
-    'services/utils.js',
+    'services/http.js',
     
     //widgets
     'widgets/header/module.js',
     'widgets/navbar/module.js',
     
     //views
+    'views/main/controller.js',
     'views/home/controller.js',
     'views/page2/controller.js',
 

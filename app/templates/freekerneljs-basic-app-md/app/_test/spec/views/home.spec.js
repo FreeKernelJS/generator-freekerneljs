@@ -4,12 +4,11 @@ describe('[module fkjs.views.home]', function () {
 
     // load the controller's module and all its dependencies
     beforeEach(module('fkjs.views.home')); //main module
-    beforeEach(module('fkjs.services.utils')); //dependency
     
     var HomeCtrl, scope;
 
     // Initialize the controller and a mock scope
-    beforeEach(inject(function ($controller, stringUtil) {
+    beforeEach(inject(function ($controller) {
         scope = {};
         HomeCtrl = $controller('HomeViewController', {$scope: scope});
     }));
@@ -21,7 +20,7 @@ describe('[module fkjs.views.home]', function () {
         }));
         
         it('should attach a certain "param" to the scope which contains a certain value', function () {
-            expect(scope.someText).toEqual('content here');
+            expect(scope.lastVisitDate).toBeDefined();
         });
     });
 });

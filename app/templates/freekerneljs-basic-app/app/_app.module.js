@@ -13,15 +13,17 @@ angular.module('<%= props.name %>', [
     
     //angular modules
     'ui.router',
+    'pascalprecht.translate',
     
     //app services
-    'fkjs.services.utils',
+    'fkjs.services.http',
     
     //app widgets
     'fkjs.widgets.header',
     'fkjs.widgets.navbar',
     
     //app views
+    'fkjs.views.main',
     'fkjs.views.home',
     'fkjs.views.page2'
 ]);
