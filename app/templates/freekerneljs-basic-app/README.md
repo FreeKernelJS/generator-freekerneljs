@@ -50,6 +50,6 @@ This app can be used as a starting point and basis to develop your own applicati
 - Localization
 - <a href="http://sass-lang.com/">Sass</a> CSS preprocessors
 - Documentation format to be used with ngdoc
-- Unit testing with Karma and Jasmine
+- Unit testing with Jasmine
 - HTML 5 structure
 
