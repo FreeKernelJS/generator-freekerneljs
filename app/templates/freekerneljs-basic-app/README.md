@@ -21,16 +21,22 @@ This app can be used as a starting point and basis to develop your own applicati
     │       ├── module.js
     │       └── template.html
     ├── views
+    │   └── main
+    │       ├── controller.js
     │   └── home
     │       ├── controller.js
     │       └── page.html
+    │   └── page2
+    │       ├── controller.js
+    │       └── page.html
     └── services
-        └── utils.js
+        └── http.js
 ```
 
 ##### Dependencies:
 - <a href="https://angularjs.org/">angular</a> (v1.3.x)
 - <a href="https://github.com/angular-ui/ui-router">angular-ui-router</a> (v0.2.x)
+- <a href="https://github.com/angular-translate/angular-translate">angular-translate</a> (v2.7.2)
 - <a href="https://github.com/ded/script.js/">script.js</a> (v2.5.7)
 - <a href="http://getbootstrap.com/">bootstrap</a> (v3.3.x)
 
@@ -40,8 +46,10 @@ This app can be used as a starting point and basis to develop your own applicati
 - Modular architecture that can be extended
 - Best practices for performance
 - Responsive UI
+- Http service
+- Localization
 - <a href="http://sass-lang.com/">Sass</a> CSS preprocessors
-- String format service
 - Documentation format to be used with ngdoc
+- Unit testing with Karma and Jasmine
 - HTML 5 structure
 
