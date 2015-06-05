@@ -221,11 +221,13 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
                 return props.modules.indexOf(mod) !== -1;
             };
 
-            // Common modules
+            // Common modules.
             this.angularModule = true;
             this.mocksModule = true;
             this.routeModule = true;
             this.scriptjsModule = true;
+            this.angularTranslateModule = true;
+            this.angularTranslateLoaderStaticFilesModule = true;
             this.cookiesModule = hasMod('cookiesModule');
             this.resourceModule = hasMod('resourceModule');
             this.messagesModule = hasMod('messagesModule');
@@ -267,6 +269,7 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
         this.bulkDirectory(templateName + '/app/views', 'app/views');
         this.bulkDirectory(templateName + '/app/widgets', 'app/widgets');
         this.bulkDirectory(templateName + '/app/services', 'app/services');
+        this.bulkDirectory(templateName + '/app/data', 'app/data');
     },
     
     writing: function () {

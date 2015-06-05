@@ -33,6 +33,12 @@
     <% if (scriptjsModule) { %>, 
     "script.js": "^2.5.7"<% } %>
 
+    <% if (angularTranslateModule) { %>,
+    "angular-translate": "^2.7.2"<% } %>
+
+    <% if (angularTranslateLoaderStaticFilesModule) { %>,
+    "angular-translate-loader-static-files": "^2.7.2"<% } %>
+  
   },
   "overrides": {
     "script.js": {

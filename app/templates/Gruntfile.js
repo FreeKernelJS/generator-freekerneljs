@@ -3,10 +3,10 @@ module.exports = function (grunt) {
         bower_dependencies = grunt.file.readJSON('./bower.json').dependencies,
         bower_comp = Object.keys(bower_dependencies);
 
-    // Load all grunt tasks
+    // Load all grunt tasks.
     require('load-grunt-tasks')(grunt);
 
-    // Show elapsed time at the end
+    // Show elapsed time at the end.
     require('time-grunt')(grunt);
 
     // Application configuration.

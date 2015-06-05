@@ -36,6 +36,12 @@
     <% if (iconicFont) { %>,
     "material-design-iconic-font": "^1.1.1"<% } %>
 
+    <% if (angularTranslateModule) { %>,
+    "angular-translate": "^2.7.2"<% } %>
+
+    <% if (angularTranslateLoaderStaticFilesModule) { %>,
+    "angular-translate-loader-static-files": "^2.7.2"<% } %>
+  
   },
   "overrides": {
     "script.js": {
