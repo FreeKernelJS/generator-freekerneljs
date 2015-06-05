@@ -21,11 +21,11 @@ This app can be used as a starting point and basis to develop your own applicati
     │       ├── module.js
     │       └── template.html
     ├── views
-    │   └── main
-    │       ├── controller.js
-    │   └── home
-    │       ├── controller.js
-    │       └── page.html
+    │   ├── main
+    │   │   └── controller.js
+    │   ├── home
+    │   │   ├── controller.js
+    │   │   └── page.html
     │   └── page2
     │       ├── controller.js
     │       └── page.html
