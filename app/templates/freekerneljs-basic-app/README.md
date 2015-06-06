@@ -10,9 +10,15 @@ This app can be used as a starting point and basis to develop your own applicati
     ├── app.bootstrap.js
     ├── app.module.js
     ├── app.routes.js
+    ├── _test
     ├── assets
     │   ├── css
     │   └── images
+    ├── data
+    │   ├── locale
+    │   └── server
+    ├── services
+    │   └── http.js
     ├── widgets
     │   ├── header
     │   │   ├── module.js
@@ -20,17 +26,15 @@ This app can be used as a starting point and basis to develop your own applicati
     │   └── navbar
     │       ├── module.js
     │       └── template.html
-    ├── views
-    │   ├── main
-    │   │   └── controller.js
-    │   ├── home
-    │   │   ├── controller.js
-    │   │   └── page.html
-    │   └── page2
-    │       ├── controller.js
-    │       └── page.html
-    └── services
-        └── http.js
+    └── views
+        ├── main
+        │   └── controller.js
+        ├── home
+        │   ├── controller.js
+        │   └── page.html
+        └── page2
+            ├── controller.js
+            └── page.html
 ```
 
 ##### Dependencies:
