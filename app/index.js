@@ -27,9 +27,16 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
         this.on('end', function () {
             console.log('Running the Grunt \'default\' task now ...');
 
+            if (templateName == 'freekerneljs-basic-app') {
+                this.spawnCommand('grunt', ['copy:bootstrap-fonts']).on('close', function () {
+                    console.log('Bootstrap fonts copied.');
+                })
+            }
+
             this.spawnCommand('grunt', ['default']).on('close', function () {
                 console.log('The Grunt task has completed.');
             })
+            
         });
 
         this.appname = 'freekerneljs-project';

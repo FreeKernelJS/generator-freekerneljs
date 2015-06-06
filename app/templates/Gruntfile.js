@@ -100,6 +100,14 @@ module.exports = function (grunt) {
             }
         },
         copy: {
+            'bootstrap-fonts': {
+                src: [
+                    '**/*'
+                ],
+                expand: true,
+                cwd: 'bower_components/bootstrap/fonts',
+                dest: 'app/assets/fonts'
+            },
             'material-design-iconic-font': {
                 src: [
                     '**/*'
