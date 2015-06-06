@@ -1,12 +1,10 @@
 <page>
-    <h2 translate="views.page2.title"></h2>
-    <div class="md-no-sticky">{{ 'views.page2.listTitle' | translate }}</div>
-
-        <ul>
-
-            
-            <li ng-repeat="item in list">
-                {{ item.name }} 
-        </li>
-
+    <div class="list-group">
+        <a href="#" class="list-group-item active">
+            <h4 class="list-group-item-heading fkjs-list-header"><span class="glyphicon glyphicon-ok-circle fkjs-list-header-icon"></span>{{ 'views.page2.listTitle' | translate }}</h4>
+        </a>
+        <a href="#" class="list-group-item" ng-repeat="item in list">
+            <p class="list-group-item-text">{{ item.name}}</p>
+        </a>
+    </div>
 </page>

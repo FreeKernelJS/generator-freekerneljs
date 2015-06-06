@@ -13,7 +13,7 @@ angular.module('fkjs.views.page2', [])
 .controller('Page2ViewController', function($scope, httpService){
     
     //load data with get request
-    httpService.get('data/server/list.json').then(function(data){ 
+    httpService.get('data/server/getList.php').then(function(data){ 
         $scope.list = data;
     });
 });

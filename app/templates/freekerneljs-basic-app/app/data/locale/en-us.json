@@ -5,7 +5,6 @@
             "lastVisit": "Last visit: {{lastVisitDate}}"
         },
         "page2": {
-            "title": "Welcome to page #2",
             "listTitle": "Some List"
         }
     }
