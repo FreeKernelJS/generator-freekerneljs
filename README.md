@@ -1,6 +1,6 @@
 # generator-freekerneljs
 
-#Contents
+### Contents
 1. [About FreeKernelJS](#about)
 2. [When Should I Use FreeKernelJS?](#use)
 3. [Templates](#templates)
