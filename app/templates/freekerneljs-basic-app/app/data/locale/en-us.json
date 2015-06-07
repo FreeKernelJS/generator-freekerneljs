@@ -2,6 +2,9 @@
     "views": {
         "home": {
             "title": "Welcome",
+            "text": "This app is based on Bootstrap library. Please visit",
+            "bootstrap": "Bootstrap",
+            "website": "website for more information.",
             "lastVisit": "Last visit: {{lastVisitDate}}"
         },
         "page2": {
