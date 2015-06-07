@@ -18,7 +18,7 @@ A basic application which uses AngularJS as the MVC framework, combined with **A
 
 
 ##### Dependencies:
-- <a href="https://angularjs.org/">angular</a> (v1.3.x)
+- <a href="https://angularjs.org/">angular</a> (v1.4.x)
 - <a href="https://github.com/angular/material">angular-material</a> (v0.9.x)
 - <a href="https://github.com/angular-ui/ui-router">angular-ui-router</a> (v0.2.x)
 - <a href="https://github.com/angular-translate/angular-translate">angular-translate</a> (v2.7.2)
