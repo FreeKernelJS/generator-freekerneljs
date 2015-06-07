@@ -59,7 +59,7 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
                 if (err) {
                     console.log(err);
                 }
-                else {
+                else if (update.latest > update.current) {
                     var fill = function (str, count) {
                         return Array(count + 1).join(str);
                     };
