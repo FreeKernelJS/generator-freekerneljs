@@ -49,29 +49,55 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
         generatorRoot = this.templatePath('../../');
         templatePath = this.templatePath();
 
+        var done = this.async();
         var notifier = updateNotifier({
             pkg: pkg,
             // Check for updates every one hour.
-            updateCheckInterval: 1000 * 60 * 60
+            //updateCheckInterval: 1000 * 60 * 60,
+
+            callback: function (err, update) {
+                if (err) {
+                    console.log(err);
+                }
+                else {
+                    var fill = function (str, count) {
+                        return Array(count + 1).join(str);
+                    };
+
+                    var line1 = ' Update available: ' + chalk.green.bold(update.latest) + chalk.dim(' (current: ' + update.current + ')') + ' ',
+                        line2 = ' Run ' + chalk.magenta('npm update -g ' + pkg.name) + ' to update. ',
+                        contentWidth = Math.max(stringLength(line1), stringLength(line2)),
+                        line1rest = contentWidth - stringLength(line1),
+                        line2rest = contentWidth - stringLength(line2),
+                        top = chalk.yellow('┌' + fill('─', contentWidth) + '┐'),
+                        bottom = chalk.yellow('└' + fill('─', contentWidth) + '┘'),
+                        side = chalk.yellow('│'),
+                        updateMessage = '\n\n' + top + '\n' + side + line1 + fill(' ', line1rest) + side + '\n' + side + line2 + fill(' ', line2rest) + side + '\n' + bottom + '\n';
+
+                    console.log(updateMessage);  
+                }
+
+                done();
+            }
         });
 
-        if (notifier.update) {
-            var fill = function (str, count) {
-                return Array(count + 1).join(str);
-            };
+        //if (notifier.update) {
+        //    var fill = function (str, count) {
+        //        return Array(count + 1).join(str);
+        //    };
 
-            var line1 = ' Update available: ' + chalk.green.bold(notifier.update.latest) + chalk.dim(' (current: ' + notifier.update.current + ')') + ' ',
-                line2 = ' Run ' + chalk.magenta('npm update -g ' + pkg.name) + ' to update. ',
-                contentWidth = Math.max(stringLength(line1), stringLength(line2)),
-                line1rest = contentWidth - stringLength(line1),
-                line2rest = contentWidth - stringLength(line2),
-                top = chalk.yellow('┌' + fill('─', contentWidth) + '┐'),
-                bottom = chalk.yellow('└' + fill('─', contentWidth) + '┘'),
-                side = chalk.yellow('│'),
-                updateMessage = '\n\n' + top + '\n' + side + line1 + fill(' ', line1rest) + side + '\n' + side + line2 + fill(' ', line2rest) + side + '\n' + bottom + '\n';
+        //    var line1 = ' Update available: ' + chalk.green.bold(notifier.update.latest) + chalk.dim(' (current: ' + notifier.update.current + ')') + ' ',
+        //        line2 = ' Run ' + chalk.magenta('npm update -g ' + pkg.name) + ' to update. ',
+        //        contentWidth = Math.max(stringLength(line1), stringLength(line2)),
+        //        line1rest = contentWidth - stringLength(line1),
+        //        line2rest = contentWidth - stringLength(line2),
+        //        top = chalk.yellow('┌' + fill('─', contentWidth) + '┐'),
+        //        bottom = chalk.yellow('└' + fill('─', contentWidth) + '┘'),
+        //        side = chalk.yellow('│'),
+        //        updateMessage = '\n\n' + top + '\n' + side + line1 + fill(' ', line1rest) + side + '\n' + side + line2 + fill(' ', line2rest) + side + '\n' + bottom + '\n';
 
-            console.log(updateMessage);
-        }
+        //    console.log(updateMessage);
+        //}
     },
 
     prompting: function () {
