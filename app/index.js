@@ -23,20 +23,23 @@ function getDirectories(srcpath) {
 var freekerneljsGenerator = yeoman.generators.Base.extend({
     constructor: function () {
         yeoman.generators.Base.apply(this, arguments);
-
+        
         this.on('end', function () {
             console.log('Running the Grunt \'default\' task now ...');
 
             if (templateName == 'freekerneljs-basic-app') {
-                this.spawnCommand('grunt', ['copy:bootstrap-fonts']).on('close', function () {
+                this.spawnCommand('grunt --project=' + this.slugname, ['copy:bootstrap-fonts']).on('close', function () {
                     console.log('Bootstrap fonts copied.');
                 })
             }
-
-            this.spawnCommand('grunt', ['default']).on('close', function () {
-                console.log('The Grunt task has completed.');
-            })
             
+            this.spawnCommand('grunt --project=' + this.slugname, ['default']).on('close', function () {
+                console.log('The Grunt task has completed.');
+            });
+            
+            this.spawnCommand('grunt', ['clean:workspace']).on('close', function () {
+                console.log('Workspace cleaned.');
+            });
         });
 
         this.appname = 'freekerneljs-project';
@@ -257,39 +260,49 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
                 default:
             }
 
+            this.mkdir(this.slugname);
+
             done();
         }.bind(this));
     },
 
     configuration: function () {
-        this.copy(templateName + '/gitignore', '.gitignore');
-        this.copy(templateName + '/bowerrc', '.bowerrc');
-        this.copy('Gruntfile.js', 'Gruntfile.js');
-        this.template('_package.json', 'package.json');
+        // Workspace
+        this.template(templateName + '/_package.json', 'package.json');
         this.template(templateName + '/_bower.json', 'bower.json');
+        this.template('_bowerrc', '.bowerrc');
+        this.copy('Gruntfile.js', 'Gruntfile.js');
+        
+        // Project folder
+        this.template(templateName + '/_package.json', this.slugname + '/package.json');
+        this.template(templateName + '/_bower.json', this.slugname + '/bower.json');
+        this.copy('Gruntfile.js', this.slugname + '/Gruntfile.js');
+        this.copy(templateName + '/gitignore', this.slugname + '/.gitignore');
+        this.copy(templateName + '/bowerrc', this.slugname + '/.bowerrc');
     },
 
     app: function () {
-        this.mkdir('app');
-        this.copy(templateName + '/app/_app.bootstrap.js', 'app/app.bootstrap.js');
-        this.copy(templateName + '/app/_app.module.js', 'app/app.module.js');
-        this.copy(templateName + '/app/_app.routes.js', 'app/app.routes.js');
-        this.copy(templateName + '/app/_index.html', 'app/index.html');
-        this.bulkDirectory(templateName + '/app/assets/images', 'app/assets/images');
-        this.bulkDirectory(templateName + '/app/assets/scss', 'app/assets/scss');
-        this.bulkDirectory(templateName + '/app/assets/css', 'app/assets/css');
-        this.bulkDirectory(templateName + '/app/views', 'app/views');
-        this.bulkDirectory(templateName + '/app/widgets', 'app/widgets');
-        this.bulkDirectory(templateName + '/app/services', 'app/services');
-        this.bulkDirectory(templateName + '/app/data', 'app/data');
+        this.mkdir(this.slugname + '/app');
+        this.copy(templateName + '/app/_app.bootstrap.js', this.slugname + '/app/app.bootstrap.js');
+        this.copy(templateName + '/app/_app.module.js', this.slugname + '/app/app.module.js');
+        this.copy(templateName + '/app/_app.routes.js', this.slugname + '/app/app.routes.js');
+        this.copy(templateName + '/app/_index.html', this.slugname + '/app/index.html');
+        this.bulkDirectory(templateName + '/app/assets/images', this.slugname + '/app/assets/images');
+        this.bulkDirectory(templateName + '/app/assets/scss', this.slugname + '/app/assets/scss');
+        this.bulkDirectory(templateName + '/app/assets/css', this.slugname + '/app/assets/css');
+        this.bulkDirectory(templateName + '/app/views', this.slugname + '/app/views');
+        this.bulkDirectory(templateName + '/app/widgets', this.slugname + '/app/widgets');
+        this.bulkDirectory(templateName + '/app/services', this.slugname + '/app/services');
+        this.bulkDirectory(templateName + '/app/data', this.slugname + '/app/data');
     },
     
     writing: function () {
-        this.copy(templateName + '/README.md', 'README.md');
+        this.copy(templateName + '/README.md', this.slugname + '/README.md');
+        this.copy(templateName + '/README.md', '/README.md');
     },
 
     test: function () {
-        this.bulkDirectory(templateName + '/app/_test', 'app/_test');
+        this.bulkDirectory(templateName + '/app/_test', this.slugname + '/app/_test');
     },
 
     install: function () {

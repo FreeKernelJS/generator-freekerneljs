@@ -1,0 +1,3 @@
+{
+    "directory": "<%= slugname %>/bower_components"
+}

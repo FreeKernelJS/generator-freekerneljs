@@ -1,17 +1,19 @@
 module.exports = function (grunt) {
-    var path = require('path'),
-        bower_dependencies = grunt.file.readJSON('./bower.json').dependencies,
+    var
+        project_folder = grunt.option('project') ? grunt.option('project') + '/' : './',
+        path = require('path'),
+        bower_dependencies = grunt.file.readJSON(project_folder + 'bower.json').dependencies,
         bower_comp = Object.keys(bower_dependencies);
 
     // Load all grunt tasks.
-    require('load-grunt-tasks')(grunt);
+    require('load-grunt-tasks')(grunt, { config: project_folder + 'package.json' });
 
     // Show elapsed time at the end.
     require('time-grunt')(grunt);
 
     // Application configuration.
     grunt.initConfig({
-        pkg: grunt.file.readJSON('./package.json'),
+        pkg: grunt.file.readJSON(project_folder + 'package.json'),
 
         banner: '/*!\n' +
             ' * <%= pkg.name %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' +
@@ -194,8 +196,8 @@ module.exports = function (grunt) {
                     var component_dependencies,
                         dependencies = [];
 
-                    if (grunt.file.exists('./bower_components/' + component + '/bower.json')) {
-                        component_dependencies = grunt.file.readJSON('./bower_components/' + component + '/bower.json').dependencies,
+                    if (grunt.file.exists(project_folder + 'bower_components/' + component + '/bower.json')) {
+                        component_dependencies = grunt.file.readJSON(project_folder + 'bower_components/' + component + '/bower.json').dependencies,
                         dependencies = component_dependencies ? Object.keys(component_dependencies) : [];
                     }
 
@@ -327,6 +329,12 @@ module.exports = function (grunt) {
             'docs': [
                 'dist/docs'
             ],
+            'workspace': [
+                '.bowerrc',
+                'bower.json',
+                'package.json',
+                'README.md'
+            ]
         },
         watch: {
             debug: {
@@ -362,9 +370,26 @@ module.exports = function (grunt) {
         }
     });
 
+    /**
+	 * @description
+	 *   Now that we have loaded the package.json and the node_modules we set the base path
+     *   for the actual execution of the tasks.
+	 * 
+	 */
+    grunt.file.setBase(project_folder);
+
     grunt.event.on('watch', function (action, filepath, target) {
         grunt.log.writeln(target + ': ' + filepath + ' has ' + action);
     });
+
+    /**
+	 * @description
+	 *   Running clean workspace task(s).
+	 * 
+	 */
+    grunt.registerTask('clean-workspace', [
+		'clean:workspace'
+    ]);
 
     /**
 	 * @description
