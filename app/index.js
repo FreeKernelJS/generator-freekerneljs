@@ -23,7 +23,7 @@ function getDirectories(srcpath) {
 var freekerneljsGenerator = yeoman.generators.Base.extend({
     constructor: function () {
         yeoman.generators.Base.apply(this, arguments);
-
+        
         this.on('end', function () {
             console.log('Running the Grunt \'default\' task now ...');
 
@@ -32,7 +32,7 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
                     console.log('Bootstrap fonts copied.');
                 })
             }
-
+            
             this.spawnCommand('grunt', ['default']).on('close', function () {
                 console.log('The Grunt task has completed.');
             })
