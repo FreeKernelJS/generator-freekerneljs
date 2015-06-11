@@ -9,6 +9,7 @@ var util = require('util'),
     updateNotifier = require('update-notifier'),
     compareVersion = require('compare-version'),
     stringLength = require('string-length'),
+    s = require('underscore.string'),
     pkg = require('../package.json'),
     templateName = 'freekerneljs-basic-app-md',
     generatorRoot = '',
@@ -227,7 +228,7 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
             }
 
             // For easier access in the templates.
-            this.slugname = this._.slugify(props.name);
+            this.slugname = s.slugify(props.name);
 
             var hasMod = function (mod) {
                 return props.modules.indexOf(mod) !== -1;
