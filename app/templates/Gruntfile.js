@@ -14,10 +14,10 @@ module.exports = function (grunt) {
         pkg: grunt.file.readJSON('./package.json'),
 
         banner: '/*!\n' +
-            ' * <%= pkg.name %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' +
-            ' * <%= pkg.homepage %>\n' +
-            ' * @license <%= pkg.license %>\n' +
-            ' * v<%= pkg.version %>\n */\n',
+            ' * <%%= pkg.name %> - <%%= grunt.template.today("yyyy-mm-dd") %>\n' +
+            ' * <%%= pkg.homepage %>\n' +
+            ' * @license <%%= pkg.license %>\n' +
+            ' * v<%%= pkg.version %>\n */\n',
 
         'string-replace': {
             'material-design-iconic-font': {
@@ -49,19 +49,19 @@ module.exports = function (grunt) {
                     replacements: [
                         {
                             pattern: 'fkjs_(name)',
-                            replacement: '<%= pkg.name %>'
+                            replacement: '<%%= pkg.name %>'
                         },
                         {
                             pattern: 'fkjs_(title)',
-                            replacement: '<%= pkg.title %>'
+                            replacement: '<%%= pkg.title %>'
                         },
                         {
                             pattern: 'fkjs_(description)',
-                            replacement: '<%= pkg.description %>'
+                            replacement: '<%%= pkg.description %>'
                         },
                         {
                             pattern: 'fkjs_(version)',
-                            replacement: '<%= pkg.version %>'
+                            replacement: '<%%= pkg.version %>'
                         }
                     ]
                 }
@@ -81,19 +81,19 @@ module.exports = function (grunt) {
                     replacements: [
                         {
                             pattern: 'fkjs_(name)',
-                            replacement: '<%= pkg.name %>'
+                            replacement: '<%%= pkg.name %>'
                         },
                         {
                             pattern: 'fkjs_(title)',
-                            replacement: '<%= pkg.title %>'
+                            replacement: '<%%= pkg.title %>'
                         },
                         {
                             pattern: 'fkjs_(description)',
-                            replacement: '<%= pkg.description %>'
+                            replacement: '<%%= pkg.description %>'
                         },
                         {
                             pattern: 'fkjs_(version)',
-                            replacement: '<%= pkg.version %>'
+                            replacement: '<%%= pkg.version %>'
                         }
                     ]
                 }
@@ -285,7 +285,7 @@ module.exports = function (grunt) {
                     },
                     dead_code: true
                 },
-                banner: '<%= banner %>'
+                banner: '<%%= banner %>'
             },
             libraries: {
                 src: 'dist/app.js',
@@ -301,7 +301,7 @@ module.exports = function (grunt) {
         processhtml: {
             options: {
                 data: {
-                    html_tag: '<html ng-app="<%= pkg.name %>">'
+                    html_tag: '<html ng-app="<%%= pkg.name %>">'
                 }
             },
             dist: {
@@ -348,7 +348,7 @@ module.exports = function (grunt) {
                 dest: 'app/docs',
                 startPage: '/api/app',
                 html5Mode: false,
-                title: '<%= pkg.title %> Docs',
+                title: '<%%= pkg.title %> Docs',
                 bestMatch: true
             },
             all: [

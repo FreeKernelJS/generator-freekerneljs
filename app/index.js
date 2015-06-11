@@ -271,7 +271,6 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
     },
 
     app: function () {
-        this.mkdir('app');
         this.copy(templateName + '/app/_app.bootstrap.js', 'app/app.bootstrap.js');
         this.copy(templateName + '/app/_app.module.js', 'app/app.module.js');
         this.copy(templateName + '/app/_app.routes.js', 'app/app.routes.js');
