@@ -185,7 +185,7 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
             type: 'input',
             name: 'description',
             message: 'Description',
-            default: 'A FreeKernelJS template application.'
+            default: 'A FreeKernelJS project'
         }, {
             type: 'input',
             name: 'version',
@@ -199,11 +199,7 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
         }, {
             type: 'input',
             name: 'repository',
-            message: 'GitHub repository'
-        }, {
-            type: 'input',
-            name: 'github_username',
-            message: 'GitHub username'
+            message: 'Repository'
         }, {
             type: 'input',
             name: 'author_name',
