@@ -172,6 +172,22 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
                 checked: false
             }]
         }, {
+            when: function (response) {
+                //if (response.template)
+
+                this.appname = 'response.template;'
+
+
+
+                    
+
+                //global.project_name = 'FreeKernel.js ' + global.project_skeleton + ' ' + global.skeleton_type + ' ' + 'project ' +
+                //    Math.floor((Math.random() * 1000000) + 1).toString();
+
+
+
+                return true
+            },
             type: 'input',
             name: 'name',
             message: 'Project name',
