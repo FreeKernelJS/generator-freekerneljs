@@ -174,7 +174,7 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
         }, {
             type: 'input',
             name: 'name',
-            message: 'Application name',
+            message: 'Project name',
             default: this.appname
         }, {
             type: 'input',
