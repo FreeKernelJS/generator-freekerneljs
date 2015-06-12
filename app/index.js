@@ -10,6 +10,7 @@ var util = require('util'),
     compareVersion = require('compare-version'),
     stringLength = require('string-length'),
     s = require('underscore.string'),
+    mkdirp = require('mkdirp'),
     pkg = require('../package.json'),
     templateName = 'freekerneljs-basic-app-md',
     generatorRoot = '',
@@ -273,7 +274,7 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
                 default:
             }
 
-            this.mkdir(this.slugname);
+            mkdirp(this.slugname);
 
             done();
         }.bind(this));
