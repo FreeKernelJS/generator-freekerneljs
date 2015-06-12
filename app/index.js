@@ -11,10 +11,13 @@ var util = require('util'),
     stringLength = require('string-length'),
     _ = require('underscore.string'),
     mkdirp = require('mkdirp'),
+    childProcess = require('child_process'),
     pkg = require('../package.json'),
     templateName = 'freekerneljs-basic-app-md',
     generatorRoot = '',
     templatePath = '';
+
+var exec = childProcess.exec;
 
 function getDirectories(srcpath) {
     return fs.readdirSync(srcpath).filter(function (file) {
@@ -27,27 +30,36 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
         yeoman.generators.Base.apply(this, arguments);
         
         this.on('end', function () {
-            console.log('Running the Grunt \'default\' task now ...');
+            console.log('Running Grunt tasks now...');
 
             if (templateName == 'freekerneljs-basic-app') {
                 var done = this.async();
-                this.spawnCommand('grunt', ['copy:bootstrap-fonts'], ['--project=pro']).on('close', function () {
-                    console.log('Bootstrap fonts copied.');
-                });
-                done();
+                exec('grunt copy:bootstrap-fonts --project=' + this.slugname, function (err) {
+                    if (err) {
+                        this.log.error('Error: Grunt "copy:bootstrap-fonts" task.');
+                        this.abort = true;
+                    }
+                    done();
+                }.bind(this));
             }
-            
-            var done = this.async();
-            this.spawnCommand('grunt', ['default'], ['--project=pro']).on('close', function () {
-                console.log('The Grunt task has completed.');
-            });
-            done();
 
-            //var done = this.async();
-            //this.spawnCommand('grunt', ['clean:workspace'], ['--project=pro']).on('close', function () {
-            //    console.log('Workspace cleaned.');
-            //});
-            //done();
+            var done = this.async();
+            exec('grunt default --project=' + this.slugname, function (err) {
+                if (err) {
+                    this.log.error('Error: Grunt "default" task.');
+                    this.abort = true;
+                }
+                done();
+            }.bind(this));
+
+            var done = this.async();
+            exec('grunt clean-workspace', function (err) {
+                if (err) {
+                    this.log.error('Error: Grunt "clean-workspace" task.');
+                    this.abort = true;
+                }
+                done();
+            }.bind(this));
         });
 
         this.appname = 'freekerneljs-project';
