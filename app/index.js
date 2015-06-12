@@ -9,7 +9,7 @@ var util = require('util'),
     updateNotifier = require('update-notifier'),
     compareVersion = require('compare-version'),
     stringLength = require('string-length'),
-    s = require('underscore.string'),
+    _ = require('underscore.string'),
     mkdirp = require('mkdirp'),
     pkg = require('../package.json'),
     templateName = 'freekerneljs-basic-app-md',
@@ -30,18 +30,24 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
             console.log('Running the Grunt \'default\' task now ...');
 
             if (templateName == 'freekerneljs-basic-app') {
-                this.spawnCommand('grunt --project=' + this.slugname, ['copy:bootstrap-fonts']).on('close', function () {
+                var done = this.async();
+                this.spawnCommand('grunt', ['copy:bootstrap-fonts'], ['--project=pro']).on('close', function () {
                     console.log('Bootstrap fonts copied.');
-                })
+                });
+                done();
             }
             
-            this.spawnCommand('grunt --project=' + this.slugname, ['default']).on('close', function () {
+            var done = this.async();
+            this.spawnCommand('grunt', ['default'], ['--project=pro']).on('close', function () {
                 console.log('The Grunt task has completed.');
             });
-            
-            this.spawnCommand('grunt', ['clean:workspace']).on('close', function () {
-                console.log('Workspace cleaned.');
-            });
+            done();
+
+            //var done = this.async();
+            //this.spawnCommand('grunt', ['clean:workspace'], ['--project=pro']).on('close', function () {
+            //    console.log('Workspace cleaned.');
+            //});
+            //done();
         });
 
         this.appname = 'freekerneljs-project';
@@ -217,7 +223,8 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
         }, {
             type: 'input',
             name: 'repository',
-            message: 'Repository'
+            message: 'Repository',
+            default: 'none'
         }, {
             type: 'input',
             name: 'author_name',
@@ -244,7 +251,7 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
             }
 
             // For easier access in the templates.
-            this.slugname = s.slugify(props.name);
+            this.slugname = _.slugify(props.name);
 
             var hasMod = function (mod) {
                 return props.modules.indexOf(mod) !== -1;
@@ -311,7 +318,7 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
     
     writing: function () {
         this.copy(templateName + '/README.md', this.slugname + '/README.md');
-        this.copy(templateName + '/README.md', '/README.md');
+        this.copy(templateName + '/README.md', 'README.md');
     },
 
     test: function () {

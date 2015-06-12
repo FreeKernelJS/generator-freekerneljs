@@ -330,6 +330,7 @@ module.exports = function (grunt) {
                 'dist/docs'
             ],
             'workspace': [
+                '.gitignore',
                 '.bowerrc',
                 'bower.json',
                 'package.json',
