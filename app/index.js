@@ -59,6 +59,7 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
                     this.abort = true;
                 }
                 done();
+                console.log('Grunt tasks completed.');
             }.bind(this));
         });
     },
