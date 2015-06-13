@@ -189,6 +189,9 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
                 //var name = this.appname || path.basename(process.cwd());
                 //return name.replace(/\s+/g, '-');
                 return response.template + '-' + Math.floor((Math.random() * 1000000) + 1).toString();
+            },
+            validate: function (str) {
+                return fs.existsSync(str) ? 'Project name already exists!' : true;
             }
         }, {
             type: 'input',
