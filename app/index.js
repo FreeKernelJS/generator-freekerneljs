@@ -84,21 +84,21 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
                         return Array(count + 1).join(str);
                     };
 
-                    var line1 = ' Update available: ' + chalk.green.bold(update.latest) + chalk.dim(' (current: ' + update.current + ')') + ' ',
-                        line2 = ' Run ' + chalk.magenta('npm update -g ' + pkg.name) + ' to update. ',
-                        contentWidth = Math.max(string_length(line1), string_length(line2)),
-                        line1rest = contentWidth - string_length(line1),
-                        line2rest = contentWidth - string_length(line2),
-                        top = chalk.yellow('┌' + fill('─', contentWidth) + '┐'),
-                        bottom = chalk.yellow('└' + fill('─', contentWidth) + '┘'),
+                    var line_1 = ' Update available: ' + chalk.green.bold(update.latest) + chalk.dim(' (current: ' + update.current + ')') + ' ',
+                        line_2 = ' Run ' + chalk.magenta('npm update -g ' + pkg.name) + ' to update. ',
+                        content_width = Math.max(string_length(line_1), string_length(line_2)),
+                        line_1_rest = content_width - string_length(line_1),
+                        line_2_rest = content_width - string_length(line_2),
+                        top = chalk.yellow('┌' + fill('─', content_width) + '┐'),
+                        bottom = chalk.yellow('└' + fill('─', content_width) + '┘'),
                         side = chalk.yellow('│'),
-                        updateMessage = '\n\n' + top + '\n' + side + line1 + fill(' ', line1rest) + side + '\n' + side + line2 + fill(' ', line2rest) + side + '\n' + bottom + '\n';
+                        update_message = '\n\n' + top + '\n' + side + line_1 + fill(' ', line_1_rest) + side + '\n' + side + line_2 + fill(' ', line_2_rest) + side + '\n' + bottom + '\n';
 
-                    this.log(updateMessage);  
+                    this.log(update_message);
                 }
 
                 done();
-            }
+            }.bind(this)
         })
     },
 
