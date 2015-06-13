@@ -115,10 +115,7 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
 
         var prompts = [{
             when: function (response) {
-                if (getDirectories(template_path).length > 1)
-                    return true
-
-                return false
+                return getDirectories(template_path).length > 1;
             },
             type: 'list',
             name: 'template',
@@ -283,8 +280,10 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
             done();
         }.bind(this));
     },
-
+    
     configuration: function () {
+        this.conflicter.force = true;
+
         // Workspace
         this.template(template_name + '/_package.json', 'package.json');
         this.template(template_name + '/_bower.json', 'bower.json');
@@ -300,6 +299,8 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
     },
 
     app: function () {
+        this.conflicter.force = true;
+
         this.copy(template_name + '/app/_app.bootstrap.js', this.slugname + '/app/app.bootstrap.js');
         this.copy(template_name + '/app/_app.module.js', this.slugname + '/app/app.module.js');
         this.copy(template_name + '/app/_app.routes.js', this.slugname + '/app/app.routes.js');
@@ -314,11 +315,15 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
     },
     
     writing: function () {
+        this.conflicter.force = true;
+
         this.copy(template_name + '/README.md', this.slugname + '/README.md');
         this.copy(template_name + '/README.md', 'README.md');
     },
 
     test: function () {
+        this.conflicter.force = true;
+
         this.bulkDirectory(template_name + '/app/_test', this.slugname + '/app/_test');
     },
 
