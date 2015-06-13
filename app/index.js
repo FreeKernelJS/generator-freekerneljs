@@ -191,7 +191,7 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
                 return response.template + '-' + Math.floor((Math.random() * 1000000) + 1).toString();
             },
             validate: function (str) {
-                return fs.existsSync(str) ? 'Project name already exists!' : true;
+                return fs.existsSync(str) ? chalk.red('ERROR: ') + 'Project name already exists.' : true;
             }
         }, {
             type: 'input',
