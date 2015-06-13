@@ -5,19 +5,20 @@ var util = require('util'),
     path = require('path'),
     chalk = require('chalk'),
     yeoman = require('yeoman-generator'),
-    pkgName = require('pkg-name'),
-    updateNotifier = require('update-notifier'),
-    compareVersion = require('compare-version'),
-    stringLength = require('string-length'),
+    pkg_name = require('pkg-name'),
+    update_notifier = require('update-notifier'),
+    compare_version = require('compare-version'),
+    string_length = require('string-length'),
     _ = require('underscore.string'),
     mkdirp = require('mkdirp'),
-    childProcess = require('child_process'),
+    child_process = require('child_process'),
     pkg = require('../package.json'),
-    templateName = 'freekerneljs-basic-app-md',
-    generatorRoot = '',
-    templatePath = '';
+    template_name = 'freekerneljs-basic-app-md',
+    generator_root = '',
+    template_path = '',
+    task_error = false;
 
-var exec = childProcess.exec;
+var exec = child_process.exec;
 
 function getDirectories(srcpath) {
     return fs.readdirSync(srcpath).filter(function (file) {
@@ -30,13 +31,14 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
         yeoman.generators.Base.apply(this, arguments);
         
         this.on('end', function () {
-            console.log('Running Grunt tasks now...');
+            this.log('Running ' + chalk.yellow('Grunt') + ' tasks now...');
 
-            if (templateName == 'freekerneljs-basic-app') {
+            if (template_name == 'freekerneljs-basic-app') {
                 var done = this.async();
                 exec('grunt copy:bootstrap-fonts --project=' + this.slugname, function (err) {
                     if (err) {
-                        this.log.error('Error: Grunt "copy:bootstrap-fonts" task.');
+                        task_error = true;
+                        this.log(chalk.red('ERROR: ') + 'Grunt "copy:bootstrap-fonts" task.');
                         this.abort = true;
                     }
                     done();
@@ -46,7 +48,8 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
             var done = this.async();
             exec('grunt default --project=' + this.slugname, function (err) {
                 if (err) {
-                    this.log.error('Error: Grunt "default" task.');
+                    task_error = true;
+                    this.log(chalk.red('ERROR: ') + 'Grunt "default" task.');
                     this.abort = true;
                 }
                 done();
@@ -55,42 +58,43 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
             var done = this.async();
             exec('grunt clean-workspace', function (err) {
                 if (err) {
-                    this.log.error('Error: Grunt "clean-workspace" task.');
+                    task_error = true;
+                    this.log(chalk.red('ERROR: ') + 'Grunt "clean-workspace" task.');
                     this.abort = true;
                 }
                 done();
-                console.log('Grunt tasks completed.');
+                task_error ? '' : this.log(chalk.green('Grunt tasks completed successfully.'));
             }.bind(this));
         });
     },
 
     initializing: function () {
-        generatorRoot = this.templatePath('../../');
-        templatePath = this.templatePath();
+        generator_root = this.templatePath('../../');
+        template_path = this.templatePath();
 
         var done = this.async();
-        updateNotifier({
+        update_notifier({
             pkg: pkg,
             callback: function (err, update) {
                 if (err) {
-                    console.log(err);
+                    this.log(err);
                 }
-                else if (compareVersion(update.latest, update.current) == 1) {
+                else if (compare_version(update.latest, update.current) == 1) {
                     var fill = function (str, count) {
                         return Array(count + 1).join(str);
                     };
 
                     var line1 = ' Update available: ' + chalk.green.bold(update.latest) + chalk.dim(' (current: ' + update.current + ')') + ' ',
                         line2 = ' Run ' + chalk.magenta('npm update -g ' + pkg.name) + ' to update. ',
-                        contentWidth = Math.max(stringLength(line1), stringLength(line2)),
-                        line1rest = contentWidth - stringLength(line1),
-                        line2rest = contentWidth - stringLength(line2),
+                        contentWidth = Math.max(string_length(line1), string_length(line2)),
+                        line1rest = contentWidth - string_length(line1),
+                        line2rest = contentWidth - string_length(line2),
                         top = chalk.yellow('┌' + fill('─', contentWidth) + '┐'),
                         bottom = chalk.yellow('└' + fill('─', contentWidth) + '┘'),
                         side = chalk.yellow('│'),
                         updateMessage = '\n\n' + top + '\n' + side + line1 + fill(' ', line1rest) + side + '\n' + side + line2 + fill(' ', line2rest) + side + '\n' + bottom + '\n';
 
-                    console.log(updateMessage);  
+                    this.log(updateMessage);  
                 }
 
                 done();
@@ -107,11 +111,11 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
           '+-+-+-+-+-+-+-+-+-+-+-+-+ +-+-+-+-+-+-+-+-+-+\n' +
           '\n'
 
-        console.log(welcomeMsg);
+        this.log(welcomeMsg);
 
         var prompts = [{
             when: function (response) {
-                if (getDirectories(templatePath).length > 1)
+                if (getDirectories(template_path).length > 1)
                     return true
 
                 return false
@@ -119,7 +123,7 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
             type: 'list',
             name: 'template',
             message: 'Select a template',
-            choices: getDirectories(templatePath),
+            choices: getDirectories(template_path),
             default: 'freekerneljs-basic-app-md'
         }, {
             when: function (response) {
@@ -240,7 +244,7 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
             this.props = props;
             
             if (props.template) {
-                templateName = props.template;
+                template_name = props.template;
             }
 
             // For easier access in the templates.
@@ -263,7 +267,7 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
             this.sanitizeModule = hasMod('sanitizeModule');
             this.touchModule = hasMod('touchModule');
 
-            switch (templateName) {
+            switch (template_name) {
                 case 'freekerneljs-basic-app':
                     this.bootstrapModule = true;
                     break;
@@ -282,40 +286,40 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
 
     configuration: function () {
         // Workspace
-        this.template(templateName + '/_package.json', 'package.json');
-        this.template(templateName + '/_bower.json', 'bower.json');
+        this.template(template_name + '/_package.json', 'package.json');
+        this.template(template_name + '/_bower.json', 'bower.json');
         this.template('_bowerrc', '.bowerrc');
         this.copy('Gruntfile.js', 'Gruntfile.js');
         
         // Project folder
-        this.template(templateName + '/_package.json', this.slugname + '/package.json');
-        this.template(templateName + '/_bower.json', this.slugname + '/bower.json');
+        this.template(template_name + '/_package.json', this.slugname + '/package.json');
+        this.template(template_name + '/_bower.json', this.slugname + '/bower.json');
         this.copy('Gruntfile.js', this.slugname + '/Gruntfile.js');
-        this.copy(templateName + '/gitignore', this.slugname + '/.gitignore');
-        this.copy(templateName + '/bowerrc', this.slugname + '/.bowerrc');
+        this.copy(template_name + '/gitignore', this.slugname + '/.gitignore');
+        this.copy(template_name + '/bowerrc', this.slugname + '/.bowerrc');
     },
 
     app: function () {
-        this.copy(templateName + '/app/_app.bootstrap.js', this.slugname + '/app/app.bootstrap.js');
-        this.copy(templateName + '/app/_app.module.js', this.slugname + '/app/app.module.js');
-        this.copy(templateName + '/app/_app.routes.js', this.slugname + '/app/app.routes.js');
-        this.copy(templateName + '/app/_index.html', this.slugname + '/app/index.html');
-        this.bulkDirectory(templateName + '/app/assets/images', this.slugname + '/app/assets/images');
-        this.bulkDirectory(templateName + '/app/assets/scss', this.slugname + '/app/assets/scss');
-        this.bulkDirectory(templateName + '/app/assets/css', this.slugname + '/app/assets/css');
-        this.bulkDirectory(templateName + '/app/views', this.slugname + '/app/views');
-        this.bulkDirectory(templateName + '/app/widgets', this.slugname + '/app/widgets');
-        this.bulkDirectory(templateName + '/app/services', this.slugname + '/app/services');
-        this.bulkDirectory(templateName + '/app/data', this.slugname + '/app/data');
+        this.copy(template_name + '/app/_app.bootstrap.js', this.slugname + '/app/app.bootstrap.js');
+        this.copy(template_name + '/app/_app.module.js', this.slugname + '/app/app.module.js');
+        this.copy(template_name + '/app/_app.routes.js', this.slugname + '/app/app.routes.js');
+        this.copy(template_name + '/app/_index.html', this.slugname + '/app/index.html');
+        this.bulkDirectory(template_name + '/app/assets/images', this.slugname + '/app/assets/images');
+        this.bulkDirectory(template_name + '/app/assets/scss', this.slugname + '/app/assets/scss');
+        this.bulkDirectory(template_name + '/app/assets/css', this.slugname + '/app/assets/css');
+        this.bulkDirectory(template_name + '/app/views', this.slugname + '/app/views');
+        this.bulkDirectory(template_name + '/app/widgets', this.slugname + '/app/widgets');
+        this.bulkDirectory(template_name + '/app/services', this.slugname + '/app/services');
+        this.bulkDirectory(template_name + '/app/data', this.slugname + '/app/data');
     },
     
     writing: function () {
-        this.copy(templateName + '/README.md', this.slugname + '/README.md');
-        this.copy(templateName + '/README.md', 'README.md');
+        this.copy(template_name + '/README.md', this.slugname + '/README.md');
+        this.copy(template_name + '/README.md', 'README.md');
     },
 
     test: function () {
-        this.bulkDirectory(templateName + '/app/_test', this.slugname + '/app/_test');
+        this.bulkDirectory(template_name + '/app/_test', this.slugname + '/app/_test');
     },
 
     install: function () {
