@@ -61,11 +61,6 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
                 done();
             }.bind(this));
         });
-
-        this.appname = 'freekerneljs-project';
-
-        //this.appname = this.appname || path.basename(process.cwd());
-        //this.appname = this.appname.replace(/\s+/g, '-');
     },
 
     initializing: function () {
@@ -127,10 +122,7 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
             default: 'freekerneljs-basic-app-md'
         }, {
             when: function (response) {
-                if (response.template == 'freekerneljs-basic-app')
-                    return true
-
-                return false
+                return response.template === 'freekerneljs-basic-app';
             },
             type: 'checkbox',
             name: 'modules',
@@ -158,10 +150,7 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
             }]
         }, {
             when: function (response) {
-                if (response.template == 'freekerneljs-basic-app-md')
-                    return true
-
-                return false
+                return response.template === 'freekerneljs-basic-app-md';
             },
             type: 'checkbox',
             name: 'modules',
@@ -192,26 +181,14 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
                 checked: false
             }]
         }, {
-            when: function (response) {
-                //if (response.template)
-
-                this.appname = 'response.template;'
-
-
-
-                    
-
-                //global.project_name = 'FreeKernel.js ' + global.project_skeleton + ' ' + global.skeleton_type + ' ' + 'project ' +
-                //    Math.floor((Math.random() * 1000000) + 1).toString();
-
-
-
-                return true
-            },
             type: 'input',
             name: 'name',
             message: 'Project name',
-            default: this.appname
+            default: function (response) {
+                //var name = this.appname || path.basename(process.cwd());
+                //return name.replace(/\s+/g, '-');
+                return response.template + '-' + Math.floor((Math.random() * 1000000) + 1).toString();
+            }
         }, {
             type: 'input',
             name: 'title',
@@ -257,7 +234,7 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
 
         this.prompt(prompts, function (props) {
             this.props = props;
-
+            
             if (props.template) {
                 templateName = props.template;
             }
