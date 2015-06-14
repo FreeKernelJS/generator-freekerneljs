@@ -283,7 +283,6 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
     
     configuration: function () {
         // Workspace
-        if (fs.existsSync('package.json')) fs.unlinkSync('package.json');
         this.template(template_name + '/_package.json', 'package.json');
         this.template(template_name + '/_bower.json', 'bower.json');
         this.template('_bowerrc', '.bowerrc');
