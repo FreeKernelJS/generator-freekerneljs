@@ -333,7 +333,6 @@ module.exports = function (grunt) {
                 '.gitignore',
                 '.bowerrc',
                 'bower.json',
-                'package.json',
                 'README.md'
             ]
         },
