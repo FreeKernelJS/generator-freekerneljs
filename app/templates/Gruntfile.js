@@ -328,13 +328,6 @@ module.exports = function (grunt) {
             ],
             'docs': [
                 'dist/docs'
-            ],
-            'workspace': [
-                '.gitignore',
-                'package.json',
-                '.bowerrc',
-                'bower.json',
-                'README.md'
             ]
         },
         watch: {
@@ -382,15 +375,6 @@ module.exports = function (grunt) {
     grunt.event.on('watch', function (action, filepath, target) {
         grunt.log.writeln(target + ': ' + filepath + ' has ' + action);
     });
-
-    /**
-	 * @description
-	 *   Running clean workspace task(s).
-	 * 
-	 */
-    grunt.registerTask('clean-workspace', [
-		'clean:workspace'
-    ]);
 
     /**
 	 * @description

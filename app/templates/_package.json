@@ -4,6 +4,7 @@
   "description": "<%= props.description %>",
   "version": "<%= props.version %>",
   "license": "<%= props.license %>",
+  "private": true,
   "repository": "<%= props.repository %>",
   "author": {
     "name": "<%= props.author_name %>",
