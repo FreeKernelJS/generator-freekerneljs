@@ -1,6 +1,4 @@
-# generator-freekerneljs
-
-### Contents
+#Contents
 1. [About FreeKernelJS](#about)
 2. [When Should I Use FreeKernelJS?](#use)
 3. [Templates](#templates)
@@ -54,4 +52,4 @@ For general questions and discussions, or if you would like to contribute to thi
 This project is under the [MIT License](https://github.com/FreeKernelJS/generator-freekerneljs/blob/master/LICENSE).
 
 # <a name="releases"></a> Releases History
-[Latest releases](https://github.com/FreeKernelJS/generator-freekerneljs/releases) of FreeKernelJS.
+[Latest releases](https://github.com/FreeKernelJS/generator-freekerneljs/releases) of FreeKernelJS
