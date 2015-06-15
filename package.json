@@ -1,7 +1,7 @@
 {
   "name": "generator-freekerneljs",
   "version": "0.6.0",
-  "updateDependencies": true,
+  "updateDependencies": false,
   "description": "Generates apps from templates, provides a set of tools for development.",
   "license": "MIT",
   "main": "",
