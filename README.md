@@ -23,6 +23,10 @@ FreeKernelJS aims to provide developers with a set of tools to generate a Web ap
 Supported platforms: Windows, iOS, Linux.  
 Supported Browsers: designed to support the current versions of Chrome, Firefox, and Internet Explorer 10+.
 
+> **Important Note**:  
+As of version 0.6.0 FreeKernelJS uses a Workspace (rather than a single project folder) which is specified during the generation process, and provides different folders structure than what was provided so far.  
+For further information please refer to the [Generate and Manage New Projects](https://github.com/FreeKernelJS/generator-freekerneljs/wiki/generate-app) page. 
+
 # <a name="use"></a> When Should I Use FreeKernelJS?
 - [x] You are looking to learn the basics.
 - [x] You need a tool to kick start your Web project.
@@ -37,7 +41,7 @@ A list of available templates is specified in this page: **[Templates](https://g
 
 # <a name="getting-started"></a> Getting Started
 1. **[Installation](https://github.com/FreeKernelJS/generator-freekerneljs/wiki/installation)**: first, you will need to install the environment with only 4 easy steps!
-2. **[Generate A New App](https://github.com/FreeKernelJS/generator-freekerneljs/wiki/generate-app)**: then you can learn how to generate a new app, and how to configure it. 
+2. **[Generate and Manage New Projects](https://github.com/FreeKernelJS/generator-freekerneljs/wiki/generate-app)**: then you can learn how to generate a new Project, how to configure and manage it. 
 
 # <a name="development"></a> Development Tools
 FreeKernelJS comes with a set of tasks, powered by Grunt, which can be used during development to perform routine operations such as: unit testing, distribution, Sass compilation, etc.  

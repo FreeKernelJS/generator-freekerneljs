@@ -5,15 +5,20 @@ var util = require('util'),
     path = require('path'),
     chalk = require('chalk'),
     yeoman = require('yeoman-generator'),
-    pkgName = require('pkg-name'),
-    updateNotifier = require('update-notifier'),
-    compareVersion = require('compare-version'),
-    stringLength = require('string-length'),
-    s = require('underscore.string'),
+    pkg_name = require('pkg-name'),
+    update_notifier = require('update-notifier'),
+    compare_version = require('compare-version'),
+    string_length = require('string-length'),
+    _ = require('underscore.string'),
+    mkdirp = require('mkdirp'),
+    child_process = require('child_process'),
     pkg = require('../package.json'),
-    templateName = 'freekerneljs-basic-app-md',
-    generatorRoot = '',
-    templatePath = '';
+    template_name = 'freekerneljs-basic-app-md',
+    generator_root = '',
+    template_path = '',
+    task_error = false;
+
+var exec = child_process.exec;
 
 function getDirectories(srcpath) {
     return fs.readdirSync(srcpath).filter(function (file) {
@@ -24,60 +29,92 @@ function getDirectories(srcpath) {
 var freekerneljsGenerator = yeoman.generators.Base.extend({
     constructor: function () {
         yeoman.generators.Base.apply(this, arguments);
-        
+        this.option('update');
+
         this.on('end', function () {
-            console.log('Running the Grunt \'default\' task now ...');
+            if (!this.options.update) {
+                this.log('Running ' + chalk.yellow('Grunt') + ' tasks now...');
 
-            if (templateName == 'freekerneljs-basic-app') {
-                this.spawnCommand('grunt', ['copy:bootstrap-fonts']).on('close', function () {
-                    console.log('Bootstrap fonts copied.');
-                })
+                if (template_name == 'freekerneljs-basic-app') {
+                    var done = this.async();
+                    exec('grunt copy:bootstrap-fonts --project=' + this.slugname, function (err) {
+                        if (err) {
+                            task_error = true;
+                            this.log(chalk.red('ERROR: ') + 'Grunt "copy:bootstrap-fonts" task.');
+                            this.log(err);
+                            this.abort = true;
+                        }
+                        done();
+                    }.bind(this));
+                }
+
+                var done = this.async();
+                exec('grunt default --project=' + this.slugname, function (err) {
+                    if (err) {
+                        task_error = true;
+                        this.log(chalk.red('ERROR: ') + 'Grunt "default" task.');
+                        this.log(err);
+                        this.abort = true;
+                    }
+                    done();
+                    task_error ? '' : this.log(chalk.green('Grunt tasks completed successfully.'));
+                }.bind(this));
             }
-            
-            this.spawnCommand('grunt', ['default']).on('close', function () {
-                console.log('The Grunt task has completed.');
-            })
-            
+
+            if (fs.existsSync('.bowerrc')) fs.unlinkSync('.bowerrc');
+            if (fs.existsSync('bower.json')) fs.unlinkSync('bower.json');
+            if (fs.existsSync('package.json')) fs.unlinkSync('package.json');
         });
-
-        this.appname = 'freekerneljs-project';
-
-        //this.appname = this.appname || path.basename(process.cwd());
-        //this.appname = this.appname.replace(/\s+/g, '-');
     },
 
     initializing: function () {
-        generatorRoot = this.templatePath('../../');
-        templatePath = this.templatePath();
+        generator_root = this.templatePath('../../');
+        template_path = this.templatePath();
 
         var done = this.async();
-        updateNotifier({
+        update_notifier({
             pkg: pkg,
             callback: function (err, update) {
+                var fill = function (str, count) {
+                    return Array(count + 1).join(str);
+                };
+
                 if (err) {
-                    console.log(err);
+                    this.log(err);
                 }
-                else if (compareVersion(update.latest, update.current) == 1) {
-                    var fill = function (str, count) {
-                        return Array(count + 1).join(str);
-                    };
-
-                    var line1 = ' Update available: ' + chalk.green.bold(update.latest) + chalk.dim(' (current: ' + update.current + ')') + ' ',
-                        line2 = ' Run ' + chalk.magenta('npm update -g ' + pkg.name) + ' to update. ',
-                        contentWidth = Math.max(stringLength(line1), stringLength(line2)),
-                        line1rest = contentWidth - stringLength(line1),
-                        line2rest = contentWidth - stringLength(line2),
-                        top = chalk.yellow('┌' + fill('─', contentWidth) + '┐'),
-                        bottom = chalk.yellow('└' + fill('─', contentWidth) + '┘'),
+                else if (compare_version(update.latest, update.current) == 1) {
+                    var line_1 = ' Update available: ' + chalk.green.bold(update.latest) + chalk.dim(' (current: ' + update.current + ')') + ' ',
+                        line_2 = ' Run ' + chalk.magenta('npm update -g ' + pkg.name) + ' to update. ',
+                        content_width = Math.max(string_length(line_1), string_length(line_2)),
+                        line_1_rest = content_width - string_length(line_1),
+                        line_2_rest = content_width - string_length(line_2),
+                        top = chalk.yellow('┌' + fill('─', content_width) + '┐'),
+                        bottom = chalk.yellow('└' + fill('─', content_width) + '┘'),
                         side = chalk.yellow('│'),
-                        updateMessage = '\n\n' + top + '\n' + side + line1 + fill(' ', line1rest) + side + '\n' + side + line2 + fill(' ', line2rest) + side + '\n' + bottom + '\n';
+                        update_message = '\n\n' + top + '\n' + side + line_1 + fill(' ', line_1_rest) + side + '\n' + side + line_2 + fill(' ', line_2_rest) + side + '\n' + bottom + '\n';
 
-                    console.log(updateMessage);  
+                    this.log(update_message);
+                }
+
+                if (pkg.updateDependencies) {
+                    var line_1 = ' New updates are available for download.  ',
+                        line_2 = ' Run ' + chalk.magenta('yo freekerneljs --update') + ' to update.  ',
+                        line_3 = ' Use this command from your ' + chalk.red('Workspace') + ' folder.  ',
+                        content_width = Math.max(string_length(line_1), string_length(line_2), string_length(line_3)),
+                        line_1_rest = content_width - string_length(line_1),
+                        line_2_rest = content_width - string_length(line_2),
+                        line_3_rest = content_width - string_length(line_3),
+                        top = chalk.yellow('┌' + fill('─', content_width) + '┐'),
+                        bottom = chalk.yellow('└' + fill('─', content_width) + '┘'),
+                        side = chalk.yellow('│'),
+                        update_message = '\n' + top + '\n' + side + line_1 + fill(' ', line_1_rest) + side + '\n' + side + line_2 + fill(' ', line_2_rest) + side + '\n' + side + line_3 + fill(' ', line_3_rest) + side + '\n' + bottom + '\n';
+
+                    this.log(update_message);
                 }
 
                 done();
-            }
-        })
+            }.bind(this)
+        });
     },
 
     prompting: function () {
@@ -89,213 +126,272 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
           '+-+-+-+-+-+-+-+-+-+-+-+-+ +-+-+-+-+-+-+-+-+-+\n' +
           '\n'
 
-        console.log(welcomeMsg);
+        this.log(welcomeMsg);
 
-        var prompts = [{
-            when: function (response) {
-                if (getDirectories(templatePath).length > 1)
-                    return true
-
-                return false
-            },
-            type: 'list',
-            name: 'template',
-            message: 'Select a template',
-            choices: getDirectories(templatePath),
-            default: 'freekerneljs-basic-app-md'
-        }, {
-            when: function (response) {
-                if (response.template == 'freekerneljs-basic-app')
-                    return true
-
-                return false
-            },
-            type: 'checkbox',
-            name: 'modules',
-            message: 'Which packages would you like to include?',
-            choices: [{
-                value: 'cookiesModule',
-                name: 'angular-cookies',
-                checked: false
+        this.slugname = '';
+        if (!this.options.update) {
+            var prompts = [{
+                when: function (response) {
+                    return getDirectories(template_path).length > 1;
+                },
+                type: 'list',
+                name: 'template',
+                message: 'Select a template',
+                choices: getDirectories(template_path),
+                default: 'freekerneljs-basic-app-md'
             }, {
-                value: 'resourceModule',
-                name: 'angular-resource',
-                checked: false
+                when: function (response) {
+                    return response.template === 'freekerneljs-basic-app';
+                },
+                type: 'checkbox',
+                name: 'modules',
+                message: 'Which packages would you like to include?',
+                choices: [{
+                    value: 'cookiesModule',
+                    name: 'angular-cookies',
+                    checked: false
+                }, {
+                    value: 'resourceModule',
+                    name: 'angular-resource',
+                    checked: false
+                }, {
+                    value: 'messagesModule',
+                    name: 'angular-messages',
+                    checked: false
+                }, {
+                    value: 'sanitizeModule',
+                    name: 'angular-sanitize',
+                    checked: false
+                }, {
+                    value: 'touchModule',
+                    name: 'angular-touch',
+                    checked: false
+                }]
             }, {
-                value: 'messagesModule',
-                name: 'angular-messages',
-                checked: false
+                when: function (response) {
+                    return response.template === 'freekerneljs-basic-app-md';
+                },
+                type: 'checkbox',
+                name: 'modules',
+                message: 'Which packages would you like to include?',
+                choices: [{
+                    value: 'cookiesModule',
+                    name: 'angular-cookies',
+                    checked: false
+                }, {
+                    value: 'resourceModule',
+                    name: 'angular-resource',
+                    checked: false
+                }, {
+                    value: 'messagesModule',
+                    name: 'angular-messages',
+                    checked: false
+                }, {
+                    value: 'sanitizeModule',
+                    name: 'angular-sanitize',
+                    checked: false
+                }, {
+                    value: 'touchModule',
+                    name: 'angular-touch',
+                    checked: false
+                }, {
+                    value: 'iconicFont',
+                    name: 'material-design-iconic-font',
+                    checked: false
+                }]
             }, {
-                value: 'sanitizeModule',
-                name: 'angular-sanitize',
-                checked: false
+                type: 'input',
+                name: 'name',
+                message: 'Project name',
+                default: function (response) {
+                    //var name = this.appname || path.basename(process.cwd());
+                    //return name.replace(/\s+/g, '-');
+                    return response.template + '-' + Math.floor((Math.random() * 1000000) + 1).toString();
+                },
+                validate: function (str) {
+                    return fs.existsSync(str) ? chalk.red('ERROR: ') + 'Project name already exists.' : true;
+                }
             }, {
-                value: 'touchModule',
-                name: 'angular-touch',
-                checked: false
-            }]
-        }, {
-            when: function (response) {
-                if (response.template == 'freekerneljs-basic-app-md')
-                    return true
-
-                return false
-            },
-            type: 'checkbox',
-            name: 'modules',
-            message: 'Which packages would you like to include?',
-            choices: [{
-                value: 'cookiesModule',
-                name: 'angular-cookies',
-                checked: false
+                type: 'input',
+                name: 'title',
+                message: 'Title',
+                default: 'FreeKernelJS App'
             }, {
-                value: 'resourceModule',
-                name: 'angular-resource',
-                checked: false
+                type: 'input',
+                name: 'description',
+                message: 'Description',
+                default: 'A FreeKernelJS project'
             }, {
-                value: 'messagesModule',
-                name: 'angular-messages',
-                checked: false
+                type: 'input',
+                name: 'version',
+                message: 'Version',
+                default: '1.0.0'
             }, {
-                value: 'sanitizeModule',
-                name: 'angular-sanitize',
-                checked: false
+                type: 'input',
+                name: 'license',
+                message: 'License',
+                default: 'MIT'
             }, {
-                value: 'touchModule',
-                name: 'angular-touch',
-                checked: false
+                type: 'input',
+                name: 'repository',
+                message: 'Repository',
+                default: 'none'
             }, {
-                value: 'iconicFont',
-                name: 'material-design-iconic-font',
-                checked: false
-            }]
-        }, {
-            type: 'input',
-            name: 'name',
-            message: 'Application name',
-            default: this.appname
-        }, {
-            type: 'input',
-            name: 'title',
-            message: 'Title',
-            default: 'FreeKernelJS App'
-        }, {
-            type: 'input',
-            name: 'description',
-            message: 'Description',
-            default: 'A FreeKernelJS template application.'
-        }, {
-            type: 'input',
-            name: 'version',
-            message: 'Version',
-            default: '1.0.0'
-        }, {
-            type: 'input',
-            name: 'license',
-            message: 'License',
-            default: 'MIT'
-        }, {
-            type: 'input',
-            name: 'repository',
-            message: 'GitHub repository'
-        }, {
-            type: 'input',
-            name: 'github_username',
-            message: 'GitHub username'
-        }, {
-            type: 'input',
-            name: 'author_name',
-            message: 'Author name'
-        }, {
-            type: 'input',
-            name: 'author_email',
-            message: 'Author email'
-        }, {
-            type: 'input',
-            name: 'author_url',
-            message: 'Author url'
-        }, {
-            type: 'input',
-            name: 'homepage',
-            message: 'Home page'
-        }];
+                type: 'input',
+                name: 'author_name',
+                message: 'Author name'
+            }, {
+                type: 'input',
+                name: 'author_email',
+                message: 'Author email'
+            }, {
+                type: 'input',
+                name: 'author_url',
+                message: 'Author url'
+            }, {
+                type: 'input',
+                name: 'homepage',
+                message: 'Home page'
+            }];
 
-        this.prompt(prompts, function (props) {
-            this.props = props;
+            this.prompt(prompts, function (props) {
+                this.props = props;
 
-            if (props.template) {
-                templateName = props.template;
-            }
+                if (props.template) {
+                    template_name = props.template;
+                }
 
-            // For easier access in the templates.
-            this.slugname = s.slugify(props.name);
+                // For easier access in the templates.
+                this.slugname = _.slugify(props.name);
 
-            var hasMod = function (mod) {
-                return props.modules.indexOf(mod) !== -1;
-            };
+                var hasMod = function (mod) {
+                    return props.modules.indexOf(mod) !== -1;
+                };
 
-            // Common modules.
-            this.angularModule = true;
-            this.mocksModule = true;
-            this.routeModule = true;
-            this.scriptjsModule = true;
-            this.angularTranslateModule = true;
-            this.angularTranslateLoaderStaticFilesModule = true;
-            this.cookiesModule = hasMod('cookiesModule');
-            this.resourceModule = hasMod('resourceModule');
-            this.messagesModule = hasMod('messagesModule');
-            this.sanitizeModule = hasMod('sanitizeModule');
-            this.touchModule = hasMod('touchModule');
+                // Common modules.
+                this.angularModule = true;
+                this.mocksModule = true;
+                this.routeModule = true;
+                this.scriptjsModule = true;
+                this.angularTranslateModule = true;
+                this.angularTranslateLoaderStaticFilesModule = true;
+                this.cookiesModule = hasMod('cookiesModule');
+                this.resourceModule = hasMod('resourceModule');
+                this.messagesModule = hasMod('messagesModule');
+                this.sanitizeModule = hasMod('sanitizeModule');
+                this.touchModule = hasMod('touchModule');
 
-            switch (templateName) {
-                case 'freekerneljs-basic-app':
-                    this.bootstrapModule = true;
-                    break;
-                case 'freekerneljs-basic-app-md':
-                    this.materialModule = true;
-                    this.iconicFont = hasMod('iconicFont');
-                    break;
-                default:
-            }
+                switch (template_name) {
+                    case 'freekerneljs-basic-app':
+                        this.bootstrapModule = true;
+                        break;
+                    case 'freekerneljs-basic-app-md':
+                        this.materialModule = true;
+                        this.iconicFont = hasMod('iconicFont');
+                        break;
+                    default:
+                }
 
+                mkdirp(this.slugname);
+
+                done();
+            }.bind(this));
+        }
+        else {
             done();
-        }.bind(this));
+        }
     },
 
+    update: function () {
+        if (this.options.update) {
+            this.log('\n' + chalk.bgWhite(chalk.magenta('Updating dependencies. This may take several minutes, please wait...')) + '\n');
+            this.props = [];
+            if (fs.existsSync('package.json')) fs.unlinkSync('package.json');
+            this.copy('_package.json', 'package.json');
+            this.npmInstall(null, {
+                skipInstall: this.options['skip-install'],
+            });
+
+            var file = path.join(__dirname, '../package.json');
+            fs.readFile(file, 'utf8', function (err, data) {
+                if (err) {
+                    this.log(chalk.red('ERROR: ') + err);
+                    return;
+                }
+
+                data = JSON.parse(data);
+                data.updateDependencies = false;
+                fs.writeFile(file, JSON.stringify(data, null, 2), 'utf8', function (err, data) {
+                    if (err) {
+                        this.log(chalk.red('ERROR: ') + err);
+                        return;
+                    }
+                });
+            });
+        }
+    },
+    
     configuration: function () {
-        this.copy(templateName + '/gitignore', '.gitignore');
-        this.copy(templateName + '/bowerrc', '.bowerrc');
-        this.copy('Gruntfile.js', 'Gruntfile.js');
-        this.template('_package.json', 'package.json');
-        this.template(templateName + '/_bower.json', 'bower.json');
+        if (!this.options.update) {
+            // Workspace
+            this.template(template_name + '/_bower.json', 'bower.json');
+            this.template('_bowerrc', '.bowerrc');
+            this.copy('_package.json', 'package.json');
+            if (fs.existsSync('Gruntfile.js')) fs.unlinkSync('Gruntfile.js');
+            this.copy('Gruntfile.js', 'Gruntfile.js');
+
+            // Project folder
+            this.template('_package.json', this.slugname + '/package.json');
+            this.template(template_name + '/_bower.json', this.slugname + '/bower.json');
+            this.copy(template_name + '/bowerrc', this.slugname + '/.bowerrc');
+            this.copy('Gruntfile.js', this.slugname + '/Gruntfile.js');
+            this.copy(template_name + '/gitignore', this.slugname + '/.gitignore');
+        }
     },
 
     app: function () {
-        this.copy(templateName + '/app/_app.bootstrap.js', 'app/app.bootstrap.js');
-        this.copy(templateName + '/app/_app.module.js', 'app/app.module.js');
-        this.copy(templateName + '/app/_app.routes.js', 'app/app.routes.js');
-        this.copy(templateName + '/app/_index.html', 'app/index.html');
-        this.bulkDirectory(templateName + '/app/assets/images', 'app/assets/images');
-        this.bulkDirectory(templateName + '/app/assets/scss', 'app/assets/scss');
-        this.bulkDirectory(templateName + '/app/assets/css', 'app/assets/css');
-        this.bulkDirectory(templateName + '/app/views', 'app/views');
-        this.bulkDirectory(templateName + '/app/widgets', 'app/widgets');
-        this.bulkDirectory(templateName + '/app/services', 'app/services');
-        this.bulkDirectory(templateName + '/app/data', 'app/data');
+        if (!this.options.update) {
+            this.copy(template_name + '/app/_app.bootstrap.js', this.slugname + '/app/app.bootstrap.js');
+            this.copy(template_name + '/app/_app.module.js', this.slugname + '/app/app.module.js');
+            this.copy(template_name + '/app/_app.routes.js', this.slugname + '/app/app.routes.js');
+            this.copy(template_name + '/app/_index.html', this.slugname + '/app/index.html');
+            this.bulkDirectory(template_name + '/app/assets/images', this.slugname + '/app/assets/images');
+            this.bulkDirectory(template_name + '/app/assets/scss', this.slugname + '/app/assets/scss');
+            this.bulkDirectory(template_name + '/app/assets/css', this.slugname + '/app/assets/css');
+            this.bulkDirectory(template_name + '/app/views', this.slugname + '/app/views');
+            this.bulkDirectory(template_name + '/app/widgets', this.slugname + '/app/widgets');
+            this.bulkDirectory(template_name + '/app/services', this.slugname + '/app/services');
+            this.bulkDirectory(template_name + '/app/data', this.slugname + '/app/data');
+        }
     },
     
     writing: function () {
-        this.copy(templateName + '/README.md', 'README.md');
+        if (!this.options.update) {
+            if (!this.options.update) {
+                this.copy(template_name + '/README.md', this.slugname + '/README.md');
+            }
+        }
     },
 
     test: function () {
-        this.bulkDirectory(templateName + '/app/_test', 'app/_test');
+        if (!this.options.update) {
+            this.bulkDirectory(template_name + '/app/_test', this.slugname + '/app/_test');
+        }
     },
 
     install: function () {
-        this.installDependencies({
-            skipInstall: this.options['skip-install']
-        });
+        if (!this.options.update) {
+            this.log('\n' + chalk.bgWhite(chalk.magenta('Installing dependencies. This may take several minutes, please wait...')) + '\n');
+            if (!fs.existsSync('node_modules')) {
+                this.npmInstall(null, {
+                    skipInstall: this.options['skip-install'],
+                });
+            }
+
+            this.bowerInstall(null, {
+                skipInstall: this.options['skip-install'],
+            });
+        }
     }
 });
 

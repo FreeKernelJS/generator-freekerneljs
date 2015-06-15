@@ -1,9 +1,10 @@
 {
-  "name": "generator-freekerneljs", 
-  "version": "0.5.2",
+  "name": "generator-freekerneljs",
+  "version": "0.6.0",
+  "updateDependencies": false,
   "description": "Generates apps from templates, provides a set of tools for development.",
   "license": "MIT",
-  "main": "app/index.js",
+  "main": "",
   "repository": "https://github.com/FreeKernelJS/generator-freekerneljs",
   "author": {
     "name": "FreeKernelJS",
@@ -23,7 +24,7 @@
     "yeoman-generator",
     "angularjs",
     "angular-material",
-    "material-design", 
+    "material-design",
     "grunt",
     "bower",
     "karma-jasmine",
@@ -38,7 +39,9 @@
     "string-length": "^1.0.0",
     "update-notifier": "^0.5.0",
     "yeoman-generator": "^0.20.1",
-    "underscore.string": "^3.1.1"
+    "mkdirp": "^0.5.1",
+    "underscore.string": "^3.1.1",
+    "prompt-input": "^0.0.1"
   },
   "devDependencies": {},
   "peerDependencies": {
