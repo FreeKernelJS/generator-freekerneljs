@@ -1,7 +1,7 @@
 {
   "name": "generator-freekerneljs",
   "version": "0.6.0",
-  "updateDependencies": false,
+  "updateDependencies": true,
   "description": "Generates apps from templates, provides a set of tools for development.",
   "license": "MIT",
   "main": "",
@@ -24,7 +24,7 @@
     "yeoman-generator",
     "angularjs",
     "angular-material",
-    "material-design", 
+    "material-design",
     "grunt",
     "bower",
     "karma-jasmine",
@@ -41,7 +41,7 @@
     "yeoman-generator": "^0.20.1",
     "mkdirp": "^0.5.1",
     "underscore.string": "^3.1.1",
-	"prompt-input": "^0.0.1"
+    "prompt-input": "^0.0.1"
   },
   "devDependencies": {},
   "peerDependencies": {

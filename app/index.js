@@ -75,47 +75,46 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
         update_notifier({
             pkg: pkg,
             callback: function (err, update) {
+                var fill = function (str, count) {
+                    return Array(count + 1).join(str);
+                };
+
                 if (err) {
                     this.log(err);
                 }
                 else if (compare_version(update.latest, update.current) == 1) {
-                    var fill = function (str, count) {
-                        return Array(count + 1).join(str);
-                    };
-
                     var line_1 = ' Update available: ' + chalk.green.bold(update.latest) + chalk.dim(' (current: ' + update.current + ')') + ' ',
                         line_2 = ' Run ' + chalk.magenta('npm update -g ' + pkg.name) + ' to update. ',
-                        line_3 = '',
                         content_width = Math.max(string_length(line_1), string_length(line_2)),
+                        line_1_rest = content_width - string_length(line_1),
+                        line_2_rest = content_width - string_length(line_2),
+                        top = chalk.yellow('┌' + fill('─', content_width) + '┐'),
+                        bottom = chalk.yellow('└' + fill('─', content_width) + '┘'),
+                        side = chalk.yellow('│'),
+                        update_message = '\n\n' + top + '\n' + side + line_1 + fill(' ', line_1_rest) + side + '\n' + side + line_2 + fill(' ', line_2_rest) + side + '\n' + bottom + '\n';
+
+                    this.log(update_message);
+                }
+
+                if (pkg.updateDependencies) {
+                    var line_1 = ' New updates are available for download.  ',
+                        line_2 = ' Run ' + chalk.magenta('yo freekerneljs --update') + ' to update.  ',
+                        line_3 = ' Use this command from your ' + chalk.red('Workspace') + ' folder.  ',
+                        content_width = Math.max(string_length(line_1), string_length(line_2), string_length(line_3)),
                         line_1_rest = content_width - string_length(line_1),
                         line_2_rest = content_width - string_length(line_2),
                         line_3_rest = content_width - string_length(line_3),
                         top = chalk.yellow('┌' + fill('─', content_width) + '┐'),
                         bottom = chalk.yellow('└' + fill('─', content_width) + '┘'),
                         side = chalk.yellow('│'),
-                        update_message = '\n\n' + top + '\n' + side + line_1 + fill(' ', line_1_rest) + side + '\n' + side + line_2 + fill(' ', line_2_rest) + side + '\n' + bottom + '\n';
-
-                        if (pkg.updateDependencies) {
-                            line_1 = ' INFO: New updates are available for download.  ',
-                            line_2 = ' INFO: Run: ' + chalk.magenta('yo freekerneljs --update') + ' to update.  ',
-                            line_3 = ' INFO: Use this command from your Workspace folder.  ';
-                            content_width = Math.max(string_length(line_1), string_length(line_2), string_length(line_3)),
-                            line_1_rest = content_width - string_length(line_1),
-                            line_2_rest = content_width - string_length(line_2),
-                            line_3_rest = content_width - string_length(line_3),
-                            top = chalk.yellow('┌' + fill('─', content_width) + '┐'),
-                            bottom = chalk.yellow('└' + fill('─', content_width) + '┘'),
-                            side = chalk.yellow('│');
-
-                            update_message += '\n' + top + '\n' + side + line_1 + fill(' ', line_1_rest) + side + '\n' + side + line_2 + fill(' ', line_2_rest) + side + '\n' + side + line_3 + fill(' ', line_3_rest) + side + '\n' + bottom + '\n';
-                        }
+                        update_message = '\n' + top + '\n' + side + line_1 + fill(' ', line_1_rest) + side + '\n' + side + line_2 + fill(' ', line_2_rest) + side + '\n' + side + line_3 + fill(' ', line_3_rest) + side + '\n' + bottom + '\n';
 
                     this.log(update_message);
                 }
 
                 done();
             }.bind(this)
-        })
+        });
     },
 
     prompting: function () {
@@ -311,6 +310,23 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
             this.copy('_package.json', 'package.json');
             this.npmInstall(null, {
                 skipInstall: this.options['skip-install'],
+            });
+
+            var file = path.join(__dirname, '../package.json');
+            fs.readFile(file, 'utf8', function (err, data) {
+                if (err) {
+                    this.log(chalk.red('ERROR: ') + err);
+                    return;
+                }
+
+                data = JSON.parse(data);
+                data.updateDependencies = false;
+                fs.writeFile(file, JSON.stringify(data, null, 2), 'utf8', function (err, data) {
+                    if (err) {
+                        this.log(chalk.red('ERROR: ') + err);
+                        return;
+                    }
+                });
             });
         }
     },
