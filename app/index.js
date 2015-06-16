@@ -5,7 +5,6 @@ var util = require('util'),
     path = require('path'),
     chalk = require('chalk'),
     yeoman = require('yeoman-generator'),
-    pkg_name = require('pkg-name'),
     update_notifier = require('update-notifier'),
     compare_version = require('compare-version'),
     string_length = require('string-length'),
@@ -13,7 +12,7 @@ var util = require('util'),
     mkdirp = require('mkdirp'),
     child_process = require('child_process'),
     pkg = require('../package.json'),
-    template_name = 'freekerneljs-basic-app-md',
+    template_name = 'template-basic-app-md',
     generator_root = '',
     template_path = '',
     task_error = false;
@@ -35,7 +34,7 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
             if (!this.options.update) {
                 this.log('Running ' + chalk.yellow('Grunt') + ' tasks now...');
 
-                if (template_name == 'freekerneljs-basic-app') {
+                if (template_name == 'template-basic-app') {
                     var done = this.async();
                     exec('grunt copy:bootstrap-fonts --project=' + this.slugname, function (err) {
                         if (err) {
@@ -138,10 +137,10 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
                 name: 'template',
                 message: 'Select a template',
                 choices: getDirectories(template_path),
-                default: 'freekerneljs-basic-app-md'
+                default: 'template-basic-app-md'
             }, {
                 when: function (response) {
-                    return response.template === 'freekerneljs-basic-app';
+                    return response.template === 'template-basic-app';
                 },
                 type: 'checkbox',
                 name: 'modules',
@@ -169,7 +168,7 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
                 }]
             }, {
                 when: function (response) {
-                    return response.template === 'freekerneljs-basic-app-md';
+                    return response.template === 'template-basic-app-md';
                 },
                 type: 'checkbox',
                 name: 'modules',
@@ -282,10 +281,10 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
                 this.touchModule = hasMod('touchModule');
 
                 switch (template_name) {
-                    case 'freekerneljs-basic-app':
+                    case 'template-basic-app':
                         this.bootstrapModule = true;
                         break;
-                    case 'freekerneljs-basic-app-md':
+                    case 'template-basic-app-md':
                         this.materialModule = true;
                         this.iconicFont = hasMod('iconicFont');
                         break;
@@ -304,29 +303,23 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
 
     update: function () {
         if (this.options.update) {
-            this.log('\n' + chalk.bgWhite(chalk.magenta('Updating dependencies. This may take several minutes, please wait...')) + '\n');
             this.props = [];
+
+            this.log('\n' + chalk.bgWhite(chalk.magenta('Updating dependencies. This may take several minutes, please wait...')) + '\n');
+
             if (fs.existsSync('package.json')) fs.unlinkSync('package.json');
             this.copy('_package.json', 'package.json');
+
             this.npmInstall(null, {
                 skipInstall: this.options['skip-install'],
             });
 
-            var file = path.join(__dirname, '../package.json');
-            fs.readFile(file, 'utf8', function (err, data) {
+            pkg.updateDependencies = false;
+            fs.writeFile(path.join(__dirname, '../package.json'), JSON.stringify(pkg, null, 2), 'utf8', function (err, data) {
                 if (err) {
                     this.log(chalk.red('ERROR: ') + err);
                     return;
                 }
-
-                data = JSON.parse(data);
-                data.updateDependencies = false;
-                fs.writeFile(file, JSON.stringify(data, null, 2), 'utf8', function (err, data) {
-                    if (err) {
-                        this.log(chalk.red('ERROR: ') + err);
-                        return;
-                    }
-                });
             });
         }
     },
@@ -351,17 +344,10 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
 
     app: function () {
         if (!this.options.update) {
-            this.copy(template_name + '/app/_app.bootstrap.js', this.slugname + '/app/app.bootstrap.js');
-            this.copy(template_name + '/app/_app.module.js', this.slugname + '/app/app.module.js');
-            this.copy(template_name + '/app/_app.routes.js', this.slugname + '/app/app.routes.js');
-            this.copy(template_name + '/app/_index.html', this.slugname + '/app/index.html');
-            this.bulkDirectory(template_name + '/app/assets/images', this.slugname + '/app/assets/images');
-            this.bulkDirectory(template_name + '/app/assets/scss', this.slugname + '/app/assets/scss');
-            this.bulkDirectory(template_name + '/app/assets/css', this.slugname + '/app/assets/css');
-            this.bulkDirectory(template_name + '/app/views', this.slugname + '/app/views');
-            this.bulkDirectory(template_name + '/app/widgets', this.slugname + '/app/widgets');
-            this.bulkDirectory(template_name + '/app/services', this.slugname + '/app/services');
+            this.bulkDirectory(template_name + '/app/assets', this.slugname + '/app/assets');
+            this.bulkDirectory(template_name + '/app/src', this.slugname + '/app/src');
             this.bulkDirectory(template_name + '/app/data', this.slugname + '/app/data');
+            this.copy(template_name + '/app/index.html', this.slugname + '/app/index.html');
         }
     },
     
@@ -375,7 +361,7 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
 
     test: function () {
         if (!this.options.update) {
-            this.bulkDirectory(template_name + '/app/_test', this.slugname + '/app/_test');
+            this.bulkDirectory(template_name + '/app/test', this.slugname + '/app/test');
         }
     },
 

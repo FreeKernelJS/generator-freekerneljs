@@ -125,12 +125,7 @@ module.exports = function (grunt) {
                     '!**/docs/**',
                     '!**/assets/css/**',
                     '!**/assets/scss/**',
-                    '!**/services/**/*.js',
-                    '!**/views/**/*.js',
-                    '!**/widgets/**/*.js',
-                    '!**/app.bootstrap.js',
-                    '!**/app.module.js',
-                    '!**/app.routes.js'
+                    '!**/src/**/*.js'
                 ],
                 expand: true,
                 cwd: 'app',
@@ -213,11 +208,7 @@ module.exports = function (grunt) {
             dist: {
                 files: {
                     'dist/app.js.files.js': [
-                        'app/services/**/*.js',
-                        'app/views/**/*.js',
-                        'app/widgets/**/*.js',
-                        'app/app.module.js',
-                        'app/app.routes.js'
+                        'app/src/**/*.js'
                     ]
                 }
             }
@@ -324,7 +315,7 @@ module.exports = function (grunt) {
                 'dist/assets/css/app.css',
                 'dist/_bower.js',
                 'dist/_bower.css',
-                'dist/services'
+                'dist/src/services'
             ],
             'docs': [
                 'dist/docs'
@@ -359,7 +350,7 @@ module.exports = function (grunt) {
         },
         karma: {
             unit: {
-                configFile: 'app/_test/karma.conf.js'
+                configFile: 'app/test/karma.conf.js'
             }
         }
     });
