@@ -310,6 +310,7 @@ module.exports = function (grunt) {
             'dist-after': [
                 'app/assets/scss/.temp',
                 'dist/app.js',
+                'dist/app.bootstrap.js',
                 'dist/app.libraries.js',
                 'dist/app.js.files.js',
                 'dist/assets/css/app.css',
