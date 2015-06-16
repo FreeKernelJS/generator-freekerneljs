@@ -4,7 +4,7 @@ describe('[fkjs.widgets.navbar]', function () {
 
     // load the directive's module and all its dependencies
     beforeEach(module('fkjs.widgets.navbar')); // directive
-    beforeEach(module('widgets/navbar/template.html')); // The directive's external template file
+    beforeEach(module('src/widgets/navbar/template.html')); // The directive's external template file
     beforeEach(module('ui.router.state')); //other dependency
     
     var element, $compile, $rootScope;

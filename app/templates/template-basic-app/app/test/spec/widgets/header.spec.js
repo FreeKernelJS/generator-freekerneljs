@@ -4,7 +4,7 @@ describe('[fkjs.widgets.header]', function () {
 
     // load the directive's module and all its dependencies
     beforeEach(module('fkjs.widgets.header')); // directive
-    beforeEach(module('widgets/header/template.html')); // The directive's external template file
+    beforeEach(module('src/widgets/header/template.html')); // The directive's external template file
     
     var element, $compile, $rootScope;
 

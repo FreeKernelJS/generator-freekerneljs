@@ -12,7 +12,6 @@ angular.module('<%= props.name %>', [
     // the application:
     
     //angular modules
-    'ngMaterial',
     'ui.router',
     'pascalprecht.translate',
     

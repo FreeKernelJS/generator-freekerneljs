@@ -1,0 +1,26 @@
+<nav class="navbar navbar-default fkjs-navbar">
+    
+    <!-- header -->
+    <div class="navbar-header fkjs-navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#side-menu">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand fkjs-navbar-appname" href="#">FreeKernelJS App</a>
+    </div>
+
+    <!-- list -->
+    <div class="navbar-default sidebar fkjs-navbar-body" role="navigation">
+        <div class="sidebar-nav navbar-collapse">
+            <ul class="nav in" id="side-menu">
+            <li ng-repeat="item in navbarItems">
+                <a class="fkjs-navbar-item-text {{item.activeCss}}"
+                   href="#{{item.pageUrl}}" ng-bind="item.text"></a>
+            </li>
+        </ul>
+    </div>
+    </div> 
+
+</nav>

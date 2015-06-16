@@ -21,9 +21,9 @@ module.exports = function(config) {
       '../bower_components/angular/angular.js',
       '../bower_components/angular-mocks/angular-mocks.js',
       '../bower_components/angular-ui-router/release/angular-ui-router.js',
-      '**/*.js',
-      '_test/spec/**/*spec.js',
-      'widgets/**/*.html'
+      'src/**/*.js',
+      'test/spec/**/*spec.js',
+      'src/widgets/**/*.html'
     ],
 
     // list of files to exclude
@@ -34,7 +34,7 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-        'widgets/**/*.html':['ng-html2js']
+        'src/widgets/**/*.html':['ng-html2js']
     },
 
 
