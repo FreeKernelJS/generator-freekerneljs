@@ -29,27 +29,31 @@ angular.module('fkjs.widgets.navbar', [])
              */
             $scope.$on('$stateChangeSuccess', function(event, current){
                 var stateName = $state.$current.self.name;
+                var activeCss = $scope.activeCss;
                 var items = $scope.navbarItems;
                 var i, stateText, len=items.length;
                 for(i=0 ; i<len ; i++){
                     if(items[i].pageUrl === stateName){
                         stateText = items[i].text;
-                        $scope.navbarItems[i].isActive = true;
+                        $scope.navbarItems[i].activeCss = activeCss;
                     }
                     else{
-                        $scope.navbarItems[i].isActive = false;
+                        $scope.navbarItems[i].activeCss = '';
                     }
                 }
-
+                
                 $rootScope.$broadcast('navbarStateChange', stateText);
             });
         },
         
         link: function(scope){
+            var activeCss = 'active';
+            scope.activeCss = activeCss;
+
             scope.navbarItems = [{
                 pageUrl: 'home',
                 text: 'Home',
-                isActive: true
+                activeCss: activeCss
             },{
                 pageUrl: 'page2',
                 text: 'Page 2'

@@ -33,25 +33,25 @@
  * `app.bootstrap.js` file, required by `index.html`, is responsible for loading 
  * all app's JS dependencies first, before the application is being initialized.
  * 
- * It will also require {@link app.app-module-js app.module.js} and {@link app.app-routes-js app.routes.js} by this order.
+ * It will also require {@link app.src.app-module-js app.module.js} and {@link app.src.app-routes-js app.routes.js} by this order.
  */
 $script([
     // list all your files here:
     
     //services
-    'services/http.js',
+    'src/services/http.js',
     
     //widgets
-    'widgets/header/module.js',
-    'widgets/navbar/module.js',
+    'src/widgets/header/module.js',
+    'src/widgets/navbar/module.js',
     
     //views
-    'views/main/controller.js',
-    'views/home/controller.js',
-    'views/page2/controller.js',
+    'src/views/main/controller.js',
+    'src/views/home/controller.js',
+    'src/views/page2/controller.js',
 
     // app main file
-    'app.module.js'
+    'src/app.module.js'
 
 ], 'appDependencies');
 
@@ -59,7 +59,7 @@ $script([
 // load routes, then bootstrap the application.
 $script.ready('appDependencies', function () {
     $script([
-        'app.routes.js'
+        'src/app.routes.js'
 
     ], function () {
         angular.bootstrap(document, ['<%= props.name %>']);
