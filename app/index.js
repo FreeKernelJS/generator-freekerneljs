@@ -348,6 +348,7 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
             this.bulkDirectory(template_name + '/app/src', this.slugname + '/app/src');
             this.bulkDirectory(template_name + '/app/data', this.slugname + '/app/data');
             this.copy(template_name + '/app/index.html', this.slugname + '/app/index.html');
+            this.copy(template_name + '/app/app.bootstrap.js', this.slugname + '/app/app.bootstrap.js');
         }
     },
     
