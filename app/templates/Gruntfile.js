@@ -121,7 +121,7 @@ module.exports = function (grunt) {
             dist: {
                 src: [
                     '**/*',
-                    '!**/_test/**',
+                    '!**/test/**',
                     '!**/docs/**',
                     '!**/assets/css/**',
                     '!**/assets/scss/**',
@@ -345,7 +345,8 @@ module.exports = function (grunt) {
                 bestMatch: true
             },
             all: [
-				'app/**/*.js'
+				'app/src/**/*.js',
+                'app/app.bootstrap.js'
             ]
         },
         karma: {
