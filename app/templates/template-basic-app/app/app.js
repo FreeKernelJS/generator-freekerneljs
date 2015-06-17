@@ -7,7 +7,7 @@
  * ## About this app 
  * A simple AngularJS application.
  * 
- * You can start with {@link app.app-bootstrap-js app.bootstrap.js} which is the initial
+ * You can start with {@link app.app-js app.js} which is the initial
  * file required by `index.html`.
  * 
  * > Please note that the initial file has been splitted into three different files 
@@ -16,7 +16,7 @@
  * @example
  * How to link between the three files using the same name:
  * <pre>
- * // app.bootstrap.js
+ * // app.js
  * angular.bootstrap(document, ['freekerneljs-app']);
  * 
  * // app.module.js and app.routes.js
@@ -27,10 +27,10 @@
 
 /**
  * @ngdoc interface
- * @name app.app-bootstrap-js
+ * @name app.app-js
  *
  * @description
- * `app.bootstrap.js` file, required by `index.html`, is responsible for loading 
+ * `app.js` file, required by `index.html`, is responsible for loading 
  * all app's JS dependencies first, before the application is being initialized.
  * 
  * It will also require {@link app.src.app-module-js app.module.js} and {@link app.src.app-routes-js app.routes.js} by this order.
