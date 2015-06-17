@@ -62,6 +62,6 @@ $script.ready('appDependencies', function () {
         'src/app.routes.js'
 
     ], function () {
-        angular.bootstrap(document, ['<%= props.name %>']);
+        angular.bootstrap(document, ['fkjs_(name)']);
     });
 });
