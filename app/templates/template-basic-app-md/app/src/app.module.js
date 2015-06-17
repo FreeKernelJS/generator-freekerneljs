@@ -7,7 +7,7 @@
  * 
  * For an enterprise application the list can be very long and therefore it is arranged by categories.
  */
-angular.module('<%= props.name %>', [
+angular.module('fkjs_(name)', [
     // modules dependencies for 
     // the application:
     

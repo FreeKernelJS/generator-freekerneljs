@@ -33,7 +33,7 @@
 })
  * </pre>
  */
-angular.module('<%= props.name %>')
+angular.module('fkjs_(name)')
 
 .config(function($stateProvider, $urlRouterProvider){
              
