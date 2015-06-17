@@ -43,6 +43,9 @@
   "overrides": {
     "script.js": {
       "main": "dist/script.js"
+    },
+    "bootstrap": {
+      "main": "dist/css/bootstrap.css"
     }
   }
 }

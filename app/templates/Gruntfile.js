@@ -121,7 +121,6 @@ module.exports = function (grunt) {
             dist: {
                 src: [
                     '**/*',
-                    '!**/app.bootstrap.js',
                     '!**/test/**',
                     '!**/docs/**',
                     '!**/assets/css/**',
@@ -181,6 +180,7 @@ module.exports = function (grunt) {
                 ],
                 mainFiles: {
                     //'script.js': 'dist/script.js'
+                    'bootstrap': 'dist/css/bootstrap.css'
                 },
                 dependencies: {
 
