@@ -347,7 +347,7 @@ module.exports = function (grunt) {
             },
             all: [
 				'app/src/**/*.js',
-                'app/app.bootstrap.js'
+                'app/app.js'
             ]
         },
         karma: {
