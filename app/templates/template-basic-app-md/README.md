@@ -33,7 +33,6 @@ A basic application which uses AngularJS as the MVC framework, combined with **A
 └── app/
     ├── assets/
     │   ├── css
-    │   ├── fonts
     │   ├── images
     │   └── sass
     ├── data/
