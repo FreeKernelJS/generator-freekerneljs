@@ -50,19 +50,19 @@ module.exports = function (grunt) {
                 options: {
                     replacements: [
                         {
-                            pattern: 'fkjs_(name)',
+                            pattern: /fkjs_\(name\)/ig,
                             replacement: '<%%= pkg.name %>'
                         },
                         {
-                            pattern: 'fkjs_(title)',
+                            pattern: /fkjs_\(title\)/ig,
                             replacement: '<%%= pkg.title %>'
                         },
                         {
-                            pattern: 'fkjs_(description)',
+                            pattern: /fkjs_\(description\)/ig,
                             replacement: '<%%= pkg.description %>'
                         },
                         {
-                            pattern: 'fkjs_(version)',
+                            pattern: /fkjs_\(version\)/ig,
                             replacement: '<%%= pkg.version %>'
                         }
                     ]
@@ -82,19 +82,19 @@ module.exports = function (grunt) {
                 options: {
                     replacements: [
                         {
-                            pattern: 'fkjs_(name)',
+                            pattern: /fkjs_\(name\)/ig,
                             replacement: '<%%= pkg.name %>'
                         },
                         {
-                            pattern: 'fkjs_(title)',
+                            pattern: /fkjs_\(title\)/ig,
                             replacement: '<%%= pkg.title %>'
                         },
                         {
-                            pattern: 'fkjs_(description)',
+                            pattern: /fkjs_\(description\)/ig,
                             replacement: '<%%= pkg.description %>'
                         },
                         {
-                            pattern: 'fkjs_(version)',
+                            pattern: /fkjs_\(version\)/ig,
                             replacement: '<%%= pkg.version %>'
                         }
                     ]

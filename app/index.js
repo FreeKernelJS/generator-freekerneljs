@@ -20,9 +20,14 @@ var util = require('util'),
 var exec = child_process.exec;
 
 function getDirectories(srcpath) {
-    return fs.readdirSync(srcpath).filter(function (file) {
-        return fs.statSync(path.join(srcpath, file)).isDirectory();
-    });
+    if (fs.existsSync(srcpath)) {
+        return fs.readdirSync(srcpath).filter(function (file) {
+            return fs.statSync(path.join(srcpath, file)).isDirectory();
+        });
+    }
+    else {
+        return [];
+    }
 }
 
 var freekerneljsGenerator = yeoman.generators.Base.extend({
@@ -132,11 +137,13 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
             var prompts = [{
                 when: function (response) {
                     return getDirectories(template_path).length > 1;
+                    //return getDirectories('../node_modules').length > 1;
                 },
                 type: 'list',
                 name: 'template',
                 message: 'Select a template',
                 choices: getDirectories(template_path),
+                //choices: getDirectories('../node_modules'),
                 default: 'template-basic-app-md'
             }, {
                 when: function (response) {
