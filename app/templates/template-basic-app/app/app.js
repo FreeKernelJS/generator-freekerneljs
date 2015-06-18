@@ -17,10 +17,10 @@
  * How to link between the three files using the same name:
  * <pre>
  * // app.js
- * angular.bootstrap(document, ['freekerneljs-app']);
+ * angular.bootstrap(document, ['fkjs_(name)']);
  * 
  * // app.module.js and app.routes.js
- * angular.module('freekerneljs-app', [
+ * angular.module('fkjs_(name)', [
  * </pre>
  */
 

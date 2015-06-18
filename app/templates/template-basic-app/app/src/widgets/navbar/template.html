@@ -2,13 +2,7 @@
     
     <!-- header -->
     <div class="navbar-header fkjs-navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#side-menu">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand fkjs-navbar-appname" href="#">fkjs_(title)</a>
+        <a class="navbar-brand fkjs-navbar-appname" href="#">fkjs_(title)</a>
     </div>
 
     <!-- list -->
@@ -17,7 +11,7 @@
             <ul class="nav in" id="side-menu">
             <li ng-repeat="item in navbarItems">
                 <a class="fkjs-navbar-item-text {{item.activeCss}}"
-                   href="#{{item.pageUrl}}" ng-bind="item.text"></a>
+                   href="#{{item.pageUrl}}" translate="{{item.locale}}"></a>
             </li>
         </ul>
     </div>

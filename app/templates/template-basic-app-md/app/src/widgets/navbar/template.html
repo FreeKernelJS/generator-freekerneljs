@@ -1,18 +1,18 @@
 <nav layout="column">
     <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-is-locked-open="$mdMedia('gt-md')" flex>
     
-        <h1 class="navbar-header">
+        <h1 class="fkjs-navbar-header">
             fkjs_(title)
         </h1>
 
-        <div layout="column" layout-align="space-between start" class="navbar-body">
+        <div layout="column" layout-align="space-between start" class="fkjs-navbar-body">
 
             <md-button ng-repeat="item in navbarItems"
                        ng-class="{ 'active' : item.isActive }"
                        href="#{{item.pageUrl}}"
                        aria-label="menu item">
 
-                <span class="navbar-item-text" ng-bind="item.text"></span>
+                <span class="fkjs-navbar-item-text" translate="{{item.locale}}"></span>
             </md-button>
 
         </div>

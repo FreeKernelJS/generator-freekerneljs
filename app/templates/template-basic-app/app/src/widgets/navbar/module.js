@@ -25,7 +25,8 @@ angular.module('fkjs.widgets.navbar', [])
         controller: function($scope){
             /*
              * set "active" css on selected menu item,
-             * fire event to notify header regarding this change.
+             * fire event to notify header regarding this change, and update its text.
+             * Please note that it is relying on the navbarItems array structure.
              */
             $scope.$on('$stateChangeSuccess', function(event, current){
                 var stateName = $state.$current.self.name;
@@ -34,7 +35,7 @@ angular.module('fkjs.widgets.navbar', [])
                 var i, stateText, len=items.length;
                 for(i=0 ; i<len ; i++){
                     if(items[i].pageUrl === stateName){
-                        stateText = items[i].text;
+                        stateText = items[i].locale;
                         $scope.navbarItems[i].activeCss = activeCss;
                     }
                     else{
@@ -52,11 +53,11 @@ angular.module('fkjs.widgets.navbar', [])
 
             scope.navbarItems = [{
                 pageUrl: 'home',
-                text: 'Home',
+                locale: 'widgets.navbar.home',
                 activeCss: activeCss
             },{
                 pageUrl: 'page2',
-                text: 'Page 2'
+                locale: 'widgets.navbar.page2'
             }];
         }
     };

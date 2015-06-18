@@ -1,7 +1,7 @@
 // ~~~ html elements
 
 body {
-    font-size: $font-size-small;
+    font-size: $font-size-normal;
     background-color: darken($background-color, 3%);
 }
 
@@ -26,6 +26,6 @@ a:focus {
 
 // ~~~ common styles for the entire app
 
-.content-bg{
+.fkjs-content-bg{
     background-color: $background-color !important;
 }

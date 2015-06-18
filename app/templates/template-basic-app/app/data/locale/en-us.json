@@ -10,5 +10,12 @@
         "page2": {
             "listTitle": "Some List"
         }
+    },
+    
+    "widgets": {
+        "navbar": {
+            "home": "Home",
+            "page2": "Page 2"
+        }
     }
 }
