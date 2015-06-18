@@ -1,6 +1,6 @@
 *{
     font-family: 'Roboto', sans-serif;
-    font-size: 1em;
+    font-size: $font-size-normal;
 }
 
 html,body{
@@ -8,7 +8,7 @@ html,body{
 }
 
 body {
-    background-color: darken( $color-background-100, 3%);
+    background-color: darken($background-color, 3%);
 }
 
 a {
@@ -16,23 +16,23 @@ a {
     text-decoration: none;
 }
 a:hover,
-a:focus {
-    color: $link-color-dark;
+a:focus,
+a:visited{
+    color: darken($link-color, 10%);
+}
+a:hover,
+a:focus{
     text-decoration: underline;
 }
 a:focus {
     outline: 0;
     outline-offset: -2px;
 }
-a:visited{
-    color: $link-color-dark;
-}
 
 
 // ~~~ common styles for the entire app
 
 .content-bg{
-    //margin-left: $navbar-width;
     padding: $padding-small;
     overflow-y: auto;
 }

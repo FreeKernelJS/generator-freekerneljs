@@ -1,5 +1,5 @@
 .fkjs-navbar{
-    transition: all .1s linear;
+    @include transition(all, .1s, linear);
     background-color: #fff;
     margin: 0;
 }
@@ -47,7 +47,7 @@
 
 .fkjs-navbar-item-text:hover,
 .fkjs-navbar-item-text.active{
-    background-color: $link-background;
+    background-color: $background-item;
 }
 
 @media (min-width: 0px) and (max-width: 767px) {

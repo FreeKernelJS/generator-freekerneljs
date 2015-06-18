@@ -28,7 +28,7 @@
     "angular-ui-router": "~0.2.15"<% } %>
 
     <% if (materialModule) { %>,
-    "angular-material": "^0.9.7"<% } %>
+    "angular-material": "^0.10.0"<% } %>
 
     <% if (scriptjsModule) { %>, 
     "script.js": "^2.5.7"<% } %>

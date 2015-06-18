@@ -2,10 +2,10 @@
     padding: 32px 34px 13px $padding-small;
     margin-left: $navbar-width;
     border-bottom: 1px solid $color-grey-300;
-    background-color: $color-background-header;
+    background-color: $background-header-color;
     height: 100%;
     vertical-align: top;
-    transition: all .1s linear;
+    @include transition(all, .1s, linear);
 }
 
 .fkjs-page-header-text {
