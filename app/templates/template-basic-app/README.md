@@ -43,14 +43,14 @@ This app can be used as a starting point and basis to develop your own applicati
     │   ├── services/
     │   │   └── http.js
     │   ├── views/
-    │   │     ├── main/
-    │   │     │   └── controller.js
-    │   │     ├── home/
-    │   │     │   ├── controller.js
-    │   │     │   └── page.html
-    │   │     └── page2/
-    │   │         ├── controller.js
-    │   │         └── page.html    
+    │   │   ├── main/
+    │   │   │   └── controller.js
+    │   │   ├── home/
+    │   │   │   ├── controller.js
+    │   │   │   └── page.html
+    │   │   └── page2/
+    │   │       ├── controller.js
+    │   │       └── page.html    
     │   ├── widgets/
     │   │   ├── header/
     │   │   │   ├── module.js
