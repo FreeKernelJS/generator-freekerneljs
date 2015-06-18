@@ -71,7 +71,3 @@ A basic application which uses AngularJS as the MVC framework, combined with **A
 - `services`: this folder contains any services/providers/factories/utilities being used in the application.
 - `widgets`: this folder contains the different directives.
 - `views`: this folder contains views that represent pages (one view per page). With the exception of the main controller - this controller is responsible for managing global aspects of the application so it doesn't have a view.
-
-
-
-
