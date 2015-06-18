@@ -80,8 +80,3 @@ This app can be used as a starting point and basis to develop your own applicati
   * `spec`: this folder contains spec files to run tests with Jasmine
   * `karma.conf.js`: this file defines configurations for unit testing with Jasmine.
 - `app.js`: required by index.html. This file is responsible for loading all app's JS dependencies first (including app.module.js, app.routes.js), then bootstrap the application.
-
-
-
-
-
