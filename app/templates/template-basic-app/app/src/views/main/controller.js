@@ -16,7 +16,7 @@ angular.module('fkjs.views.main', [])
  * @methodOf fkjs.views.main
  * 
  * @description 
- * Initialize the localization object which is being provided by {@link http://angular-translate.github.io/docs/#/guide/ angular-translate package}.
+ * Initialize the localization object which is being provided by {@link http://angular-translate.github.io/docs/#/api angular-translate package}.
  * You can also use {@link https://docs.angularjs.org/guide/i18n#messageformat-extensions message format}.
  */
 .config(function($translateProvider){

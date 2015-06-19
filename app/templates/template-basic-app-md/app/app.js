@@ -22,6 +22,10 @@
  * // app.module.js and app.routes.js
  * angular.module('fkjs_(name)', [
  * </pre>
+ * 
+ * ### Wiki
+ * This application is developed using FreeKernelJS generator, and offers the functionality distributed along with it.
+ * For more information please refer to {@link https://github.com/FreeKernelJS/generator-freekerneljs/wiki FreeKernelJS generator wiki}
  */
 
 

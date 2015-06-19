@@ -1,0 +1,10 @@
+@ngdoc overview
+@name API Reference
+@description
+
+# Overview - API Reference
+
+This is the API Reference welcom page.
+
+You can navigate by using the search bar or the links on the left.  
+Start here: [app overview](#/api/app)
