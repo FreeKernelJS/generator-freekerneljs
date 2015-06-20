@@ -1,6 +1,6 @@
 {
   "name": "generator-freekerneljs",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "updateDependencies": false,
   "description": "Generates apps from templates, provides a set of tools for development.",
   "license": "MIT",
@@ -13,7 +13,7 @@
   "homepage": "http://www.freekerneljs.org",
   "engines": {
     "node": ">=0.10.35",
-    "npm" : ">=1.4.28"
+    "npm": ">=1.4.28"
   },
   "files": [
     "app"

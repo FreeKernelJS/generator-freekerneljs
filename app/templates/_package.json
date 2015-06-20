@@ -1,17 +1,17 @@
 {
-  "name": "<%= slugname %>",
-  "title": "<%= props.title %>",
-  "description": "<%= props.description %>",
-  "version": "<%= props.version %>",
-  "license": "<%= props.license %>",
+  "name": "<%= name %>",
+  "title": "<%= title %>",
+  "description": "<%= description %>",
+  "version": "<%= version %>",
+  "license": "<%= license %>",
   "private": true,
-  "repository": "<%= props.repository %>",
+  "repository": "<%= repository %>",
   "author": {
-    "name": "<%= props.author_name %>",
-    "email": "<%= props.author_email %>",
-    "url": "<%= props.author_url %>"
+    "name": "<%= author_name %>",
+    "email": "<%= author_email %>",
+    "url": "<%= author_url %>"
   },
-  "homepage": "<%= props.homepage %>",
+  "homepage": "<%= homepage %>",
   "keywords": [],
   "devDependencies": {
     "grunt": "^0.4",
@@ -39,6 +39,8 @@
     "karma": "^0.12.32",
     "karma-jasmine": "^0.1.5",
     "karma-phantomjs-launcher": "*",
-    "karma-ng-html2js-preprocessor": "^0.1.2"
+    "karma-ng-html2js-preprocessor": "^0.1.2",
+    "freekerneljs-basic-app": "FreeKernelJS/freekerneljs-basic-app",
+    "freekerneljs-basic-app-md": "FreeKernelJS/freekerneljs-basic-app-md"
   }
 }

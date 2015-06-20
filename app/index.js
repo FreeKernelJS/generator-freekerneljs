@@ -12,9 +12,11 @@ var util = require('util'),
     mkdirp = require('mkdirp'),
     child_process = require('child_process'),
     pkg = require('../package.json'),
-    template_name = 'template-basic-app-md',
     generator_root = '',
-    template_path = '',
+    generator_app = '',
+    generator_templates = '',
+    configs = [],
+    templates_exist = true,
     task_error = false;
 
 var exec = child_process.exec;
@@ -30,50 +32,38 @@ function getDirectories(srcpath) {
     }
 }
 
+function existTemplates(srcpath, templates) {
+    templates.forEach(function (name) {
+        if (!fs.existsSync(path.join(srcpath, name)) || !fs.statSync(path.join(srcpath, name)).isDirectory())
+            templates_exist = false;
+    });
+
+    return templates_exist;
+}
+
 var freekerneljsGenerator = yeoman.generators.Base.extend({
     constructor: function () {
         yeoman.generators.Base.apply(this, arguments);
+
         this.option('update');
-
-        this.on('end', function () {
-            if (!this.options.update) {
-                this.log('Running ' + chalk.yellow('Grunt') + ' tasks now...');
-
-                if (template_name == 'template-basic-app') {
-                    var done = this.async();
-                    exec('grunt copy:bootstrap-fonts --project=' + this.slugname, function (err) {
-                        if (err) {
-                            task_error = true;
-                            this.log(chalk.red('ERROR: ') + 'Grunt "copy:bootstrap-fonts" task.');
-                            this.log(err);
-                            this.abort = true;
-                        }
-                        done();
-                    }.bind(this));
-                }
-
-                var done = this.async();
-                exec('grunt default --project=' + this.slugname, function (err) {
-                    if (err) {
-                        task_error = true;
-                        this.log(chalk.red('ERROR: ') + 'Grunt "default" task.');
-                        this.log(err);
-                        this.abort = true;
-                    }
-                    done();
-                    task_error ? '' : this.log(chalk.green('Grunt tasks completed successfully.'));
-                }.bind(this));
-            }
-
-            if (fs.existsSync('.bowerrc')) fs.unlinkSync('.bowerrc');
-            if (fs.existsSync('bower.json')) fs.unlinkSync('bower.json');
-            if (fs.existsSync('package.json')) fs.unlinkSync('package.json');
-        });
     },
 
     initializing: function () {
-        generator_root = this.templatePath('../../');
-        template_path = this.templatePath();
+        generator_root = path.join(this.sourceRoot(), '../../');
+        generator_app = path.join(this.sourceRoot(), '../');
+        generator_templates = path.join(this.sourceRoot(), './');
+
+        fs.readFile(path.join(generator_app, 'config.json'), 'utf8', function (err, data) {
+            if (err) {
+                this.log(chalk.red('ERROR: ') + err);
+                return;
+            }
+
+            configs = JSON.parse(data);
+
+            if (configs);
+                templates_exist = existTemplates('node_modules', configs.templates);
+        });
 
         var done = this.async();
         update_notifier({
@@ -136,18 +126,16 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
         if (!this.options.update) {
             var prompts = [{
                 when: function (response) {
-                    return getDirectories(template_path).length > 1;
-                    //return getDirectories('../node_modules').length > 1;
+                    return configs.templates.length > 0;
                 },
                 type: 'list',
                 name: 'template',
                 message: 'Select a template',
-                choices: getDirectories(template_path),
-                //choices: getDirectories('../node_modules'),
-                default: 'template-basic-app-md'
+                choices: configs.templates,
+                default: configs.defaultTemplate
             }, {
                 when: function (response) {
-                    return response.template === 'template-basic-app';
+                    return response.template === 'freekerneljs-basic-app';
                 },
                 type: 'checkbox',
                 name: 'modules',
@@ -175,7 +163,7 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
                 }]
             }, {
                 when: function (response) {
-                    return response.template === 'template-basic-app-md';
+                    return response.template === 'freekerneljs-basic-app-md';
                 },
                 type: 'checkbox',
                 name: 'modules',
@@ -263,10 +251,6 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
             this.prompt(prompts, function (props) {
                 this.props = props;
 
-                if (props.template) {
-                    template_name = props.template;
-                }
-
                 // For easier access in the templates.
                 this.slugname = _.slugify(props.name);
 
@@ -287,24 +271,168 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
                 this.sanitizeModule = hasMod('sanitizeModule');
                 this.touchModule = hasMod('touchModule');
 
-                switch (template_name) {
-                    case 'template-basic-app':
+                switch (props.template) {
+                    case 'freekerneljs-basic-app':
                         this.bootstrapModule = true;
                         break;
-                    case 'template-basic-app-md':
+                    case 'freekerneljs-basic-app-md':
                         this.materialModule = true;
                         this.iconicFont = hasMod('iconicFont');
                         break;
                     default:
                 }
 
-                mkdirp(this.slugname);
-
                 done();
             }.bind(this));
         }
         else {
             done();
+        }
+    },
+
+    configuring: {
+        init: function () {
+            if (!this.options.update) {
+                this.log('\n' + chalk.bgWhite(chalk.magenta('Creating project and installing dependencies. This may take several minutes, please wait...')) + '\n');
+
+                mkdirp(this.slugname);
+
+                this.fs.copyTpl(
+                    this.templatePath('_package.json'),
+                    this.destinationPath('package.json'),
+                    {
+                        name: this.slugname,
+                        title: this.props.title,
+                        description: this.props.description,
+                        version: this.props.version,
+                        license: this.props.license,
+                        repository: this.props.repository,
+                        author_name: this.props.author_name,
+                        author_email: this.props.author_email,
+                        author_url: this.props.author_url,
+                        homepage: this.props.homepage
+                    }
+                );
+
+                this.fs.copyTpl(
+                    this.templatePath('_bowerrc'),
+                    this.destinationPath('.bowerrc'),
+                    {
+                        name: this.slugname
+                    }
+                );
+
+                if (fs.existsSync('Gruntfile.js')) fs.unlinkSync('Gruntfile.js');
+                    this.fs.copy(
+                        this.templatePath(path.join(generator_app, 'Gruntfile.js')),
+                        this.destinationPath('Gruntfile.js')
+                    );
+            }
+        },
+        npm: function () {
+            if (!this.options.update) {
+                if (!fs.existsSync('node_modules') || !templates_exist) {
+                    this.npmInstall(null, {
+                        skipInstall: this.options['skip-install']
+                    });
+                }
+            }
+        }
+    },
+
+    end: {
+        app: function () {
+            if (!this.options.update) {
+                this.fs.copyTpl(
+                    path.join('node_modules', this.props.template, 'app'),
+                    this.destinationPath(path.join(this.slugname, 'app'))
+                );
+
+                this.fs.copyTpl(
+                    path.join('node_modules', this.props.template, 'bowerrc'),
+                    this.destinationPath(path.join(this.slugname, '.bowerrc'))
+                );
+
+                this.fs.copyTpl(
+                    path.join('node_modules', this.props.template, '_bower.json'),
+                    this.destinationPath('bower.json'),
+                    {
+                        name: this.slugname,
+                        version: this.props.version,
+                        angularModule: this.angularModule,
+                        mocksModule: this.mocksModule,
+                        routeModule: this.routeModule,
+                        scriptjsModule: this.scriptjsModule,
+                        angularTranslateModule: this.angularTranslateModule,
+                        angularTranslateLoaderStaticFilesModule: this.angularTranslateLoaderStaticFilesModule,
+                        cookiesModule: this.cookiesModule,
+                        resourceModule: this.resourceModule,
+                        messagesModule: this.messagesModule,
+                        sanitizeModule: this.sanitizeModule,
+                        touchModule: this.touchModule,
+                        bootstrapModule: this.bootstrapModule,
+                        materialModule: this.materialModule,
+                        iconicFont: this.iconicFont
+                    }
+                );
+
+                this.fs.copy(
+                    'bower.json',
+                    this.destinationPath(path.join(this.slugname, 'bower.json'))
+                );
+
+                this.fs.copy(
+                    'package.json',
+                    this.destinationPath(path.join(this.slugname, 'package.json'))
+                );
+
+                this.fs.copy(
+                    'Gruntfile.js',
+                    this.destinationPath(path.join(this.slugname, 'Gruntfile.js'))
+                );
+            }
+        },
+        bower: function () {
+            if (!this.options.update) {
+                this.bowerInstall(null, {
+                    skipInstall: this.options['skip-install']
+                });
+            }
+        },
+        grunt: function () {
+            if (!this.options.update) {
+                this.log('Running ' + chalk.yellow('Grunt') + ' tasks now...');
+
+                if (this.props.template == 'freekerneljs-basic-app') {
+                    var done = this.async();
+                    exec('grunt copy:bootstrap-fonts --project=' + this.slugname, function (err) {
+                        if (err) {
+                            task_error = true;
+                            this.log(chalk.red('ERROR: ') + 'Grunt "copy:bootstrap-fonts" task.');
+                            this.log(err);
+                            this.abort = true;
+                        }
+                        done();
+                    }.bind(this));
+                }
+
+                var done = this.async();
+                exec('grunt default --project=' + this.slugname, function (err) {
+                    if (err) {
+                        task_error = true;
+                        this.log(chalk.red('ERROR: ') + 'Grunt "default" task.');
+                        this.log(err);
+                        this.abort = true;
+                    }
+                    done();
+                    task_error ? '' : this.log(chalk.green('Grunt tasks completed successfully.'));
+                }.bind(this));
+            }
+        },
+        clean: function () {
+            if (fs.existsSync('.bowerrc')) fs.unlinkSync('.bowerrc');
+            if (fs.existsSync('bower.json')) fs.unlinkSync('bower.json');
+            if (fs.existsSync('package.json')) fs.unlinkSync('package.json');
         }
     },
 
@@ -315,7 +443,22 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
             this.log('\n' + chalk.bgWhite(chalk.magenta('Updating dependencies. This may take several minutes, please wait...')) + '\n');
 
             if (fs.existsSync('package.json')) fs.unlinkSync('package.json');
-            this.copy('_package.json', 'package.json');
+                this.fs.copyTpl(
+                    this.templatePath('_package.json'),
+                    this.destinationPath('package.json'),
+                    {
+                        name: this.slugname,
+                        title: this.props.title,
+                        description: this.props.description,
+                        version: this.props.version,
+                        license: this.props.license,
+                        repository: this.props.repository,
+                        author_name: this.props.author_name,
+                        author_email: this.props.author_email,
+                        author_url: this.props.author_url,
+                        homepage: this.props.homepage
+                    }
+                );
 
             this.npmInstall(null, {
                 skipInstall: this.options['skip-install'],
@@ -327,63 +470,6 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
                     this.log(chalk.red('ERROR: ') + err);
                     return;
                 }
-            });
-        }
-    },
-    
-    configuration: function () {
-        if (!this.options.update) {
-            // Workspace
-            this.template(template_name + '/_bower.json', 'bower.json');
-            this.template('_bowerrc', '.bowerrc');
-            this.copy('_package.json', 'package.json');
-            if (fs.existsSync('Gruntfile.js')) fs.unlinkSync('Gruntfile.js');
-            this.copy('Gruntfile.js', 'Gruntfile.js');
-
-            // Project folder
-            this.template('_package.json', this.slugname + '/package.json');
-            this.template(template_name + '/_bower.json', this.slugname + '/bower.json');
-            this.copy(template_name + '/bowerrc', this.slugname + '/.bowerrc');
-            this.copy('Gruntfile.js', this.slugname + '/Gruntfile.js');
-            this.copy(template_name + '/gitignore', this.slugname + '/.gitignore');
-        }
-    },
-
-    app: function () {
-        if (!this.options.update) {
-            this.bulkDirectory(template_name + '/app/assets', this.slugname + '/app/assets');
-            this.bulkDirectory(template_name + '/app/src', this.slugname + '/app/src');
-            this.bulkDirectory(template_name + '/app/data', this.slugname + '/app/data');
-            this.copy(template_name + '/app/index.html', this.slugname + '/app/index.html');
-            this.copy(template_name + '/app/app.js', this.slugname + '/app/app.js');
-        }
-    },
-    
-    writing: function () {
-        if (!this.options.update) {
-            if (!this.options.update) {
-                this.copy(template_name + '/README.md', this.slugname + '/README.md');
-            }
-        }
-    },
-
-    test: function () {
-        if (!this.options.update) {
-            this.bulkDirectory(template_name + '/app/test', this.slugname + '/app/test');
-        }
-    },
-
-    install: function () {
-        if (!this.options.update) {
-            this.log('\n' + chalk.bgWhite(chalk.magenta('Installing dependencies. This may take several minutes, please wait...')) + '\n');
-            if (!fs.existsSync('node_modules')) {
-                this.npmInstall(null, {
-                    skipInstall: this.options['skip-install'],
-                });
-            }
-
-            this.bowerInstall(null, {
-                skipInstall: this.options['skip-install'],
             });
         }
     }

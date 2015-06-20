@@ -1,0 +1,7 @@
+{
+  "templates": [
+    "freekerneljs-basic-app",
+    "freekerneljs-basic-app-md"
+  ],
+  "defaultTemplate" : "freekerneljs-basic-app"
+}
