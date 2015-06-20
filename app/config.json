@@ -3,5 +3,5 @@
     "freekerneljs-basic-app",
     "freekerneljs-basic-app-md"
   ],
-  "defaultTemplate" : "freekerneljs-basic-app"
+  "defaultTemplate" : "freekerneljs-basic-app-md"
 }
