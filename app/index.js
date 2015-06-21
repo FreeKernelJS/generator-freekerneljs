@@ -395,12 +395,12 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
     end: {
         app: function () {
             if (!this.options.update) {
-                this.fs.copyTpl(
+                this.fs.copy(
                     path.join('node_modules', this.props.template, 'app'),
                     this.destinationPath(path.join(this.slugname, 'app'))
                 );
 
-                this.fs.copyTpl(
+                this.fs.copy(
                     path.join('node_modules', this.props.template, 'bowerrc'),
                     this.destinationPath(path.join(this.slugname, '.bowerrc'))
                 );
