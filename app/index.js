@@ -61,9 +61,34 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
 
             configs = JSON.parse(data);
 
-            if (configs);
+            if (configs)
                 templates_exist = existTemplates('node_modules', configs.templates);
         });
+
+        if (fs.existsSync('config.user.json')) {
+            var user_configs;
+
+            fs.readFile('config.user.json', 'utf8', function (err, data) {
+                if (err) {
+                    this.log(chalk.red('ERROR: ') + err);
+                    return;
+                }
+
+                user_configs = JSON.parse(data);
+
+                if (user_configs) {
+                    user_configs.templates = configs.templates;
+                    fs.writeFile('config.user.json', JSON.stringify(user_configs, null, 2), 'utf8', function (err, data) {
+                        if (err) {
+                            this.log(chalk.red('ERROR: ') + err);
+                            return;
+                        }
+                    });
+
+                    templates_exist = existTemplates('node_modules', user_configs.templates);
+                }
+            });
+        }
 
         var done = this.async();
         update_notifier({
@@ -126,13 +151,31 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
         if (!this.options.update) {
             var prompts = [{
                 when: function (response) {
-                    return configs.templates.length > 0;
+                    return configs.templates.length > 0 && configs.customTemplates.length > 0;
+                },
+                type: 'list',
+                name: 'template_group',
+                message: 'Select a template group',
+                choices: configs.templateGroups,
+                default: configs.defaultTemplateGroup
+            }, {
+                when: function (response) {
+                    return response.template_group === 'FreeKernelJS' || (configs.templates.length > 0 && configs.customTemplates.length <= 0);
                 },
                 type: 'list',
                 name: 'template',
                 message: 'Select a template',
                 choices: configs.templates,
                 default: configs.defaultTemplate
+            }, {
+                when: function (response) {
+                    return response.template_group === 'Custom';
+                },
+                type: 'list',
+                name: 'template',
+                message: 'Select a template',
+                choices: configs.customTemplates,
+                default: configs.defaultCustomTemplate
             }, {
                 when: function (response) {
                     return response.template === 'freekerneljs-basic-app';
@@ -254,32 +297,34 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
                 // For easier access in the templates.
                 this.slugname = _.slugify(props.name);
 
-                var hasMod = function (mod) {
-                    return props.modules.indexOf(mod) !== -1;
-                };
+                if (props.template_group != 'Custom') {
+                    var hasMod = function (mod) {
+                        return props.modules.indexOf(mod) !== -1;
+                    };
 
-                // Common modules.
-                this.angularModule = true;
-                this.mocksModule = true;
-                this.routeModule = true;
-                this.scriptjsModule = true;
-                this.angularTranslateModule = true;
-                this.angularTranslateLoaderStaticFilesModule = true;
-                this.cookiesModule = hasMod('cookiesModule');
-                this.resourceModule = hasMod('resourceModule');
-                this.messagesModule = hasMod('messagesModule');
-                this.sanitizeModule = hasMod('sanitizeModule');
-                this.touchModule = hasMod('touchModule');
+                    // Common modules.
+                    this.angularModule = true;
+                    this.mocksModule = true;
+                    this.routeModule = true;
+                    this.scriptjsModule = true;
+                    this.angularTranslateModule = true;
+                    this.angularTranslateLoaderStaticFilesModule = true;
+                    this.cookiesModule = hasMod('cookiesModule');
+                    this.resourceModule = hasMod('resourceModule');
+                    this.messagesModule = hasMod('messagesModule');
+                    this.sanitizeModule = hasMod('sanitizeModule');
+                    this.touchModule = hasMod('touchModule');
 
-                switch (props.template) {
-                    case 'freekerneljs-basic-app':
-                        this.bootstrapModule = true;
-                        break;
-                    case 'freekerneljs-basic-app-md':
-                        this.materialModule = true;
-                        this.iconicFont = hasMod('iconicFont');
-                        break;
-                    default:
+                    switch (props.template) {
+                        case 'freekerneljs-basic-app':
+                            this.bootstrapModule = true;
+                            break;
+                        case 'freekerneljs-basic-app-md':
+                            this.materialModule = true;
+                            this.iconicFont = hasMod('iconicFont');
+                            break;
+                        default:
+                    }
                 }
 
                 done();
@@ -290,7 +335,7 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
         }
     },
 
-    configuring: {
+    install: {
         init: function () {
             if (!this.options.update) {
                 this.log('\n' + chalk.bgWhite(chalk.magenta('Creating project and installing dependencies. This may take several minutes, please wait...')) + '\n');
@@ -323,10 +368,17 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
                 );
 
                 if (fs.existsSync('Gruntfile.js')) fs.unlinkSync('Gruntfile.js');
+                this.fs.copy(
+                    this.templatePath(path.join(generator_app, 'Gruntfile.js')),
+                    this.destinationPath('Gruntfile.js')
+                );
+
+                if (!fs.existsSync('config.user.json')) {
                     this.fs.copy(
-                        this.templatePath(path.join(generator_app, 'Gruntfile.js')),
-                        this.destinationPath('Gruntfile.js')
+                        this.templatePath(path.join(generator_app, 'config.json')),
+                        this.destinationPath('config.user.json')
                     );
+                }
             }
         },
         npm: function () {
@@ -353,28 +405,40 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
                     this.destinationPath(path.join(this.slugname, '.bowerrc'))
                 );
 
-                this.fs.copyTpl(
-                    path.join('node_modules', this.props.template, '_bower.json'),
-                    this.destinationPath('bower.json'),
-                    {
-                        name: this.slugname,
-                        version: this.props.version,
-                        angularModule: this.angularModule,
-                        mocksModule: this.mocksModule,
-                        routeModule: this.routeModule,
-                        scriptjsModule: this.scriptjsModule,
-                        angularTranslateModule: this.angularTranslateModule,
-                        angularTranslateLoaderStaticFilesModule: this.angularTranslateLoaderStaticFilesModule,
-                        cookiesModule: this.cookiesModule,
-                        resourceModule: this.resourceModule,
-                        messagesModule: this.messagesModule,
-                        sanitizeModule: this.sanitizeModule,
-                        touchModule: this.touchModule,
-                        bootstrapModule: this.bootstrapModule,
-                        materialModule: this.materialModule,
-                        iconicFont: this.iconicFont
-                    }
-                );
+                if (this.props.template_group != 'Custom') {
+                    this.fs.copyTpl(
+                        path.join('node_modules', this.props.template, '_bower.json'),
+                        this.destinationPath('bower.json'),
+                        {
+                            name: this.slugname,
+                            version: this.props.version,
+                            angularModule: this.angularModule,
+                            mocksModule: this.mocksModule,
+                            routeModule: this.routeModule,
+                            scriptjsModule: this.scriptjsModule,
+                            angularTranslateModule: this.angularTranslateModule,
+                            angularTranslateLoaderStaticFilesModule: this.angularTranslateLoaderStaticFilesModule,
+                            cookiesModule: this.cookiesModule,
+                            resourceModule: this.resourceModule,
+                            messagesModule: this.messagesModule,
+                            sanitizeModule: this.sanitizeModule,
+                            touchModule: this.touchModule,
+                            bootstrapModule: this.bootstrapModule,
+                            materialModule: this.materialModule,
+                            iconicFont: this.iconicFont
+                        }
+                    );
+                }
+                else {
+                    this.fs.copyTpl(
+                        path.join('node_modules', this.props.template, '_bower.json'),
+                        this.destinationPath('bower.json'),
+                        {
+                            name: this.slugname,
+                            version: this.props.version
+                        }
+                    );
+                }
 
                 this.fs.copy(
                     'bower.json',
