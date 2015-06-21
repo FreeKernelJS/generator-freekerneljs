@@ -86,6 +86,8 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
                     });
 
                     templates_exist = existTemplates('node_modules', user_configs.templates);
+
+                    configs = user_configs;
                 }
             });
         }
