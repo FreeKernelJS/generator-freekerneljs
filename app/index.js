@@ -78,6 +78,7 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
 
                 if (user_configs) {
                     user_configs.templates = configs.templates;
+                    user_configs.templateGroups = configs.templateGroups;
                     fs.writeFile('config.user.json', JSON.stringify(user_configs, null, 2), 'utf8', function (err, data) {
                         if (err) {
                             this.log(chalk.red('ERROR: ') + err);
