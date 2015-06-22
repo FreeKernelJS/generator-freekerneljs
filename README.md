@@ -9,7 +9,7 @@
 5. [Development Tools](#development)
 6. [Contributing to This Project](#contribute)
 7. [License](#license)
-8. [Releases History](#releases)
+8. [Releases](#releases)
 
 # <a name="about"></a> About FreeKernelJS
 FreeKernelJS aims to provide developers with a set of tools to generate a Web app structured from a template, and to use common tasks in development such as: testing the application, generate documentation, produce a distribution version, and more.
@@ -54,5 +54,5 @@ For general questions and discussions, or if you would like to contribute to thi
 # <a name="license"></a> License
 This project is under the [MIT License](https://github.com/FreeKernelJS/generator-freekerneljs/blob/master/LICENSE).
 
-# <a name="releases"></a> Releases History
-[Latest releases](https://github.com/FreeKernelJS/generator-freekerneljs/releases) of FreeKernelJS
+# <a name="releases"></a> Releases
+Complete historical information about the FreeKernelJS releases, including notes and download links, can be found on the [releases page](https://github.com/FreeKernelJS/generator-freekerneljs/releases).
