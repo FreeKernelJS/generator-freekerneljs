@@ -39,7 +39,7 @@ For further information please refer to the [Generate and Manage New Projects](h
 FreeKernelJS offers a collection of templates from which you can choose.  
 Each template contains different features and UI libraries, and can be used to generate an app.  
 A list of available templates is specified on this page: **[Templates](https://github.com/FreeKernelJS/generator-freekerneljs/wiki/templates)**.  
-In addition, you can enlarge your collection of templates by **[Creating a Custom Template]()**.
+In addition, you can enlarge your collection of templates by **[Creating a Custom Template]()** yourself.
 
 # <a name="getting-started"></a> Getting Started
 1. **[Installation](https://github.com/FreeKernelJS/generator-freekerneljs/wiki/installation)**: first, you will need to install the environment with only 4 easy steps!
@@ -50,7 +50,8 @@ FreeKernelJS comes with a set of tasks, powered by Grunt, which can be used duri
 A list of available tasks and instructions on how to use them can be found on this page: **[Use Grunt Tasks in Development](https://github.com/FreeKernelJS/generator-freekerneljs/wiki/grunt-tasks)**
 
 # <a name="contribute"></a> Contributing to This Project
-You are welcome to contribute to this project by adding custom templates that can be used with FreeKernelJS generator. For more details pleas read [Creating a Custom Template]().  
+You are welcome to contribute to this project by adding custom templates that can be used with FreeKernelJS generator.  
+For more details please read [Creating a Custom Template]().  
 For general questions and discussions, please refer to [FreeKernelJS Forum](http://www.forum.freekerneljs.org/).
 
 # <a name="license"></a> License
