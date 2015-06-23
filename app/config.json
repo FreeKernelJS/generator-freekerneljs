@@ -3,12 +3,5 @@
     "freekerneljs-basic-app",
     "freekerneljs-basic-app-md"
   ],
-  "templateGroups": [
-    "FreeKernelJS",
-    "Custom"
-  ],
-  "customTemplates": [],
-  "defaultTemplate": "freekerneljs-basic-app-md",
-  "defaultCustomTemplate": "",
-  "defaultTemplateGroup": "FreeKernelJS"
+  "updateDependencies": false
 }

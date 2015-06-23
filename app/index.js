@@ -12,11 +12,17 @@ var util = require('util'),
     mkdirp = require('mkdirp'),
     child_process = require('child_process'),
     pkg = require('../package.json'),
-    generator_root = '',
-    generator_app = '',
-    generator_templates = '',
-    configs = [],
+    generator_root_path = '',
+    generator_app_path = '',
+    generator_templates_path = '',
+    configs = '',
+    user_configs = '',
+    templates = [],
+    template_groups = [],
+    template_list = [],
+    multiple_template_groups = false,
     templates_exist = true,
+    default_template = '',
     task_error = false;
 
 var exec = child_process.exec;
@@ -49,11 +55,12 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
     },
 
     initializing: function () {
-        generator_root = path.join(this.sourceRoot(), '../../');
-        generator_app = path.join(this.sourceRoot(), '../');
-        generator_templates = path.join(this.sourceRoot(), './');
+        generator_root_path = path.join(this.sourceRoot(), '../../');
+        generator_app_path = path.join(this.sourceRoot(), '../');
+        generator_templates_path = path.join(this.sourceRoot(), './');
 
-        fs.readFile(path.join(generator_app, 'config.json'), 'utf8', function (err, data) {
+        // Generator configs
+        fs.readFile(path.join(generator_app_path, 'config.json'), 'utf8', function (err, data) {
             if (err) {
                 this.log(chalk.red('ERROR: ') + err);
                 return;
@@ -65,33 +72,60 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
                 templates_exist = existTemplates('node_modules', configs.templates);
         });
 
-        if (fs.existsSync('config.user.json')) {
-            var user_configs;
+        // Workspace configs
+        if (!fs.existsSync('config.json')) {
+            var objTemplates = {
+                'freekerneljs-basic-app': 'Favourites',
+                'freekerneljs-basic-app-md': 'Favourites'
+            };
 
-            fs.readFile('config.user.json', 'utf8', function (err, data) {
+            var objDefaultTemplates = {
+                'Favourites': 'freekerneljs-basic-app-md'
+            };
+
+            var objConfigs = {};
+            objConfigs['templates'] = objTemplates;
+            objConfigs['defaultTemplates'] = objDefaultTemplates;
+            objConfigs['defaultTemplateGroup'] = 'Favourites';
+
+            fs.writeFile('config.json', JSON.stringify(objConfigs, null, 2), 'utf8', function (err, data) {
                 if (err) {
                     this.log(chalk.red('ERROR: ') + err);
                     return;
                 }
-
-                user_configs = JSON.parse(data);
-
-                if (user_configs) {
-                    user_configs.templates = configs.templates;
-                    user_configs.templateGroups = configs.templateGroups;
-                    fs.writeFile('config.user.json', JSON.stringify(user_configs, null, 2), 'utf8', function (err, data) {
-                        if (err) {
-                            this.log(chalk.red('ERROR: ') + err);
-                            return;
-                        }
-                    });
-
-                    templates_exist = existTemplates('node_modules', user_configs.templates);
-
-                    configs = user_configs;
-                }
             });
         }
+
+        fs.readFile('config.json', 'utf8', function (err, data) {
+            if (err) {
+                this.log(chalk.red('ERROR: ') + err);
+                return;
+            }
+
+            user_configs = JSON.parse(data);
+            
+            if (user_configs) {
+                Object.keys(user_configs.templates).forEach(function (key) {
+                    templates.push(key);
+                    
+                    // Remove duplicate group names
+                    if (template_groups.indexOf(user_configs.templates[key]) == -1)
+                        template_groups.push(user_configs.templates[key]);
+                });
+
+                if (template_groups.length > 0) {
+                    var first_group = template_groups[0];
+                    
+                    // Check for different group names
+                    template_groups.forEach(function (name) {
+                        if (name != first_group)
+                            multiple_template_groups = true;
+                    });
+                }
+
+                templates_exist = existTemplates('node_modules', templates);
+            }
+        });
 
         var done = this.async();
         update_notifier({
@@ -118,7 +152,7 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
                     this.log(update_message);
                 }
 
-                if (pkg.updateDependencies) {
+                if (configs.updateDependencies) {
                     var line_1 = ' New updates are available for download.  ',
                         line_2 = ' Run ' + chalk.magenta('yo freekerneljs --update') + ' to update.  ',
                         line_3 = ' Use this command from your ' + chalk.red('Workspace') + ' folder.  ',
@@ -154,31 +188,47 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
         if (!this.options.update) {
             var prompts = [{
                 when: function (response) {
-                    return configs.templates.length > 0 && configs.customTemplates.length > 0;
+                    return multiple_template_groups;
                 },
                 type: 'list',
                 name: 'template_group',
                 message: 'Select a template group',
-                choices: configs.templateGroups,
-                default: configs.defaultTemplateGroup
+                choices: template_groups,
+                default: user_configs.defaultTemplateGroup
             }, {
                 when: function (response) {
-                    return response.template_group === 'FreeKernelJS' || (configs.templates.length > 0 && configs.customTemplates.length <= 0);
+                    Object.keys(user_configs.templates).forEach(function (key) {
+                        if (multiple_template_groups) {
+                            if (user_configs.templates[key] == response.template_group)
+                                template_list.push(key);
+                        }
+                        else if (key != '') {
+                            template_list.push(key);
+                        }
+                    });
+
+                    Object.keys(user_configs.defaultTemplates).forEach(function (key) {
+                        if (multiple_template_groups) {
+                            if (key == response.template_group)
+                                default_template = user_configs.defaultTemplates[key];
+                        }
+                        else if (user_configs.defaultTemplates[key] != '') {
+                            default_template = user_configs.defaultTemplates[key];
+                        }
+                    });
+                    
+                    if (template_list.length > 0)
+                        return true
                 },
                 type: 'list',
                 name: 'template',
                 message: 'Select a template',
-                choices: configs.templates,
-                default: configs.defaultTemplate
-            }, {
-                when: function (response) {
-                    return response.template_group === 'Custom';
+                choices: function () {
+                    return template_list;
                 },
-                type: 'list',
-                name: 'template',
-                message: 'Select a template',
-                choices: configs.customTemplates,
-                default: configs.defaultCustomTemplate
+                default: function () {
+                    return default_template;
+                }
             }, {
                 when: function (response) {
                     return response.template === 'freekerneljs-basic-app';
@@ -300,9 +350,9 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
                 // For easier access in the templates.
                 this.slugname = _.slugify(props.name);
 
-                if (props.template_group != 'Custom') {
+                if (configs.templates.indexOf(props.template) != -1) {
                     var hasMod = function (mod) {
-                        return props.modules.indexOf(mod) !== -1;
+                        return props.modules.indexOf(mod) != -1;
                     };
 
                     // Common modules.
@@ -372,16 +422,9 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
 
                 if (fs.existsSync('Gruntfile.js')) fs.unlinkSync('Gruntfile.js');
                 this.fs.copy(
-                    this.templatePath(path.join(generator_app, 'Gruntfile.js')),
+                    this.templatePath(path.join(generator_app_path, 'Gruntfile.js')),
                     this.destinationPath('Gruntfile.js')
                 );
-
-                if (!fs.existsSync('config.user.json')) {
-                    this.fs.copy(
-                        this.templatePath(path.join(generator_app, 'config.json')),
-                        this.destinationPath('config.user.json')
-                    );
-                }
             }
         },
         npm: function () {
@@ -408,7 +451,7 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
                     this.destinationPath(path.join(this.slugname, '.bowerrc'))
                 );
 
-                if (this.props.template_group != 'Custom') {
+                if (configs.templates.indexOf(this.props.template) != -1) {
                     this.fs.copyTpl(
                         path.join('node_modules', this.props.template, '_bower.json'),
                         this.destinationPath('bower.json'),
@@ -531,8 +574,8 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
                 skipInstall: this.options['skip-install'],
             });
 
-            pkg.updateDependencies = false;
-            fs.writeFile(path.join(__dirname, '../package.json'), JSON.stringify(pkg, null, 2), 'utf8', function (err, data) {
+            configs.updateDependencies = false;
+            fs.writeFile(path.join(generator_app_path, 'config.json'), JSON.stringify(configs, null, 2), 'utf8', function (err, data) {
                 if (err) {
                     this.log(chalk.red('ERROR: ') + err);
                     return;
