@@ -17,26 +17,10 @@ var util = require('util'),
     generator_templates_path = '',
     configs = '',
     user_configs = '',
-    templates = [],
-    template_groups = [],
-    template_list = [],
-    multiple_template_groups = false,
     templates_exist = true,
-    default_template = '',
     task_error = false;
 
 var exec = child_process.exec;
-
-function getDirectories(srcpath) {
-    if (fs.existsSync(srcpath)) {
-        return fs.readdirSync(srcpath).filter(function (file) {
-            return fs.statSync(path.join(srcpath, file)).isDirectory();
-        });
-    }
-    else {
-        return [];
-    }
-}
 
 function existTemplates(srcpath, templates) {
     templates.forEach(function (name) {
@@ -73,22 +57,17 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
         });
 
         // Workspace configs
-        if (!fs.existsSync('config.json')) {
-            var objTemplates = {
-                'freekerneljs-basic-app': 'Favourites',
-                'freekerneljs-basic-app-md': 'Favourites'
-            };
-
-            var objDefaultTemplates = {
-                'Favourites': 'freekerneljs-basic-app-md'
-            };
+        if (!fs.existsSync('templates.json')) {
+            var objTemplates = [
+                'freekerneljs-basic-app',
+                'freekerneljs-basic-app-md'
+            ];
 
             var objConfigs = {};
             objConfigs['templates'] = objTemplates;
-            objConfigs['defaultTemplates'] = objDefaultTemplates;
-            objConfigs['defaultTemplateGroup'] = 'Favourites';
+            objConfigs['defaultTemplate'] = 'freekerneljs-basic-app-md';
 
-            fs.writeFile('config.json', JSON.stringify(objConfigs, null, 2), 'utf8', function (err, data) {
+            fs.writeFile('templates.json', JSON.stringify(objConfigs, null, 2), 'utf8', function (err, data) {
                 if (err) {
                     this.log(chalk.red('ERROR: ') + err);
                     return;
@@ -96,7 +75,7 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
             });
         }
 
-        fs.readFile('config.json', 'utf8', function (err, data) {
+        fs.readFile('templates.json', 'utf8', function (err, data) {
             if (err) {
                 this.log(chalk.red('ERROR: ') + err);
                 return;
@@ -104,27 +83,8 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
 
             user_configs = JSON.parse(data);
             
-            if (user_configs) {
-                Object.keys(user_configs.templates).forEach(function (key) {
-                    templates.push(key);
-                    
-                    // Remove duplicate group names
-                    if (template_groups.indexOf(user_configs.templates[key]) == -1)
-                        template_groups.push(user_configs.templates[key]);
-                });
-
-                if (template_groups.length > 0) {
-                    var first_group = template_groups[0];
-                    
-                    // Check for different group names
-                    template_groups.forEach(function (name) {
-                        if (name != first_group)
-                            multiple_template_groups = true;
-                    });
-                }
-
-                templates_exist = existTemplates('node_modules', templates);
-            }
+            if (user_configs)
+                templates_exist = existTemplates('node_modules', user_configs.templates);
         });
 
         var done = this.async();
@@ -187,48 +147,11 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
         this.slugname = '';
         if (!this.options.update) {
             var prompts = [{
-                when: function (response) {
-                    return multiple_template_groups;
-                },
-                type: 'list',
-                name: 'template_group',
-                message: 'Select a template group',
-                choices: template_groups,
-                default: user_configs.defaultTemplateGroup
-            }, {
-                when: function (response) {
-                    Object.keys(user_configs.templates).forEach(function (key) {
-                        if (multiple_template_groups) {
-                            if (user_configs.templates[key] == response.template_group)
-                                template_list.push(key);
-                        }
-                        else if (key != '') {
-                            template_list.push(key);
-                        }
-                    });
-
-                    Object.keys(user_configs.defaultTemplates).forEach(function (key) {
-                        if (multiple_template_groups) {
-                            if (key == response.template_group)
-                                default_template = user_configs.defaultTemplates[key];
-                        }
-                        else if (user_configs.defaultTemplates[key] != '') {
-                            default_template = user_configs.defaultTemplates[key];
-                        }
-                    });
-                    
-                    if (template_list.length > 0)
-                        return true
-                },
                 type: 'list',
                 name: 'template',
                 message: 'Select a template',
-                choices: function () {
-                    return template_list;
-                },
-                default: function () {
-                    return default_template;
-                }
+                choices: user_configs.templates,
+                default: user_configs.defaultTemplate
             }, {
                 when: function (response) {
                     return response.template === 'freekerneljs-basic-app';
