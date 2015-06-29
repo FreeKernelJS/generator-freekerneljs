@@ -65,7 +65,7 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
 
             var objConfigs = {};
             objConfigs['templates'] = objTemplates;
-            objConfigs['defaultTemplate'] = 'freekerneljs-basic-app-md';
+            objConfigs['defaultTemplate'] = 'freekerneljs-basic-app';
 
             fs.writeFile('templates.json', JSON.stringify(objConfigs, null, 2), 'utf8', function (err, data) {
                 if (err) {
