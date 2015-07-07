@@ -216,9 +216,6 @@ module.exports = function (grunt) {
                 bowerOptions: {
                     relative: false
                 },
-                bowerOptions: {
-                    relative: false
-                },
                 callback: function (main_files, component) {
                     var component_dependencies,
                         dependencies = [];
