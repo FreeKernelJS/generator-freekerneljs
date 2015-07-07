@@ -208,11 +208,13 @@ module.exports = function (grunt) {
 
                 ],
                 mainFiles: {
-                    //'script.js': 'dist/script.js'
                     'bootstrap': 'dist/css/bootstrap.css'
                 },
                 dependencies: {
-
+                    'angular': ['jquery']
+                },
+                bowerOptions: {
+                    relative: false
                 },
                 bowerOptions: {
                     relative: false
@@ -221,15 +223,13 @@ module.exports = function (grunt) {
                     var component_dependencies,
                         dependencies = [];
 
-                    if (grunt.file.exists(project_folder + 'bower_components/' + component + '/bower.json')) {
-                        component_dependencies = grunt.file.readJSON(project_folder + 'bower_components/' + component + '/bower.json').dependencies,
+                    if (grunt.file.exists(path.join('bower_components/', component, 'bower.json'))) {
+                        component_dependencies = grunt.file.readJSON(path.join('bower_components/', component, 'bower.json')).dependencies;
                         dependencies = component_dependencies ? Object.keys(component_dependencies) : [];
                     }
 
                     return main_files.map(function (filepath) {
-                        for (i = 0; i < bower_comp.length; i++) {
-                            return ((bower_comp[i].indexOf(component) > -1 || dependencies.length > -1) && component != 'script.js') ? filepath : false;
-                        }
+                        return ((bower_comp.indexOf(component) > -1 || dependencies.length > -1) && component != 'script.js') ? filepath : false;
                     });
                 }
             }
