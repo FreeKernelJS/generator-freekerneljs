@@ -65,7 +65,7 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
 
             var objConfigs = {};
             objConfigs['templates'] = objTemplates;
-            objConfigs['defaultTemplate'] = 'freekerneljs-basic-app-md';
+            objConfigs['defaultTemplate'] = 'freekerneljs-basic-app';
 
             fs.writeFile('templates.json', JSON.stringify(objConfigs, null, 2), 'utf8', function (err, data) {
                 if (err) {
@@ -153,66 +153,6 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
                 choices: user_configs.templates,
                 default: user_configs.defaultTemplate
             }, {
-                when: function (response) {
-                    return response.template === 'freekerneljs-basic-app';
-                },
-                type: 'checkbox',
-                name: 'modules',
-                message: 'Which packages would you like to include?',
-                choices: [{
-                    value: 'cookiesModule',
-                    name: 'angular-cookies',
-                    checked: false
-                }, {
-                    value: 'resourceModule',
-                    name: 'angular-resource',
-                    checked: false
-                }, {
-                    value: 'messagesModule',
-                    name: 'angular-messages',
-                    checked: false
-                }, {
-                    value: 'sanitizeModule',
-                    name: 'angular-sanitize',
-                    checked: false
-                }, {
-                    value: 'touchModule',
-                    name: 'angular-touch',
-                    checked: false
-                }]
-            }, {
-                when: function (response) {
-                    return response.template === 'freekerneljs-basic-app-md';
-                },
-                type: 'checkbox',
-                name: 'modules',
-                message: 'Which packages would you like to include?',
-                choices: [{
-                    value: 'cookiesModule',
-                    name: 'angular-cookies',
-                    checked: false
-                }, {
-                    value: 'resourceModule',
-                    name: 'angular-resource',
-                    checked: false
-                }, {
-                    value: 'messagesModule',
-                    name: 'angular-messages',
-                    checked: false
-                }, {
-                    value: 'sanitizeModule',
-                    name: 'angular-sanitize',
-                    checked: false
-                }, {
-                    value: 'touchModule',
-                    name: 'angular-touch',
-                    checked: false
-                }, {
-                    value: 'iconicFont',
-                    name: 'material-design-iconic-font',
-                    checked: false
-                }]
-            }, {
                 type: 'input',
                 name: 'name',
                 message: 'Project name',
@@ -272,36 +212,6 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
 
                 // For easier access in the templates.
                 this.slugname = _.slugify(props.name);
-
-                if (configs.templates.indexOf(props.template) != -1) {
-                    var hasMod = function (mod) {
-                        return props.modules.indexOf(mod) != -1;
-                    };
-
-                    // Common modules.
-                    this.angularModule = true;
-                    this.mocksModule = true;
-                    this.routeModule = true;
-                    this.scriptjsModule = true;
-                    this.angularTranslateModule = true;
-                    this.angularTranslateLoaderStaticFilesModule = true;
-                    this.cookiesModule = hasMod('cookiesModule');
-                    this.resourceModule = hasMod('resourceModule');
-                    this.messagesModule = hasMod('messagesModule');
-                    this.sanitizeModule = hasMod('sanitizeModule');
-                    this.touchModule = hasMod('touchModule');
-
-                    switch (props.template) {
-                        case 'freekerneljs-basic-app':
-                            this.bootstrapModule = true;
-                            break;
-                        case 'freekerneljs-basic-app-md':
-                            this.materialModule = true;
-                            this.iconicFont = hasMod('iconicFont');
-                            break;
-                        default:
-                    }
-                }
 
                 done();
             }.bind(this));
@@ -374,40 +284,14 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
                     this.destinationPath(path.join(this.slugname, '.bowerrc'))
                 );
 
-                if (configs.templates.indexOf(this.props.template) != -1) {
-                    this.fs.copyTpl(
-                        path.join('node_modules', this.props.template, '_bower.json'),
-                        this.destinationPath('bower.json'),
-                        {
-                            name: this.slugname,
-                            version: this.props.version,
-                            angularModule: this.angularModule,
-                            mocksModule: this.mocksModule,
-                            routeModule: this.routeModule,
-                            scriptjsModule: this.scriptjsModule,
-                            angularTranslateModule: this.angularTranslateModule,
-                            angularTranslateLoaderStaticFilesModule: this.angularTranslateLoaderStaticFilesModule,
-                            cookiesModule: this.cookiesModule,
-                            resourceModule: this.resourceModule,
-                            messagesModule: this.messagesModule,
-                            sanitizeModule: this.sanitizeModule,
-                            touchModule: this.touchModule,
-                            bootstrapModule: this.bootstrapModule,
-                            materialModule: this.materialModule,
-                            iconicFont: this.iconicFont
-                        }
-                    );
-                }
-                else {
-                    this.fs.copyTpl(
-                        path.join('node_modules', this.props.template, '_bower.json'),
-                        this.destinationPath('bower.json'),
-                        {
-                            name: this.slugname,
-                            version: this.props.version
-                        }
-                    );
-                }
+                this.fs.copyTpl(
+                    path.join('node_modules', this.props.template, '_bower.json'),
+                    this.destinationPath('bower.json'),
+                    {
+                        name: this.slugname,
+                        version: this.props.version
+                    }
+                );
 
                 this.fs.copy(
                     'bower.json',

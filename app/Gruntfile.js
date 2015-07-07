@@ -2,19 +2,24 @@ module.exports = function (grunt) {
     var
         project_folder = grunt.option('project') ? grunt.option('project') + '/' : './',
         path = require('path'),
-        bower_dependencies = grunt.file.readJSON(project_folder + 'bower.json').dependencies,
-        bower_comp = Object.keys(bower_dependencies);
+        pkg = grunt.file.readJSON(path.join(project_folder, 'package.json')),
+        bower_pkg = grunt.file.readJSON(path.join(project_folder, 'bower.json'));
+        bower_dependencies = grunt.file.readJSON(path.join(project_folder, 'bower.json')).dependencies,
+        bower_comp = Object.keys(bower_dependencies),
+        theme_bower_pkg = '',
+        theme_bower_scss = '',
+        theme_bower_favicon = '';
 
     // Load all grunt tasks.
-    require('load-grunt-tasks')(grunt, { config: project_folder + 'package.json' });
+    require('load-grunt-tasks')(grunt, { config: path.join(project_folder, 'package.json') });
 
     // Show elapsed time at the end.
     require('time-grunt')(grunt);
 
     // Application configuration.
     grunt.initConfig({
-        pkg: grunt.file.readJSON(project_folder + 'package.json'),
-
+        pkg: pkg,
+        
         banner: '/*!\n' +
             ' * <%= pkg.name %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' +
             ' * <%= pkg.homepage %>\n' +
@@ -64,6 +69,18 @@ module.exports = function (grunt) {
                         {
                             pattern: /fkjs_\(version\)/ig,
                             replacement: '<%= pkg.version %>'
+                        },
+                        {
+                            pattern: /fkjs_\(theme\)/ig,
+                            replacement: bower_pkg.fkjs_theme
+                        },
+                        {
+                            pattern: /fkjs_\(theme_main\)/ig,
+                            replacement: function () { return theme_bower_scss }
+                        },
+                        {
+                            pattern: /fkjs_\(favicon\)/ig,
+                            replacement: function () { return theme_bower_favicon }
                         }
                     ]
                 }
@@ -96,6 +113,18 @@ module.exports = function (grunt) {
                         {
                             pattern: /fkjs_\(version\)/ig,
                             replacement: '<%= pkg.version %>'
+                        },
+                        {
+                            pattern: /fkjs_\(theme\)/ig,
+                            replacement: bower_pkg.fkjs_theme
+                        },
+                        {
+                            pattern: /fkjs_\(theme_main\)/ig,
+                            replacement: function () { return theme_bower_scss }
+                        },
+                        {
+                            pattern: /fkjs_\(favicon\)/ig,
+                            replacement: function () { return theme_bower_favicon }
                         }
                     ]
                 }
@@ -179,11 +208,10 @@ module.exports = function (grunt) {
 
                 ],
                 mainFiles: {
-                    //'script.js': 'dist/script.js'
                     'bootstrap': 'dist/css/bootstrap.css'
                 },
                 dependencies: {
-
+                    'angular': ['jquery']
                 },
                 bowerOptions: {
                     relative: false
@@ -192,15 +220,13 @@ module.exports = function (grunt) {
                     var component_dependencies,
                         dependencies = [];
 
-                    if (grunt.file.exists(project_folder + 'bower_components/' + component + '/bower.json')) {
-                        component_dependencies = grunt.file.readJSON(project_folder + 'bower_components/' + component + '/bower.json').dependencies,
+                    if (grunt.file.exists(path.join('bower_components/', component, 'bower.json'))) {
+                        component_dependencies = grunt.file.readJSON(path.join('bower_components/', component, 'bower.json')).dependencies;
                         dependencies = component_dependencies ? Object.keys(component_dependencies) : [];
                     }
 
                     return main_files.map(function (filepath) {
-                        for (i = 0; i < bower_comp.length; i++) {
-                            return ((bower_comp[i].indexOf(component) > -1 || dependencies.length > -1) && component != 'script.js') ? filepath : false;
-                        }
+                        return ((bower_comp.indexOf(component) > -1 || dependencies.length > -1) && component != 'script.js') ? filepath : false;
                     });
                 }
             }
@@ -376,6 +402,49 @@ module.exports = function (grunt) {
 
     /**
 	 * @description
+	 *   Running theme init task(s).
+	 * 
+	 */
+    grunt.registerTask('theme-init', '', function () {
+        var options = {
+                cwd: '',
+                filter: 'isFile',
+                dot: true
+            },
+            glob = ['**/*'];
+
+        if (bower_pkg.fkjs_theme != '') {
+            theme_bower_pkg = grunt.file.readJSON(path.join('bower_components/', bower_pkg.fkjs_theme, '/bower.json'));
+
+            if (theme_bower_pkg.main.length > 0) {
+                theme_bower_pkg.main.forEach(function (entry) {
+                    switch (entry.match(/\.[0-9a-z]+$/i)[0]) {
+                        case '.ico':
+                            if (entry.match(/favicon.ico/i))
+                                theme_bower_favicon = 'assets/images/favicon.ico';
+                            break;
+                        case '.scss':
+                            if (entry.match(/_app.scss/i))
+                                theme_bower_scss = entry;
+                            break;
+                    }
+                });
+            }
+
+            options.cwd = path.join('bower_components/', bower_pkg.fkjs_theme, '/app/images/');
+            grunt.file.expand(options, glob).forEach(function (file) {
+                grunt.file.copy(path.join('bower_components/', bower_pkg.fkjs_theme, '/app/images/', file), path.join('app/assets/images/', file));
+            });
+
+            options.cwd = path.join('bower_components/', bower_pkg.fkjs_theme, '/app/fonts/');
+            grunt.file.expand(options, glob).forEach(function (file) {
+                grunt.file.copy(path.join('bower_components/', bower_pkg.fkjs_theme, '/app/fonts/', file), path.join('app/assets/fonts/', file));
+            });
+        }
+    });
+
+    /**
+	 * @description
 	 *   Running test task(s).
 	 * 
 	 */
@@ -433,6 +502,7 @@ module.exports = function (grunt) {
 	 * 
 	 */
     grunt.registerTask('default', [
+        'theme-init',
         'copy:material-design-iconic-font',
         'string-replace:material-design-iconic-font',
         'sass:material-design-iconic-font',
