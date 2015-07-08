@@ -11,11 +11,11 @@ var util = require('util'),
     _ = require('underscore.string'),
     mkdirp = require('mkdirp'),
     child_process = require('child_process'),
-    pkg = require('../package.json'),
+    pkg = require(path.join('../', 'package.json')),
     generator_root_path = '',
     generator_app_path = '',
     generator_templates_path = '',
-    configs = '',
+    configs = pkg,
     user_configs = '',
     templates_exist = true,
     task_error = false;
@@ -44,17 +44,8 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
         generator_templates_path = path.join(this.sourceRoot(), './');
 
         // Generator configs
-        fs.readFile(path.join(generator_app_path, 'config.json'), 'utf8', function (err, data) {
-            if (err) {
-                this.log(chalk.red('ERROR: ') + err);
-                return;
-            }
-
-            configs = JSON.parse(data);
-
-            if (configs)
-                templates_exist = existTemplates('node_modules', configs.templates);
-        });
+        if (configs.fkjs_templates)
+            templates_exist = existTemplates('node_modules', configs.fkjs_templates);
 
         // Workspace configs
         if (!fs.existsSync('templates.json')) {

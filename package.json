@@ -41,5 +41,10 @@
   },
   "peerDependencies": {
     "yo": ">=1.4.7"
-  }
+  },
+  "fkjs_templates": [
+    "freekerneljs-basic-app",
+    "freekerneljs-basic-app-md"
+  ],
+  "fkjs_updateDependencies": false
 }

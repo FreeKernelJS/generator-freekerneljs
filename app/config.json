@@ -1,7 +1,0 @@
-{
-  "templates": [
-    "freekerneljs-basic-app",
-    "freekerneljs-basic-app-md"
-  ],
-  "updateDependencies": false
-}
