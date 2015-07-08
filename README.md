@@ -12,7 +12,10 @@
 8. [Releases](#releases)
 
 # <a name="about"></a> About FreeKernelJS
-FreeKernelJS aims to provide developers with a set of tools to generate a Web app structured from a template, and to use common tasks in development such as: testing the application, generate documentation, produce a distribution version, and more.
+FreeKernelJS aims to provide developers with a set of tools to produce a Web application structured from a Template, and to use common tasks in development such as: testing the application, generate documentation, produce a distribution version, and more.
+
+To accelerate the production of the applications FreeKernelJS uses a Generator, which also makes the entire process simple and easy to use.  
+FreeKernelJS Generator creates for you a work environment - the Workspace, a separate Web project for each application, and enables you to develop custome Templates and Themes, then import them into FreeKernelJS to be operated by its Generator.
 
 ##### FreeKernelJS is based on these technologies:
 [![Yeoman](http://pixel-cookers.github.io/built-with-badges/yeoman/yeoman-short.png)](http://yeoman.io/)
@@ -30,6 +33,7 @@ Supported Browsers: designed to support the current versions of Chrome, Firefox,
 - [x] You want to test standard technologies and learn how to use them.
 - [x] You want to generate a skeleton app that can be extended and used in large projects.
 - [x] You want to produce quickly several different apps, build with different UI packages/libraries.
+- [x] You need a complete modualr environment, where you can develop your applications.
 
 # <a name="templates"></a> Templates
 FreeKernelJS offers a collection of templates from which you can choose.  
