@@ -37,7 +37,7 @@ Supported Browsers: designed to support the current versions of Chrome, Firefox,
 - [x] You need a complete modualr environment, where you can develop your applications.
 
 # <a name="getting-started"></a> Getting Started
-1. **[Concept and Terminology]()**: understand the main concept behind FreeKernelJS and learn about its terminology.
+1. **[Concept and Terminology](https://github.com/FreeKernelJS/generator-freekerneljs/wiki/Concept-and-Terminology)**: understand the main concept behind FreeKernelJS and learn about its terminology.
 2. **[Installation](https://github.com/FreeKernelJS/generator-freekerneljs/wiki/installation)**: first, you will need to install the environment with only 4 easy steps!
 3. **[Generate and Manage New Projects](https://github.com/FreeKernelJS/generator-freekerneljs/wiki/generate-app)**: then you can learn how to generate a new Project, how to configure and manage it. 
 
@@ -50,7 +50,7 @@ In addition, you can enlarge your collection of Templates by **[Creating a Custo
 # <a name="themes"></a> Themes
 Each App that FreeKernelJS generates can use a single Theme.  
 You can use the default Theme that comes built-in with the Template you choose, or create your own custom Theme and use it in your application.  
-To learn how to do that read **[Creating a Custom Theme]()**.
+To learn how to do that read **[Creating a Custom Theme](https://github.com/FreeKernelJS/generator-freekerneljs/wiki/Themes#custom)**.
 
 # <a name="development"></a> Development Tools
 FreeKernelJS comes with a set of tasks, powered by Grunt, which can be used during development to perform routine operations such as: unit testing, distribution, Sass compilation, etc.  
