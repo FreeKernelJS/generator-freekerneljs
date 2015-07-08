@@ -34,7 +34,7 @@ Supported Browsers: designed to support the current versions of Chrome, Firefox,
 - [x] You want to test standard technologies and learn how to use them.
 - [x] You want to generate a skeleton app that can be extended and used in large projects.
 - [x] You want to produce quickly several different apps, build with different UI packages/libraries.
-- [x] You need a complete modualr environment, where you can develop your applications.
+- [x] You need a complete modular environment, where you can develop your applications.
 
 # <a name="getting-started"></a> Getting Started
 1. **[Concept and Terminology](https://github.com/FreeKernelJS/generator-freekerneljs/wiki/Concept-and-Terminology)**: understand the main concept behind FreeKernelJS and learn about its terminology.
