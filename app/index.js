@@ -103,7 +103,7 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
                     this.log(update_message);
                 }
 
-                if (configs.updateDependencies) {
+                if (configs.fkjs_updateDependencies) {
                     var line_1 = ' New updates are available for download.  ',
                         line_2 = ' Run ' + chalk.magenta('yo freekerneljs --update') + ' to update.  ',
                         line_3 = ' Use this command from your ' + chalk.red('Workspace') + ' folder.  ',
@@ -372,7 +372,7 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
                 skipInstall: this.options['skip-install'],
             });
 
-            configs.updateDependencies = false;
+            configs.fkjs_updateDependencies = false;
             fs.writeFile(path.join(generator_app_path, 'config.json'), JSON.stringify(configs, null, 2), 'utf8', function (err, data) {
                 if (err) {
                     this.log(chalk.red('ERROR: ') + err);
