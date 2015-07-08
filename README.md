@@ -50,7 +50,7 @@ In addition, you can enlarge your collection of Templates by **[Creating a Custo
 # <a name="themes"></a> Themes
 Each App that FreeKernelJS generates can use a single Theme.  
 You can use the default Theme that comes built-in with the Template you choose, or create your own custom Theme and use it in your application.  
-To learn how to do that read [Creating a Custom Theme]().
+To learn how to do that read **[Creating a Custom Theme]()**.
 
 # <a name="development"></a> Development Tools
 FreeKernelJS comes with a set of tasks, powered by Grunt, which can be used during development to perform routine operations such as: unit testing, distribution, Sass compilation, etc.  
