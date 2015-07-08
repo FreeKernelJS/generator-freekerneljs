@@ -37,7 +37,7 @@ Supported Browsers: designed to support the current versions of Chrome, Firefox,
 - [x] You need a complete modualr environment, where you can develop your applications.
 
 # <a name="getting-started"></a> Getting Started
-1. **[Concept And Terminology]()**: understand the main concept behind FreeKernelJS and learn about its terminology.
+1. **[Concept and Terminology]()**: understand the main concept behind FreeKernelJS and learn about its terminology.
 2. **[Installation](https://github.com/FreeKernelJS/generator-freekerneljs/wiki/installation)**: first, you will need to install the environment with only 4 easy steps!
 3. **[Generate and Manage New Projects](https://github.com/FreeKernelJS/generator-freekerneljs/wiki/generate-app)**: then you can learn how to generate a new Project, how to configure and manage it. 
 
