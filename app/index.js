@@ -373,7 +373,7 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
             });
 
             configs.fkjs_updateDependencies = false;
-            fs.writeFile(path.join(generator_app_path, 'config.json'), JSON.stringify(configs, null, 2), 'utf8', function (err, data) {
+            fs.writeFile(path.join(generator_root_path, 'package.json'), JSON.stringify(configs, null, 2), 'utf8', function (err, data) {
                 if (err) {
                     this.log(chalk.red('ERROR: ') + err);
                     return;
