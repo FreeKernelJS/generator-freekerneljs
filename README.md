@@ -60,7 +60,7 @@ A list of available tasks and instructions on how to use them can be found on th
 You are welcome to contribute to this project by adding custom Templates or Themes that can be used with FreeKernelJS.  
 For more details please read:  
 [Creating a Custom Template](https://github.com/FreeKernelJS/generator-freekerneljs/wiki/templates#custom).  
-[Creating a Custom Theme]()  
+[Creating a Custom Theme](https://github.com/FreeKernelJS/generator-freekerneljs/wiki/Themes#custom)  
 For general questions and discussions, please refer to [FreeKernelJS Forum](http://www.forum.freekerneljs.org/).
 
 # <a name="license"></a> License
