@@ -57,11 +57,10 @@ FreeKernelJS comes with a set of tasks, powered by Grunt, which can be used duri
 A list of available tasks and instructions on how to use them can be found on this page: **[Use Grunt Tasks in Development](https://github.com/FreeKernelJS/generator-freekerneljs/wiki/grunt-tasks)**
 
 # <a name="contribute"></a> Contributing to This Project
-You are welcome to contribute to this project by adding custom Templates or Themes that can be used with FreeKernelJS.  
-For more details please read:  
+You are welcome to contribute to this project by adding custom Templates or Themes that can be used by FreeKernelJS. For more details read:  
 [Creating a Custom Template](https://github.com/FreeKernelJS/generator-freekerneljs/wiki/templates#custom).  
 [Creating a Custom Theme](https://github.com/FreeKernelJS/generator-freekerneljs/wiki/Themes#custom)  
-For general questions and discussions, please refer to [FreeKernelJS Forum](http://www.forum.freekerneljs.org/).
+For general questions and discussions, please refer to the [FreeKernelJS Forum](http://www.forum.freekerneljs.org/).
 
 # <a name="license"></a> License
 This project is under the [MIT License](https://github.com/FreeKernelJS/generator-freekerneljs/blob/master/LICENSE).
