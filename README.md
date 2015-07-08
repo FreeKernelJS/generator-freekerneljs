@@ -1,4 +1,4 @@
-# generator-freekerneljs
+# FreeKernelJS
 
 
 ### Contents
