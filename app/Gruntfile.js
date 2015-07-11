@@ -1,15 +1,14 @@
 module.exports = function (grunt) {
-    var
-        project_folder = grunt.option('project') ? grunt.option('project') + '/' : './',
+    var project_folder = grunt.option('project') ? grunt.option('project') + '/' : './',
         path = require('path'),
         pkg = grunt.file.readJSON(path.join(project_folder, 'package.json')),
         bower_pkg = grunt.file.readJSON(path.join(project_folder, 'bower.json'));
-    bower_dependencies = grunt.file.readJSON(path.join(project_folder, 'bower.json')).dependencies,
-    bower_comp = Object.keys(bower_dependencies),
-    theme_bower_pkg = '',
-    theme_bower_root = '../../../bower_components/',
-    theme_bower_scss = '',
-    theme_bower_favicon = '';
+        bower_dependencies = grunt.file.readJSON(path.join(project_folder, 'bower.json')).dependencies,
+        bower_comp = Object.keys(bower_dependencies),
+        theme_bower_pkg = '',
+        theme_bower_root = '../../../bower_components/',
+        theme_bower_scss = '',
+        theme_bower_favicon = '';
 
     // Load all grunt tasks.
     require('load-grunt-tasks')(grunt, { config: path.join(project_folder, 'package.json') });
