@@ -40,7 +40,7 @@
     "karma-jasmine": "^0.1.5",
     "karma-phantomjs-launcher": "*",
     "karma-ng-html2js-preprocessor": "^0.1.2",
-    "freekerneljs-basic-app": "FreeKernelJS/freekerneljs-basic-app#build_v0.2.2",
+    "freekerneljs-basic-app": "FreeKernelJS/freekerneljs-basic-app",
     "freekerneljs-basic-app-md": "FreeKernelJS/freekerneljs-basic-app-md"
   }
 }
