@@ -4,11 +4,12 @@ module.exports = function (grunt) {
         path = require('path'),
         pkg = grunt.file.readJSON(path.join(project_folder, 'package.json')),
         bower_pkg = grunt.file.readJSON(path.join(project_folder, 'bower.json'));
-        bower_dependencies = grunt.file.readJSON(path.join(project_folder, 'bower.json')).dependencies,
-        bower_comp = Object.keys(bower_dependencies),
-        theme_bower_pkg = '',
-        theme_bower_scss = '',
-        theme_bower_favicon = '';
+    bower_dependencies = grunt.file.readJSON(path.join(project_folder, 'bower.json')).dependencies,
+    bower_comp = Object.keys(bower_dependencies),
+    theme_bower_pkg = '',
+    theme_bower_root = '../../../bower_components/',
+    theme_bower_scss = '',
+    theme_bower_favicon = '';
 
     // Load all grunt tasks.
     require('load-grunt-tasks')(grunt, { config: path.join(project_folder, 'package.json') });
@@ -19,7 +20,7 @@ module.exports = function (grunt) {
     // Application configuration.
     grunt.initConfig({
         pkg: pkg,
-        
+
         banner: '/*!\n' +
             ' * <%= pkg.name %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' +
             ' * <%= pkg.homepage %>\n' +
@@ -47,6 +48,7 @@ module.exports = function (grunt) {
                     cwd: 'app/',
                     src: [
                         '**/*',
+                        '!assets/scss/app.scss',
                         '!**/assets/fonts/**',
                         '!**/assets/images/**'
                     ],
@@ -75,8 +77,20 @@ module.exports = function (grunt) {
                             replacement: bower_pkg.fkjs_theme
                         },
                         {
+                            pattern: /fkjs_\(theme_root\)/ig,
+                            replacement: function () { return theme_bower_root }
+                        },
+                        {
                             pattern: /fkjs_\(theme_main\)/ig,
-                            replacement: function () { return theme_bower_scss }
+                            replacement: function () { return theme_bower_root + bower_pkg.fkjs_theme + '/' + theme_bower_scss }
+                        },
+                        {
+                            pattern: /fkjs_\(theme_fonts\)/ig,
+                            replacement: function () { return theme_bower_root + bower_pkg.fkjs_theme + '/app/assets/fonts/' }
+                        },
+                        {
+                            pattern: /fkjs_\(theme_images\)/ig,
+                            replacement: function () { return theme_bower_root + bower_pkg.fkjs_theme + '/app/assets/images/' }
                         },
                         {
                             pattern: /fkjs_\(favicon\)/ig,
@@ -119,8 +133,20 @@ module.exports = function (grunt) {
                             replacement: bower_pkg.fkjs_theme
                         },
                         {
+                            pattern: /fkjs_\(theme_root\)/ig,
+                            replacement: function () { return theme_bower_root }
+                        },
+                        {
                             pattern: /fkjs_\(theme_main\)/ig,
-                            replacement: function () { return theme_bower_scss }
+                            replacement: function () { return theme_bower_root + bower_pkg.fkjs_theme + '/' + theme_bower_scss }
+                        },
+                        {
+                            pattern: /fkjs_\(theme_fonts\)/ig,
+                            replacement: '../fonts/'
+                        },
+                        {
+                            pattern: /fkjs_\(theme_images\)/ig,
+                            replacement: '../images/'
                         },
                         {
                             pattern: /fkjs_\(favicon\)/ig,
@@ -153,7 +179,6 @@ module.exports = function (grunt) {
                     '!**/test/**',
                     '!**/docs/**',
                     '!**/assets/css/**',
-                    '!**/assets/scss/**',
                     '!**/src/**/*.js'
                 ],
                 expand: true,
@@ -194,7 +219,10 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     cwd: 'app/assets/scss/',
-                    src: ['**/*.scss'],
+                    src: [
+                        '**/*.scss',
+                        '!app.scss'
+                    ],
                     dest: 'app/assets/scss/.temp',
                     ext: '.css'
                 }]
@@ -331,15 +359,23 @@ module.exports = function (grunt) {
             }
         },
         clean: {
+            'default-after': [
+                'app/assets/scss/app-temp-default.scss'
+            ],
+            'compile-scss-after': [
+                'app/assets/scss/app-temp-default.scss'
+            ],
             'dist-before': [
                 'dist/'
             ],
             'dist-after': [
                 'app/assets/scss/.temp',
+                'app/assets/scss/app-temp-dist.scss',
                 'dist/app.js',
                 'dist/app.libraries.js',
                 'dist/app.js.files.js',
                 'dist/assets/css/app.css',
+                'dist/assets/scss',
                 'dist/_bower.js',
                 'dist/_bower.css',
                 'dist/src/services'
@@ -406,41 +442,77 @@ module.exports = function (grunt) {
 	 * 
 	 */
     grunt.registerTask('theme-init', '', function () {
-        var options = {
-                cwd: '',
-                filter: 'isFile',
-                dot: true
-            },
-            glob = ['**/*'];
-
         if (bower_pkg.fkjs_theme != '') {
             theme_bower_pkg = grunt.file.readJSON(path.join('bower_components/', bower_pkg.fkjs_theme, '/bower.json'));
 
             if (theme_bower_pkg.main.length > 0) {
                 theme_bower_pkg.main.forEach(function (entry) {
-                    switch (entry.match(/\.[0-9a-z]+$/i)[0]) {
-                        case '.ico':
-                            if (entry.match(/favicon.ico/i))
-                                theme_bower_favicon = 'assets/images/favicon.ico';
-                            break;
-                        case '.scss':
-                            if (entry.match(/_app.scss/i))
-                                theme_bower_scss = entry;
-                            break;
+                    var result = entry.match(/\.[0-9a-z]+$/i);
+
+                    if (result) {
+                        switch (result[0]) {
+                            case '.ico':
+                                if (entry.match(/favicon.ico/i))
+                                    theme_bower_favicon = entry;
+                                break;
+                            case '.scss':
+                                if (entry.match(/_app.scss/i))
+                                    theme_bower_scss = entry;
+                                break;
+                        }
+                    }
+                    else {
+                        //console.log(entry);
                     }
                 });
             }
+        }
+    });
 
-            options.cwd = path.join('bower_components/', bower_pkg.fkjs_theme, '/app/images/');
-            grunt.file.expand(options, glob).forEach(function (file) {
-                grunt.file.copy(path.join('bower_components/', bower_pkg.fkjs_theme, '/app/images/', file), path.join('app/assets/images/', file));
-            });
+    /**
+	 * @description
+	 *   Running theme copy task(s).
+	 * 
+	 */
+    grunt.registerTask('theme-copy', '', function () {
+        if (bower_pkg.fkjs_theme != '') {
+            var srcPath = 'bower_components/' + bower_pkg.fkjs_theme + '/app/assets/',
+				destPath = 'app/assets',
+				options = {
+				    cwd: srcPath,
+				    filter: 'isFile',
+				    dot: true
+				},
+				glob = '**/*';
 
-            options.cwd = path.join('bower_components/', bower_pkg.fkjs_theme, '/app/fonts/');
             grunt.file.expand(options, glob).forEach(function (file) {
-                grunt.file.copy(path.join('bower_components/', bower_pkg.fkjs_theme, '/app/fonts/', file), path.join('app/assets/fonts/', file));
+                grunt.file.copy(path.join(srcPath, file), path.join(destPath, file));
             });
         }
+    });
+
+    /**
+	 * @description
+	 *   Running before default tags task(s).
+	 * 
+	 */
+    grunt.registerTask('before-default-tags', '', function () {
+        var srcPath = 'app/assets/scss/',
+			destPath = 'app/assets/scss/';
+
+        grunt.file.copy(path.join(srcPath, 'app.scss'), path.join(destPath, 'app-temp-default.scss'));
+    });
+
+    /**
+	 * @description
+	 *   Running before dist task(s).
+	 * 
+	 */
+    grunt.registerTask('after-dist-tags', '', function () {
+        var srcPath = 'dist/assets/scss/',
+			destPath = 'app/assets/scss/';
+
+        grunt.file.copy(path.join(srcPath, 'app.scss'), path.join(destPath, 'app-temp-dist.scss'));
     });
 
     /**
@@ -468,9 +540,13 @@ module.exports = function (grunt) {
 	 * 
 	 */
     grunt.registerTask('compile-scss', [
+        'theme-init',
+        'before-default-tags',
+        'string-replace:default-tags',
         'sass:compile-scss',
         'concat:compile-css-first',
-        'concat:compile-css-last'
+        'concat:compile-css-last',
+        'clean:compile-scss-after'
     ]);
 
     /**
@@ -480,8 +556,10 @@ module.exports = function (grunt) {
 	 */
     grunt.registerTask('dist', [
         'clean:dist-before',
+		'theme-init',
         'copy:dist',
         'string-replace:dist-tags',
+		'after-dist-tags',
         'processhtml',
         'bower_concat',
         'sass:compile-scss',
@@ -503,11 +581,16 @@ module.exports = function (grunt) {
 	 */
     grunt.registerTask('default', [
         'theme-init',
+        'theme-copy',
         'copy:material-design-iconic-font',
         'string-replace:material-design-iconic-font',
         'sass:material-design-iconic-font',
+        'before-default-tags',
         'string-replace:default-tags',
-        'compile-scss',
-        'wiredep:build'
+        'sass:compile-scss',
+        'concat:compile-css-first',
+        'concat:compile-css-last',
+        'wiredep:build',
+        'clean:default-after'
     ]);
 };
