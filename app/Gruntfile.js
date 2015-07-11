@@ -504,7 +504,7 @@ module.exports = function (grunt) {
 
     /**
 	 * @description
-	 *   Running before dist task(s).
+	 *   Running before dist tags task(s).
 	 * 
 	 */
     grunt.registerTask('after-dist-tags', '', function () {
